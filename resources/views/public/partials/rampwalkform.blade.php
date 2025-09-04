@@ -179,6 +179,11 @@
                   {
                       rule: 'minLength',
                       value: 2
+                  },
+                  {
+                      rule: 'customRegexp',
+                      value: /^[A-Za-z\s]+$/, // allows only letters and spaces
+                      errorMessage: 'Name must not contain numbers or special characters'
                   }
               ])
               .addField('#gender', [{

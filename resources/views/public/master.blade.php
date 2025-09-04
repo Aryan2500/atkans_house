@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Atkans Housne | Top Modeling Agency for New Faces & Professionals</title>
+    <title>Atkans House | Top Modeling Agency for New Faces & Professionals</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Federo&amp;family=Barlow:wght@100..900&amp;display=swap"
         rel="stylesheet">
@@ -98,15 +98,17 @@
                                 <img src="{{ asset('img/logo.png') }}" alt="">
                             </div>
                             <p style="color:#fff; letter-spacing: 1px; font-weight: 100; font-family: 'avenirlight';">
-                                We are a passionate team of developers and designers who believe in the power of
-                                creativity.
+                               We are a collective of models and creatives who believe in shaping trends, elevating style, and bringing bold stories to life on and off the runway
                             </p>
                             <div class="social-icons">
                                 <ul class="list-inline">
-                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                                    <li><a href="https://www.facebook.com/profile.php?id=61580380611390" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                                    <li><a href="https://www.snapchat.com/add/atkans_house?share_id=kkc6dC5gKvI&locale=en-GB" target="_blank"><i class="fab fa-snapchat"></i></a></li>
+
+                                    <li><a href="https://www.reddit.com/u/Atkans_House/s/ZDAB1fosPU" target="_blank"><i class="fab fa-reddit"></i></a></li>
+                                    <li><a href="https://x.com/Atkans_House" target="_blank"><i class="fab fa-x-twitter" ></i></a></li>
+                                    <li><a href="https://www.instagram.com/atkans_house_academy/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+                                    <li><a href="https://www.youtube.com/channel/UCbbAZDkUMHDy7g7Q6BgdOEg" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -195,7 +197,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="mb-0" style="font-weight: 100; font-family: 'avenirlight'; text-align: center">
-                            &copy; 2025 Atkons House. All Rights Reserved.
+                            &copy; 2025 Atkans House. All Rights Reserved.
                         </p>
                     </div>
                 </div>
