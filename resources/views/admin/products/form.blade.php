@@ -118,10 +118,23 @@
                         </div>
 
                         {{-- Status --}}
-                        <div class="form-check mb-3">
+                        {{-- <div class="form-check mb-3">
                             <input type="checkbox" name="is_active" class="form-check-input" id="is_active"
                                 {{ old('is_active', $product->is_active ?? true) ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_active">Active</label>
+                        </div> --}}
+
+                        <!-- Status -->
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="is_active" class="form-control" required>
+                                <option value="1"
+                                    {{ old('is_active', $product->is_active ?? '') == 1 ? 'selected' : '' }}>
+                                    Active</option>
+                                <option value="0"
+                                    {{ old('is_active', $product->is_active ?? '') == 0 ? 'selected' : '' }}>
+                                    Inactive</option>
+                            </select>
                         </div>
 
                         <button class="btn btn-success btn-block" type="submit">
