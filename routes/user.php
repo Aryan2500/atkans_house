@@ -22,7 +22,7 @@ Route::prefix('auth')->middleware('guest')->group(function () {
         return view('user.auth.register');
     })->name("user.register");
 
-    Route::post('/send-email-verification-top', [OtpController::class, 'sendOtp'])
+    Route::post('/send-email-verification-otp', [OtpController::class, 'sendOtp'])
         ->name('otp.email-verification');
 
     Route::post('/register', [AuthControler::class, 'doRegistration'])->name("user.doRegistration");

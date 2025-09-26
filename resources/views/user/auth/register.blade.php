@@ -282,7 +282,7 @@
             console.log('Sending OTP to:', contact);
 
             $.ajax({
-                url: '/send-email-verification-top',
+                url: '{{route("otp.email-verification")}}',
                 method: 'POST',
                 data: {
                     contact: contact,
