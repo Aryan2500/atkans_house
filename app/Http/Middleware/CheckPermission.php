@@ -24,7 +24,7 @@ class CheckPermission
         if (session('permissions')) {
             $permissions = session('permissions');
         } else {
-            $permissions = $user->rols->permissions;
+            $permissions = $user->rols ? $user->rols->permissions : [];
         }
         // dd($permissions);
         // dd($routeName);

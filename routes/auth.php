@@ -4,7 +4,7 @@ use App\Http\Controllers\AuthControler;
 use App\Http\Middleware\CheckPermission;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('auth')->middleware('guest')->group(function () {
+Route::prefix('admin/auth')->middleware('guest')->group(function () {
     Route::get('/login', [AuthControler::class, 'index'])->name('login.page');
     Route::post('/login', [AuthControler::class, 'login'])->name('login');
 

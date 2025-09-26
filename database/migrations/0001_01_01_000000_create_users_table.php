@@ -15,11 +15,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('firstName')->nullable();
+            $table->string('lastName')->nullable();
+
+            $table->string('dob')->nullable();
+            $table->string("location")->nullable();
+            $table->boolean("consent")->default(false);
             $table->string('firebase_uid')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->enum('role', ['admin', 'model', 'client', 'staff'])->default('model');
+            $table->enum('role', ['admin', 'user', 'client', 'staff'])->default('user');
             $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->foreignId('role_id')->onDelete('cascade')->nullable();
             $table->rememberToken();

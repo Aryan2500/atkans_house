@@ -76,7 +76,7 @@
         <h1>403</h1>
         <h2>Access Denied</h2>
         <p>Sorry, you don’t have permission to access this page.</p>
-        <a href="{{ route('admin.dashboard') }}" class="btn">Go Back to Dashboard</a>
+        <a href="{{ route('home') }}" class="btn">Go Back to Home</a>
     </div>
 </body>
 

@@ -1,20 +1,20 @@
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-dark">
-    <div class="container-fluid px-6">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('img/logo.png') }}" class="logo-img" alt="">
-        </a>
-
-        <!-- Toggler -->
+        <div class="logo-wrapper">
+            <a class="logo" href="{{ route('home') }}">
+                <img src="{{ asset('img/logo.png') }}" class="logo-img" alt="">
+            </a>
+        </div>
+        <!-- Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
             aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
         </button>
-
         <!-- Menu -->
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}"
                         href="{{ route('home') }}">Home</a>
@@ -36,7 +36,6 @@
                         href="{{ route('rampwalk') }}">Rampwalk Registration</a>
                 </li>
 
-                <!-- Events Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ Request::routeIs('events', 'gallery') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -49,7 +48,6 @@
                     </ul>
                 </li>
 
-                <!-- Get Involved Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ Request::routeIs('sponsorship') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -58,6 +56,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('sponsorship') }}" class="dropdown-item">Sponsorship</a></li>
+                        {{-- <li><a href="#" class="dropdown-item">Volunteer With Us</a></li> --}}
                     </ul>
                 </li>
 
@@ -66,27 +65,6 @@
                         href="{{ route('contact.index') }}">Contact Us</a>
                 </li>
 
-                <!-- Auth Links -->
-                @guest
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" data-bs-auto-close="outside">
-                            Account <i class="ti-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-                            <li><a href="{{ route('user.login') }}" class="dropdown-item">Login</a></li>
-                            <li><a href="{{ route('user.register') }}" class="dropdown-item">Register</a></li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <form method="Get" action="{{ route('user.logout') }}">
-                            @csrf
-                            <button type="submit"
-                                class="nav-link btn btn-link text-white text-decoration-none">Logout</button>
-                        </form>
-                    </li>
-                @endguest
             </ul>
         </div>
     </div>

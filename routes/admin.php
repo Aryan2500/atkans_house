@@ -21,12 +21,13 @@ use App\Http\Controllers\StoryContestController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckPermission;
 use App\Models\Sponsership;
 use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware(['auth', AdminMiddleware::class])->group(function () {
     // Route::prefix('admin')->middleware(['auth', CheckPermission::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     // Models

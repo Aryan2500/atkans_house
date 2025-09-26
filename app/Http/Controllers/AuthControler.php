@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Otp;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 
 class AuthControler extends Controller
 {
@@ -22,11 +25,17 @@ class AuthControler extends Controller
         // dd($data);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
-            $permissions = auth()->user()->rols->permissions;
+            // dd(auth()->user()->rols);
+            $permissions = auth()->user()->rols ? auth()->user()->rols->permissions : [];
 
             session(['permissions' => $permissions]);
 
-            return redirect()->route('admin.dashboard');
+            if (auth()->user()->role == 'user') {
+                return redirect()->route('user.dashboard');
+            }
+            if (auth()->user()->role == 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
         } else {
             // Authentication failed
             return back()->withErrors([
@@ -40,9 +49,15 @@ class AuthControler extends Controller
 
     public function logout()
     {
+        $role = auth()->user()->role;
+
         Auth::logout();
         session()->flush();
-        return redirect()->route("login.page");
+        if ($role == 'admin') {
+            return redirect()->route("login.page");
+        } else {
+            return redirect()->route("user.login");
+        }
     }
 
     public function edit()
@@ -125,5 +140,78 @@ class AuthControler extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('admin.dashboard')->with('success', 'Password reset successfully!')
             : back()->withErrors(['email' => [__($status)]]);
+    }
+
+
+    public function register()
+    {
+        return view('user.auth.register');
+    }
+
+
+    public function doRegistration(Request $request)
+    {
+        $data = $request->all();
+        $data['consent'] = $request->has('consent') ? true : false;
+        // dd($data['consent']);/
+
+        $validator = Validator::make($data, [
+            'firstName' => 'required|string|max:100',
+            'lastName' => 'required|string|max:100',
+            'contact' => 'required|string',
+            'dob' => 'required|string',
+            'gender' => 'required|in:Male,Female,Other',
+            'location' => 'required|string|max:255',
+            'consent' => 'nullable|boolean',
+            'otp' => 'required|digits:6',
+            'password' => 'required|string|min:6|confirmed',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'errors' => $validator->errors()], 422);
+        }
+
+        $user = User::where('email', $request->contact)->orWhere('phone', $request->contact)->first();
+        if ($user) {
+            return response()->json(['status' => false, 'message' => 'User with this contact already exists'], 400);
+        }
+        // dd($user);
+
+
+        $contact = $request->contact;
+
+        // Verify OTP
+        $otpRecord = Otp::where('contact', $contact)
+            ->where('otp', $request->otp)
+            ->where('expires_at', '>=', now())
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if (!$otpRecord) {
+            return response()->json(['status' => false, 'message' => 'Invalid or expired OTP'], 400);
+        }
+
+        // Create user
+        $user = User::create([
+            'firstName' => $request->firstName,
+            'lastName' => $request->lastName,
+            'email' => filter_var($contact, FILTER_VALIDATE_EMAIL) ? $contact : null,
+            'phone' => preg_match('/^[0-9]{10}$/', $contact) ? $contact : null,
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'location' => $request->location,
+            'consent' => $data['consent'],
+            'password' => Hash::make($request->password),
+            'email_verified_at' => filter_var($contact, FILTER_VALIDATE_EMAIL) ? now() : null,
+            'phone_verified_at' => preg_match('/^[0-9]{10}$/', $contact) ? now() : null,
+            'role' => 'user'
+        ]);
+
+        // Delete OTP after successful registration
+        $otpRecord->delete();
+
+
+        return response()->json(['status' => true, 'message' => 'Registration completed successfully', 'user' => $user]);
     }
 }
