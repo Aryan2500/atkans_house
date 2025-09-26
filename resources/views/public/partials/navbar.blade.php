@@ -61,11 +61,6 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('contact.index') ? 'active' : '' }}"
-                        href="{{ route('contact.index') }}">Contact Us</a>
-                </li>
-
                 <!-- Auth Links -->
                 @guest
                     <li class="nav-item dropdown">
@@ -87,6 +82,13 @@
                         </form>
                     </li>
                 @endguest
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('contact.index') ? 'active' : '' }}"
+                        href="{{ route('contact.index') }}">Contact Us</a>
+                </li>
+
+
             </ul>
         </div>
     </div>

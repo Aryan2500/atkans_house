@@ -35,8 +35,6 @@
             }
         }
     </style>
-
-
     <style>
         .custom-alert {
             position: relative;

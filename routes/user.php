@@ -31,9 +31,33 @@ Route::prefix('auth')->middleware('guest')->group(function () {
 
 Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(function () {
     Route::get('/dashboard', function () {
-        return 'User Dashboard';
+        $upcomingEventsCount = 323;
+        $myBookingsCount = 333;
+        $notificationsCount = 399;
+        $profileCompletion = 333;
+        $recentActivities =    collect();
+        $notifications =    collect();
+        return view('user.dashboard.index', compact('upcomingEventsCount', 'myBookingsCount', 'notificationsCount', 'profileCompletion', 'recentActivities' , 'notifications'));
     })->name('user.dashboard');
 
+    Route::get('/profile', function () {
+        return 'Profile';
+    })->name('user.profile');
+
+    Route::get('/events', function () {
+        return 'Event';
+    })->name('user.events');
+
+    Route::get('/bookings', function () {
+        return 'Booking';
+    })->name('user.bookings');
+
+    Route::get('/notification', function () {
+        return 'Notification';
+    })->name('user.notifications');
+    Route::get('/settings', function () {
+        return 'Settings';
+    })->name('user.settings');
 
     Route::get('/logout', [AuthControler::class, 'logout'])->name('user.logout');
 });
