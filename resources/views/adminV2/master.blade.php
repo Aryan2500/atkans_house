@@ -37,9 +37,9 @@
         @include('adminV2.partials.loader')
 
 
-        @include('adminv2.partials.sidenav')
+        @include('adminV2.partials.sidenav')
 
-        @include('adminv2.partials.topbar')
+        @include('adminV2.partials.topbar')
 
 
         <!-- Content Wrapper. Contains page content -->
@@ -70,7 +70,7 @@
         </div>
         <!-- /.content-wrapper -->
 
-        @include('adminv2.partials.footer')
+        @include('adminV2.partials.footer')
 
 
         <aside class="control-sidebar control-sidebar-dark">
@@ -110,7 +110,7 @@
     <script src="{{ asset('v2/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('v2/dist/js/adminlte.js?v=3.2.0') }}"></script>
-    
+
     <script src="{{ asset('v2/dist/js/pages/dashboard.js') }}"></script>
 
     @stack('scripts')
