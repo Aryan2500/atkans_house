@@ -26,7 +26,8 @@ class EventController
     {
         //
         $events = Event::all();
-        return view('admin.events.index', compact('events'));
+        $header = 'Events';
+        return view('adminV2.events.index', compact('events', 'header'));
     }
 
     /**
@@ -35,7 +36,7 @@ class EventController
     public function create()
     {
         //
-        return view('admin.events.form');
+        return view('adminV2.events.form');
     }
 
     /**
@@ -60,7 +61,7 @@ class EventController
             'short_description' => 'required|string|max:500',
             'brochure_url' => 'nullable|file|mimes:pdf|max:10240',
 
-            'registration_deadline' => 'nullable|date',
+            'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
             'disclaimer' => 'nullable|string',
 
@@ -136,7 +137,7 @@ class EventController
     {
         //
         $event = Event::findOrFail($id);
-        return view('admin.events.form', compact('event'));
+        return view('adminV2.events.form', compact('event'));
     }
 
     /**
@@ -161,7 +162,7 @@ class EventController
             'short_description' => 'required|string|max:500',
             'brochure_url' => 'nullable|file|mimes:pdf|max:10240',
 
-            'registration_deadline' => 'nullable|date',
+            'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
             'disclaimer' => 'nullable|string',
 

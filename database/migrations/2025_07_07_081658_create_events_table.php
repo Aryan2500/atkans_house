@@ -17,8 +17,8 @@ return new class extends Migration
             // Basic Info
             $table->string('title'); // "Atkans Walk 2025"
             $table->text('subtitle')->nullable(); // "Where India's Next Icons Are Born"
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->string('location'); // "Delhi"
             $table->string('venue_note')->nullable(); // "Exact venue to be announced..."
 
