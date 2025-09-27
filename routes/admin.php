@@ -27,6 +27,9 @@ use App\Models\Sponsership;
 use App\Models\Sponsorship;
 use Illuminate\Support\Facades\Route;
 
+
+
+
 Route::prefix('admin')->middleware(['auth', AdminMiddleware::class])->group(function () {
     // Route::prefix('admin')->middleware(['auth', CheckPermission::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');

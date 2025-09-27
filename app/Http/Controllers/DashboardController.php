@@ -22,12 +22,13 @@ class DashboardController
             ->orderBy('end_date')
             ->limit(10)
             ->get();
-        return view('admin.dashboard.index', [
+        return view('adminv2.dashboard.index', [
             'totalModels' => ModelProfile::count(),
             'pendingHires' => HireRequest::where('status', 'pending')->count(),
             'totalEvents' => Event::all()->count(),
             'volunteerCount' => Volunteer::count(),
-            'upcomingEvents' => $upcomingEvents
+            'upcomingEvents' => $upcomingEvents,
+            'header' => 'Dashboards'
         ]);
     }
 
