@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('adminv2/dashboard', function () {
     $header = 'Dashboards';
-    return view('adminv2.dashboard.dashboard', compact('header'));
+    return view('adminV2.dashboard.dashboard', compact('header'));
 });
 
 Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(function () {
