@@ -28,6 +28,7 @@
     <!-- Summernote -->
     <link rel="stylesheet" href="{{ asset('v2/plugins/summernote/summernote-bs4.min.css') }}">
 
+    
     @yield('styles')
 </head>
 

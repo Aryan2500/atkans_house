@@ -17,7 +17,7 @@
                             <i class="fas fa-plus"></i> Add New Milestone
                         </button>
 
-                      
+
                     </div>
                 </div>
 
@@ -151,9 +151,42 @@
                                     @endforeach
                                 </select>
                             </div>
+
+
+
+
+
                         </div>
 
 
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="Status" class="form-label">Select Status</label>
+                                <select name="event_stage" id="event_stage" class="form-control" required>
+                                    <option value="published"
+                                        {{ old('event_stage', $event->event_stage ?? 'published') == 'published' ? 'selected' : '' }}>
+                                        Published</option>
+                                    <option value="closed"
+                                        {{ old('event_stage', $event->event_stage ?? '') == 'closed' ? 'selected' : '' }}>
+                                        Closed</option>
+                                    <option value="upcoming"
+                                        {{ old('event_stage', $event->event_stage ?? '') == 'upcoming' ? 'selected' : '' }}>
+                                        Upcoming</option>
+                                    <option value="cancelled"
+                                        {{ old('event_stage', $event->event_stage ?? '') == 'cancelled' ? 'selected' : '' }}>
+                                        Cancelled</option>
+                                    <option value="running"
+                                        {{ old('event_stage', $event->event_stage ?? '') == 'running' ? 'selected' : '' }}>
+                                        Running</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for='number_of_rounds' class="form-label">Number of Rounds</label>
+                                <input type="number" name="number_of_rounds" class="form-control"
+                                    value="{{ old('number_of_rounds', $event->number_of_rounds ?? '') }}">
+                            </div>
+                        </div>
 
                         {{-- Short Description --}}
                         <div class="mb-3">

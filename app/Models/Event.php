@@ -31,7 +31,8 @@ class Event extends Model
         'has_media_coverage',
         'has_on_site_hiring',
         'show_on_home_page',
-        'event_stage'
+        'event_stage',
+        'number_of_rounds'
     ];
 
     protected $casts = [

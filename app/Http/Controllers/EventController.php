@@ -70,6 +70,9 @@ class EventController
             // Stats
             'models_count' => 'nullable|string|max:50',
             'brands_count' => 'nullable|string|max:50',
+            'event_stage' => 'required',
+            'number_of_rounds' => 'nullable'
+
             // 'is_free_entry' => 'nullable|boolean',
             // 'has_media_coverage' => 'nullable|boolean',
             // 'has_on_site_hiring' => 'nullable|boolean',
@@ -130,6 +133,8 @@ class EventController
     public function show(string $id)
     {
         //
+        $event = Event::findOrFail($id);
+        return view('adminV2.events.show', compact('event'));
     }
 
     /**
@@ -170,6 +175,9 @@ class EventController
             // Stats
             'models_count' => 'nullable|string|max:50',
             'brands_count' => 'nullable|string|max:50',
+            'event_stage' => 'required',
+            'number_of_rounds' => 'nullable'
+
             // 'is_free_entry' => 'nullable|boolean',
             // 'has_media_coverage' => 'nullable|boolean',
             // 'has_on_site_hiring' => 'nullable|boolean',

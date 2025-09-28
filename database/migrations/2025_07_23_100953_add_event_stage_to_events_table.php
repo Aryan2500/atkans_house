@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->enum('event_stage', ['published', 'closed'])->default('published')
+            $table->enum('event_stage', ['published', 'closed', 'upcoming', 'cancelled', 'running'])->default('published')
                 ->after('location');
         });
     }

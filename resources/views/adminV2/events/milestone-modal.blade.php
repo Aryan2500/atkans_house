@@ -14,7 +14,6 @@
                     <!-- left column -->
                     <div class="col-md-12">
 
-
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" id="milestoneTab" role="tablist">
                             <li class="nav-item">

@@ -67,6 +67,11 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
 
+                                            <a href="{{ route('event.show', $event->id) }}" class="btn btn-sm btn-info"
+                                                title="View">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+
                                             <form action="{{ route('event.destroy', $event->id) }}" method="POST"
                                                 style="display:inline-block;">
                                                 @csrf

@@ -27,10 +27,6 @@ return new class extends Migration
             $table->string('hero_media_type')->default('image'); // image / video
             $table->string('hero_media_url');
 
-            // Call to Action
-            $table->string('cta_text')->default('Apply Now');
-            $table->string('cta_link')->nullable();
-
             // Description & Brochure
             $table->text('short_description');
             $table->string('brochure_url')->nullable();
@@ -39,13 +35,14 @@ return new class extends Migration
                 null
             );
             // Countdown
+
             $table->dateTime('registration_deadline')->nullable();
             $table->integer('total_registered')->default(0);
             $table->text('disclaimer')->nullable(); // “Only shortlisted applicants...”
 
+
             // Stats (Combined from event_stats)
             $table->string('models_count')->nullable(); // e.g. "2000+"
-            $table->string('brands_count')->nullable(); // e.g. "100+"
             $table->boolean('is_free_entry')->default(true);
             $table->boolean('show_on_rampwalk_registration')->default(false);
 
@@ -54,6 +51,8 @@ return new class extends Migration
             $table->boolean('show_on_home_page')->default(false);
 
             $table->boolean('has_notified')->default(false);
+
+            $table->string('number_of_rounds')->default(1);
 
             $table->timestamps();
         });

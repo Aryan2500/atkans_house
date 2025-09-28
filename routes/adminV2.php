@@ -98,4 +98,8 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
     Route::resource('products', ProductController::class);
 
     Route::resource('milestone', MilestoneController::class);
+
+    Route::get('/onboard-participants', function () {
+        return view('adminV2.events.onboard-participants-images');
+    });
 });
