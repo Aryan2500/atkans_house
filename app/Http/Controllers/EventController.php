@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Milestone;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -35,8 +36,10 @@ class EventController
      */
     public function create()
     {
-        //
-        return view('adminV2.events.form');
+
+        // dd(config('constant.rule_types'));
+        $milestones = Milestone::orderBy('created_at', 'desc')->get();
+        return view('adminV2.events.form', compact('milestones'));
     }
 
     /**
@@ -64,7 +67,6 @@ class EventController
             'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
             'disclaimer' => 'nullable|string',
-
             // Stats
             'models_count' => 'nullable|string|max:50',
             'brands_count' => 'nullable|string|max:50',
@@ -108,7 +110,7 @@ class EventController
         $validated['has_media_coverage'] = $request->has('has_media_coverage');
         $validated['has_on_site_hiring'] = $request->has('has_on_site_hiring');
         $validated['show_on_home_page'] = $request->has('show_on_home_page');
-
+        $validated['milestone_id'] = $request->input('milestone');
         // Create the event
         Event::create($validated);
 
@@ -137,7 +139,10 @@ class EventController
     {
         //
         $event = Event::findOrFail($id);
-        return view('adminV2.events.form', compact('event'));
+        // dd($event->milestone);
+        $milestones = Milestone::orderBy('created_at', 'desc')->get();
+
+        return view('adminV2.events.form', compact('event', 'milestones'));
     }
 
     /**
@@ -156,16 +161,12 @@ class EventController
             'hero_media_type' => 'required|in:image,video',
             'hero_media_url' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov,webm|max:20480',
 
-            'cta_text' => 'nullable|string|max:255',
-            'cta_link' => 'nullable|string|max:255',
-
             'short_description' => 'required|string|max:500',
             'brochure_url' => 'nullable|file|mimes:pdf|max:10240',
 
             'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
             'disclaimer' => 'nullable|string',
-
             // Stats
             'models_count' => 'nullable|string|max:50',
             'brands_count' => 'nullable|string|max:50',
@@ -219,8 +220,9 @@ class EventController
         $validated['has_media_coverage'] = $request->has('has_media_coverage');
         $validated['has_on_site_hiring'] = $request->has('has_on_site_hiring');
         $validated['show_on_home_page'] = $request->has('show_on_home_page');
+        $validated['milestone_id'] = $request->input('milestone');
 
-
+        // dd($validated);
         // Update the event
         $event->update($validated);
 

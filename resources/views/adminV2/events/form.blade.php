@@ -14,13 +14,10 @@
                         <!-- Add New Criteria Button -->
                         <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal"
                             data-target="#addCriteriaModal">
-                            <i class="fas fa-plus"></i> Add New Criteria
+                            <i class="fas fa-plus"></i> Add New Milestone
                         </button>
 
-                        <!-- Example Second Button -->
-                        <button type="button" class="btn btn-success btn-sm">
-                            <i class="fas fa-cogs"></i> Another Action
-                        </button>
+                      
                     </div>
                 </div>
 
@@ -138,7 +135,25 @@
                                 <input type="text" name="models_count" class="form-control"
                                     value="{{ old('models_count', $event->models_count ?? '2000+') }}">
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="models_count" class="form-label">Select MileStone</label>
+                                <select name="milestone" class="form-control" id="">
+                                    <option value=""> Select </option>
+                                    <option value="0">None</option>
+                                    @foreach ($milestones as $milestone)
+                                        <option value="{{ $milestone->id }}"
+                                            {{ old('milestone', $event->milestone->id ?? '') == $milestone->id ? 'selected' : '' }}>
+                                            {{ $milestone->rule_name }} | {{ Str::upper($milestone->rule_type) }}
+                                            {{ Str::upper($milestone->operator) }}
+                                            {{ $milestone->value }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
+
+
 
                         {{-- Short Description --}}
                         <div class="mb-3">
@@ -198,5 +213,5 @@
         </div>
     </div>
 
-    @include('adminV2.events.criteria-modal')
+    @include('adminV2.events.milestone-modal')
 @endsection

@@ -16,8 +16,7 @@ class Event extends Model
         'venue_note',
         'hero_media_type',
         'hero_media_url',
-        'cta_text',
-        'cta_link',
+        'milestone_id',
         'short_description',
         'brochure_url',
         'registration_deadline',
@@ -26,7 +25,7 @@ class Event extends Model
 
         // Stats
         'models_count',
-        'brands_count',
+
         'is_free_entry',
         'show_on_rampwalk_registration',
         'has_media_coverage',
@@ -53,5 +52,10 @@ class Event extends Model
     public function scopeVisibleOnRampwalk($query)
     {
         return $query->where('show_on_rampwalk_registration', true);
+    }
+
+    public function milestone()
+    {
+        return $this->hasOne(Milestone::class ,'id', 'milestone_id');
     }
 }

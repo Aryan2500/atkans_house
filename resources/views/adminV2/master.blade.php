@@ -113,6 +113,9 @@
 
     <script src="{{ asset('v2/dist/js/pages/dashboard.js') }}"></script>
 
+    <script src="{{ asset('v2/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+
+
     @stack('scripts')
 </body>
 
