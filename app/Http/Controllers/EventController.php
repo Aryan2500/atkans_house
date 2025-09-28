@@ -159,10 +159,10 @@ class EventController
             'venue_note' => 'nullable|string|max:255',
 
             'hero_media_type' => 'required|in:image,video',
-            'hero_media_url' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov,webm|max:20480',
+            'hero_media_url' => 'nullable|file|mimes:jpg,jpeg,png,mp4,mov,webm|max:30480',
 
             'short_description' => 'required|string|max:500',
-            'brochure_url' => 'nullable|file|mimes:pdf|max:10240',
+            'brochure_url' => 'nullable|file|mimes:pdf|max:20240',
 
             'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
