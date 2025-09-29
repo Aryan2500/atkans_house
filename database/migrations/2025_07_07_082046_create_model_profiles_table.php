@@ -28,6 +28,8 @@ return new class extends Migration
             $table->integer('height_cm');
             $table->integer('weight_kg');
 
+            $table->boolean('is_profile_completed')->default(false);
+
 
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 

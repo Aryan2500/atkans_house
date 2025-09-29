@@ -5,7 +5,6 @@
               font-size: 13px;
               margin-top: -20px !important;
               margin-bottom: 15px !important;
-
           }
       </style>
   @endsection

@@ -41,4 +41,9 @@ class ModelProfile extends Model
     {
         return $this->hasMany(HireRequest::class);
     }
+
+    public function photos()
+    {
+        return $this->hasMany(ModelPhoto::class, 'model_profile_id');
+    }
 }

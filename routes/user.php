@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthControler;
+use App\Http\Controllers\ModelProfileController;
 use App\Http\Controllers\OtpController;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,7 @@ Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(functi
         $profileCompletion = 333;
         $recentActivities =    collect();
         $notifications =    collect();
-        return view('user.dashboard.index', compact('upcomingEventsCount', 'myBookingsCount', 'notificationsCount', 'profileCompletion', 'recentActivities' , 'notifications'));
+        return view('user.dashboard.index', compact('upcomingEventsCount', 'myBookingsCount', 'notificationsCount', 'profileCompletion', 'recentActivities', 'notifications'));
     })->name('user.dashboard');
 
     Route::get('/profile', function () {
@@ -58,6 +59,9 @@ Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(functi
     Route::get('/settings', function () {
         return 'Settings';
     })->name('user.settings');
+
+
+    Route::resource('/modelprofile', ModelProfileController::class)->only(['store', 'update']);
 
     Route::get('/logout', [AuthControler::class, 'logout'])->name('user.logout');
 });

@@ -126,7 +126,7 @@
                                 Email Address
                             </label>
                             <div class="relative">
-                                <input id="email" name="email" type="email" required value="arunmaurya2500@gmail.com"
+                                <input id="email" name="email" type="email" required value="user@gmail.com"
                                     class="input-glow w-full px-4 py-3 bg-gray-800 bg-opacity-50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
                                     placeholder="model@example.com">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -145,7 +145,7 @@
                                 Password
                             </label>
                             <div class="relative">
-                                <input id="password" name="password" type="password" required
+                                <input id="password" name="password" type="password" required value="12345678"
                                     class="input-glow w-full px-4 py-3 bg-gray-800 bg-opacity-50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
                                     placeholder="••••••••">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
