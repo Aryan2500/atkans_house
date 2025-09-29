@@ -21,7 +21,7 @@
 
   <div class="row">
 
-      @if (auth()->user()->modelprofile->photos->count() > 0)
+      @if (auth()->user()->modelprofile != null && auth()->user()->modelprofile->photos->count() > 0)
           @foreach (auth()->user()->modelprofile->photos as $photo)
               <div class="col-sm-2 thumb pt-2">
                   <img src="{{ asset($photo->photo_path) }}" class="img-fluid mb-2" alt="white sample" data-toggle="modal"
