@@ -65,81 +65,32 @@
                         <div class="col-12">
                             <h4 class="mb-3">Participants</h4>
 
-                            <!-- Participant 1 -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm"
-                                        src="{{ asset('v2/dist/img/user1-128x128.jpg') }}" alt="User image">
-                                    <span class="username">
-                                        <a href="#">Riya Sharma</a>
-                                    </span>
-                                    <span class="description text-success">Eligible</span>
-                                </div>
-                                <!-- /.user-block -->
-                                <p>
-                                    Aspiring model from Delhi, passionate about ramp walks and fashion shows.
-                                </p>
-                                <div class="d-flex justify-content-end">
+                            @if ($event->participants->count() > 0)
+                                @foreach ($event->participants as $participant)
+                                    <!-- Participant 1 -->
+                                    <div class="post">
+                                        <div class="user-block">
+                                            <img class="img-circle img-bordered-sm"
+                                                src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?semt=ais_hybrid&w=740&q=80"
+                                                alt="User image">
+                                            <span class="username">
+                                                <a href="#">{{ $participant->user->name }}</a>
+                                            </span>
+                                            <span class="description text-success">Eligible</span>
+                                        </div>
+                                        <!-- /.user-block -->
+                                        <p>
+                                            Aspiring model from {{ $participant->user->state }}, passionate about ramp walks and
+                                            fashion shows.
+                                        </p>
+                                        <div class="d-flex justify-content-end">
 
-                                    <button class="btn btn-sm btn-primary">Onboard</button>
-                                </div>
-                            </div>
-
-                            <!-- Participant 2 -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm"
-                                        src="{{ asset('v2/dist/img/user1-128x128.jpg') }}" alt="User image">
-                                    <span class="username">
-                                        <a href="#">Arjun Mehta</a>
-                                    </span>
-                                    <span class="description text-danger">Not Eligible</span>
-                                </div>
-                                <p>
-                                    Strong portfolio but missing some eligibility criteria for this event.
-                                </p>
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-sm btn-primary">Onboard</button>
-                                </div>
-                            </div>
-
-                            <!-- Participant 3 -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm"
-                                        src="{{ asset('v2/dist/img/user1-128x128.jpg') }}" alt="User image">
-                                    <span class="username">
-                                        <a href="#">Neha Verma</a>
-                                    </span>
-                                    <span class="description text-success">Eligible</span>
-                                </div>
-                                <p>
-                                    Talented newcomer with interest in fashion photography and media coverage.
-                                </p>
-                                <div class="d-flex justify-content-end">
-
-                                    <button class="btn btn-sm btn-primary">Onboard</button>
-                                </div>
-                            </div>
-
-                            <!-- Participant 4 -->
-                            <div class="post">
-                                <div class="user-block">
-                                    <img class="img-circle img-bordered-sm"
-                                        src="{{ asset('v2/dist/img/user1-128x128.jpg') }}" alt="User image">
-                                    <span class="username">
-                                        <a href="#">Karan Singh</a>
-                                    </span>
-                                    <span class="description text-success">Eligible</span>
-                                </div>
-                                <p>
-                                    Experienced participant with previous rampwalk competition background.
-                                </p>
-                                <div class="d-flex justify-content-end">
-
-                                    <button class="btn btn-sm btn-primary">Onboard</button>
-                                </div>
-                            </div>
+                                            <a href="{{ route('onboard-participants', $participant->user_id) }}"
+                                                class="btn btn-sm btn-primary">Onboard</a>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
 
                         </div>
                     </div>

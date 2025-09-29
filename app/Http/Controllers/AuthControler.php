@@ -19,9 +19,19 @@ class AuthControler extends Controller
         return view('public.login');
     }
 
+    function userlogin(Request $request)
+    {
+
+        $redirectUrl = $request->input('redirect');
+        // dd($redirectUrl);
+        return view('user.auth.login', compact('redirectUrl'));
+    }
+
     function login(Request $request)
     {
         $data = $request->all();
+        $redirectUrl = $request->redirect;
+
         // dd($data);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 
@@ -30,10 +40,17 @@ class AuthControler extends Controller
 
             session(['permissions' => $permissions]);
 
+            // dd($redirectUrl);
+            if ($redirectUrl) {
+                return redirect($redirectUrl);
+            }
+
             if (auth()->user()->role == 'user') {
+
                 return redirect()->route('user.dashboard');
             }
             if (auth()->user()->role == 'admin') {
+
                 return redirect()->route('admin.dashboard');
             }
         } else {

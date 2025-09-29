@@ -29,7 +29,7 @@
         <div class="col-12 align-self-center">
             <div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
                 <div class="w-sm-100 mr-auto">
-                    <h4 class="mb-0">Events</h4>
+                    <h4 class="mb-0">Participants Image Selection</h4>
                 </div>
                 <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
                     <li class="breadcrumb-item">Home</li>
@@ -42,19 +42,18 @@
     <div class="col-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h4 class="card-title">User Images</h4>
+                <h4 class="card-title">{{ $user->name }}'s Images</h4>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-2 thumb pt-2">
-                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D"
-                            class="img-fluid mb-2" alt="white sample" data-toggle="modal" data-target="#galleryModal">
-                    </div>
-
-                    <div class="col-sm-2 thumb pt-2">
-                        <img src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bmF0dXJlfGVufDB8fDB8fHww"
-                            class="img-fluid mb-2" alt="white sample" data-toggle="modal" data-target="#galleryModal">
-                    </div>
+                    @if ($model->photos && count($model->photos) > 0)
+                        @foreach ($model->photos as $p)
+                            <div class="col-sm-2 thumb pt-2">
+                                <img src="{{ asset($p->photo_path) }}" class="img-fluid mb-2" alt="white sample" data-toggle="modal"
+                                    data-target="#galleryModal">
+                            </div>
+                        @endforeach
+                    @endif
 
 
                 </div>

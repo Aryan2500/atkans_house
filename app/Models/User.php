@@ -78,4 +78,15 @@ class User extends Authenticatable
             'id'            // Local key on ModelProfile table...
         );
     }
+
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function participations()
+    {
+        return $this->hasMany(Participation::class);
+    }
 }

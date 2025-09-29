@@ -16,6 +16,33 @@
                                     House</span> </div>
                             <div class="date-comment"> <i class="ti-calendar"></i> {{ $event->start_date }} |
                                 {{ $event->location }}</div>
+
+
+                            @auth
+
+                                @php
+                                    $p = \App\Models\Participation::where('event_id', $event->id)
+                                        ->where('user_id', auth()->id())
+                                        ->exists();
+                                @endphp
+
+                                @if ($p)
+                                    <br>
+                                    <p href="#" class="button-3 mb-15 mt-4">Participated ✅</p>
+                                @else
+                                    <form action="{{ route('participate.store') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                        <button type="submit" class="button-3 mb-15 mt-4">Participate
+                                            Now</button>
+
+                                    </form>
+                                @endif
+                            @else
+                                <a href="{{ route('user.login', ['redirect' => url()->current()]) }}"
+                                    class="button-3 mb-15 mt-4">Login to Participate</a>
+                            @endauth
+
                         </div>
                     </div>
                 </div>

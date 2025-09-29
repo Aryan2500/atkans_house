@@ -170,6 +170,8 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="redirect" value="{{ $redirectUrl }}">
+
                     <!-- Login Button -->
                     <div>
                         <button type="submit"

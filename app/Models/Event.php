@@ -57,6 +57,11 @@ class Event extends Model
 
     public function milestone()
     {
-        return $this->hasOne(Milestone::class ,'id', 'milestone_id');
+        return $this->hasOne(Milestone::class, 'id', 'milestone_id');
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(Participation::class);
     }
 }

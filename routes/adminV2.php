@@ -22,6 +22,7 @@ use App\Http\Controllers\StoryContestController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\VoteImageController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckPermission;
 use App\Models\Sponsership;
@@ -99,7 +100,5 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
 
     Route::resource('milestone', MilestoneController::class);
 
-    Route::get('/onboard-participants', function () {
-        return view('adminV2.events.onboard-participants-images');
-    });
+    Route::get('/onboard-participants/{id}', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
 });

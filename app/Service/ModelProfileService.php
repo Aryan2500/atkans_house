@@ -28,7 +28,7 @@ class ModelProfileService
         ]));
 
         $user->update([
-            'phone' => $request->phone,
+            'phone' => $request->phone, 
             'name' => $request->name,
             'gender' => $request->gender
         ]);

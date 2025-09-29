@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Milestone;
+use App\Models\Participation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -134,6 +135,7 @@ class EventController
     {
         //
         $event = Event::findOrFail($id);
+        // $participations = Participation::where('event_id', $event->id)->get();
         return view('adminV2.events.show', compact('event'));
     }
 

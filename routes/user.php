@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthControler;
 use App\Http\Controllers\ModelProfileController;
 use App\Http\Controllers\OtpController;
+use App\Http\Controllers\ParticipationController;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -12,9 +13,8 @@ Route::get('/user', function () {
 
 
 Route::prefix('auth')->middleware('guest')->group(function () {
-    Route::get('/login', function () {
-        return view('user.auth.login');
-    })->name("user.login");
+
+    Route::get('/login', [AuthControler::class, 'userlogin'])->name("user.login");
 
     Route::post('/login', [AuthControler::class, 'login'])->name('user.doLogin');
 
@@ -64,4 +64,6 @@ Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(functi
     Route::resource('/modelprofile', ModelProfileController::class)->only(['store', 'update']);
 
     Route::get('/logout', [AuthControler::class, 'logout'])->name('user.logout');
+
+    Route::resource('participate', ParticipationController::class);
 });
