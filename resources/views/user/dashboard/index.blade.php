@@ -272,7 +272,7 @@
                 }
             ])
 
-        @if (!auth()->user()->modelProfile->id)
+        @if (auth()->user()->modelProfile == null)
             .addField('#portfolio', [{
                     rule: 'required',
                     errorMessage: 'Please upload a portfolio file'
