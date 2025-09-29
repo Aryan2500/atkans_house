@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ModelProfile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('model_photos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('model_profile_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(ModelProfile::class)->constrained('models')->onDelete('cascade');
             $table->string('photo_path'); // store image path
             $table->timestamps();
         });
