@@ -164,7 +164,7 @@
 
                                         <div class="col-md-12">
                                             <input type="submit"
-                                                value= " {{ auth()->user()->email ? 'Update Profile' : 'Register Now' }} "
+                                                value= " {{ auth()->user()->modelProfile ? 'Update Profile' : 'Register Now' }} "
                                                 style="width: 100%;">
                                         </div>
                                     </form>

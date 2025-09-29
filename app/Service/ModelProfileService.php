@@ -17,19 +17,21 @@ class ModelProfileService
         $userId = auth()->user()->id;
         $user = User::find($userId);
 
+
+
+        // dd($request->all());
+        $user->modelProfile()->create($request->only([
+            "instagram_link",
+            "category",
+            "height_cm",
+            "weight_kg",
+        ]));
+
         $user->update([
             'phone' => $request->phone,
             'name' => $request->name,
             'gender' => $request->gender
         ]);
-
-        $user->modelProfile()->create($request->only([
-
-            "instagram_link" => $request->instagram_link,
-            "category" => $request->category,
-            "height_cm" => $request->height_cm,
-            "weight_kg" => $request->weight_kg,
-        ]));
 
         // Handle multiple photo uploads
         $this->handlePhotos($request, $user->modelProfile);
