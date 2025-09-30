@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
+use App\Models\Event;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -17,8 +18,11 @@ class ProductController extends Controller
     {
         //
         $products = Product::with(['images'])->latest()->get();
+
+
+        $events = Event::where('type', 'Show')->where('event_stage', 'running')->get();
         // dd($products->count());
-        return view("public.product", compact("products"));
+        return view("public.product", compact("products", 'events'));
     }
 
     public function index()
@@ -43,7 +47,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
+    {
         $product = Product::create($request->only([
             'name',
             'description',

@@ -15,4 +15,9 @@ class ModelPhoto extends Model
     {
         return $this->belongsTo(ModelProfile::class);
     }
+
+    public function onboardImages()
+    {
+        return $this->hasMany(OnboardImages::class);
+    }
 }

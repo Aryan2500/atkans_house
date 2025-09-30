@@ -281,26 +281,28 @@
 
                 {{-- ////////////////////////////////////// VOTING SECTION //////////////////////////////// --}}
 
+                @if ($events->count() > 0)
+                    @foreach ($events as $event)
+                        <div class="col-12  py-5">
 
-                <div class="col-md-12">
-                    <div class="owl-carousel owl-theme">
-
-                        {{-- @if (count($upcomingEvents) > 0)
-                            @foreach ($upcomingEvents as $event)
-                                <!-- Item 1 -->
-                                <div class="item">
-                                    
-                                </div>
-                            @endforeach
-                        @endif --}}
-
-
-                        <div class="item">
-                            @include('public.partials.vote_section')
+                            <h4 class="mt-4" style="color: #ccc; letter-spacing: 1px;">
+                                {{ $event->title }}
+                            </h4>
+                            <p style="color: #777; font-size: 15px;">
+                                {{ $event->short_description }} </p>
                         </div>
 
-                    </div>
-                </div>
+                        <div class="col-md-12">
+                            <div class="owl-carousel owl-theme">
+
+                                <div class="item">
+                                    @include('public.partials.vote_section')
+                                </div>
+
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
 
 
             </div>

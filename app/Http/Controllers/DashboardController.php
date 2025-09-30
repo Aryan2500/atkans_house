@@ -18,10 +18,13 @@ class DashboardController
     public function index()
     {
         // dd(session('permissions'));
-        $upcomingEvents = Event::whereDate('end_date', '>=', Carbon::today())
+        // $now = Carbon::today();
+        $upcomingEvents = Event::where('event_stage', 'published')
             ->orderBy('end_date')
             ->limit(10)
             ->get();
+
+        // dd($upcomingEvents);
         return view('adminV2.dashboard.index', [
             'totalModels' => ModelProfile::count(),
             'pendingHires' => HireRequest::where('status', 'pending')->count(),

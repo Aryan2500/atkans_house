@@ -89,4 +89,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Participation::class);
     }
+
+    public function onboardedImage()
+    {
+        return $this->hasOne(OnboardImages::class, 'user_id');
+    }
 }

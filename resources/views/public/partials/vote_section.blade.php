@@ -185,29 +185,32 @@
     </style>
 @endsection
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <div class="model-card">
-                <div class="model-image-container">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=600&fit=crop"
-                        alt="Model" class="model-image">
-                    <div class="image-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <h2 class="model-name">Sophia Anderson</h2>
-                    <div class="votes-container">
-                        <span class="votes-label">Total Votes:</span>
-                        <span class="votes-count">1,247</span>
+@foreach ($event->participants as $p)
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="model-card">
+                    <div class="model-image-container">
+                        <img src="{{$p->user->onboardedImage->modelPhoto->photo_path}}"
+                            alt="Model" class="model-image">
+                        <div class="image-overlay"></div>
                     </div>
-                    <button class="vote-btn">
-                        <span>Vote Now</span>
-                    </button>
+                    <div class="card-content">
+                        <h2 class="model-name">{{ $p->user->name }}</h2>
+                        <div class="votes-container">
+                            <span class="votes-label">Total Votes:</span>
+                            <span class="votes-count">1,247</span>
+                        </div>
+                        <button class="vote-btn">
+                            <span>Vote Now</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+@endforeach
+
 
 
 

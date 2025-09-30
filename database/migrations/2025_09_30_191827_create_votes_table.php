@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'voter_id')->constrained('users')->onDelete('cascade');
             $table->foreignIdFor(OnboardImages::class)->constrained('onboard_images')->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }
