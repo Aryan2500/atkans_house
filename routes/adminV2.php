@@ -100,5 +100,7 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
 
     Route::resource('milestone', MilestoneController::class);
 
-    Route::get('/onboard-participants/{id}', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
+    Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
+
+    Route::post('/onboard-participants', [VoteImageController::class, 'doOnboardParticipantsImage'])->name('onboard-participants.store');
 });

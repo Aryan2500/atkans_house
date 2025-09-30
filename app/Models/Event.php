@@ -22,6 +22,7 @@ class Event extends Model
         'registration_deadline',
         'total_registered',
         'disclaimer',
+        'type',
 
         // Stats
         'models_count',

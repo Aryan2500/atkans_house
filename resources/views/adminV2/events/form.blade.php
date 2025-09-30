@@ -29,6 +29,19 @@
                             @method('PUT')
                         @endif
 
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="type" class="form-label">Event Type</label>
+                                <select name="type" class="form-control" required>
+                                    <option value="Rampwalk"
+                                        {{ old('type', $event->type ?? '') == 'Rampwalk' ? 'selected' : '' }}>
+                                        Rampwalk</option>
+                                    <option value="Show"
+                                        {{ old('type', $event->type ?? '') == 'Show' ? 'selected' : '' }}>
+                                        Show</option>
+                                </select>
+                            </div>
+                        </div>
                         {{-- Title & Subtitle --}}
                         <div class="row mb-3">
                             <div class="col-md-6">

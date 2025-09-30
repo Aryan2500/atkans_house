@@ -31,6 +31,8 @@ return new class extends Migration
             $table->text('short_description');
             $table->string('brochure_url')->nullable();
 
+            $table->enum('type', ['Rampwalk', 'Show'])->default('Rampwalk');
+
             $table->foreignIdFor(Milestone::class)->nullable()->onDelete('null')->default(
                 null
             );

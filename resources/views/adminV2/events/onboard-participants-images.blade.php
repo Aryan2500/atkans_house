@@ -49,13 +49,11 @@
                     @if ($model->photos && count($model->photos) > 0)
                         @foreach ($model->photos as $p)
                             <div class="col-sm-2 thumb pt-2">
-                                <img src="{{ asset($p->photo_path) }}" class="img-fluid mb-2" alt="white sample" data-toggle="modal"
-                                    data-target="#galleryModal">
+                                <img src="{{ asset($p->photo_path) }}" class="img-fluid mb-2" alt="white sample"
+                                    value="{{ $p->id }}" data-toggle="modal" data-target="#galleryModal">
                             </div>
                         @endforeach
                     @endif
-
-
                 </div>
             </div>
         </div>
@@ -83,6 +81,19 @@
                     </div>
                 </div>
 
+                <div class="modal-footer">
+                    <form action="{{ route('onboard-participants.store') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="image_id" id="image_id">
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+
+                        <button type="submit" class="btn btn-primary">Select This
+                            Image</button>
+                    </form>
+
+                </div>
+
             </div>
             <!-- /.modal-content -->
         </div>
@@ -97,9 +108,15 @@
             $('img[data-toggle="modal"]').on('click', function() {
                 // Get the src of the clicked image
                 var imgSrc = $(this).attr('src');
+                var imgId = $(this).attr('value');
 
+                console.log(imgId);
                 // Set the src to the modal image
                 $('#galleryModal img').attr('src', imgSrc);
+
+                $('#image_id').val(imgId);
+
+
 
                 // Open the modal
                 $('#galleryModal').modal('show');

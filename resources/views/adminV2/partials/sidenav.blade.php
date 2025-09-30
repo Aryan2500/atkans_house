@@ -86,7 +86,7 @@
                       <a href="{{ route('packages.index') }}"
                           class="nav-link {{ request()->routeIs('packages.*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-box"></i>
-                          <p>Orders</p>
+                          <p>Packages</p>
                       </a>
                   </li>
                   <!-- Events & Engagement -->

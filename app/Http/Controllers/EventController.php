@@ -72,7 +72,8 @@ class EventController
             'models_count' => 'nullable|string|max:50',
             'brands_count' => 'nullable|string|max:50',
             'event_stage' => 'required',
-            'number_of_rounds' => 'nullable'
+            'number_of_rounds' => 'nullable',
+            'type' => 'required',
 
             // 'is_free_entry' => 'nullable|boolean',
             // 'has_media_coverage' => 'nullable|boolean',
@@ -170,7 +171,7 @@ class EventController
 
             'short_description' => 'required|string|max:500',
             'brochure_url' => 'nullable|file|mimes:pdf|max:30240',
-
+            'type' => 'required',
             'registration_deadline' => 'nullable|date|before_or_equal:start_date',
             'total_registered' => 'nullable|integer|min:0',
             'disclaimer' => 'nullable|string',

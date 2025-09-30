@@ -18,6 +18,7 @@
     <!-- END: Breadcrumbs-->
 
     <div class="card">
+        @include('adminV2.partials.alerts')
         <div class="card-header">
             <h3 class="card-title">Event Detail</h3>
         </div>
@@ -80,14 +81,35 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            Aspiring model from {{ $participant->user->state }}, passionate about ramp walks and
+                                            Aspiring model from {{ $participant->user->state }}, passionate about ramp walks
+                                            and
                                             fashion shows.
                                         </p>
-                                        <div class="d-flex justify-content-end">
 
-                                            <a href="{{ route('onboard-participants', $participant->user_id) }}"
-                                                class="btn btn-sm btn-primary">Onboard</a>
-                                        </div>
+                                        @php
+                                            $onboardImg = \App\Models\OnboardImages::where(
+                                                'user_id',
+                                                $participant->user_id,
+                                            )
+                                                ->where('event_id', $event->id)
+                                                ->first();
+                                            // dd($onboardImg->user);
+                                        @endphp
+
+                                        @if ($onboardImg ?? false && $onboardImg->user_id === $participant->user_id)
+                                            <a href="#" class="btn btn-sm btn-success">Already Onboarded </a>
+                                            <a href="{{ asset($onboardImg->modelPhoto->photo_path) }}" target="_blank"
+                                                class="btn btn-sm btn-danger">See Image</a>
+                                        @else
+                                            <div class="d-flex justify-content-end">
+
+                                                <a href="{{ route('onboard-participants', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
+                                                    class="btn btn-sm btn-primary">Onboard</a>
+                                            </div>
+                                        @endif
+
+
+
                                     </div>
                                 @endforeach
                             @endif
