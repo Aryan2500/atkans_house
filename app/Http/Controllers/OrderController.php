@@ -58,7 +58,8 @@ class OrderController extends Controller
      * Show the form for creating a new resource.
      */
     public function store(Request $request)
-    {
+    {   
+        // dd($request->all());
         try {
 
             $order = Order::create([
@@ -102,10 +103,6 @@ class OrderController extends Controller
                     $request->input('fname')         // Customer name
                 )
             );
-            // dd($qr);
-
-
-
             return response()->json(['message' => 'Order placed successfully!', 'status' => true, 'orderId' => $order->id, 'qr' => "qr"], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage(), 'status' => false], 400);

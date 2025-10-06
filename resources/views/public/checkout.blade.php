@@ -102,8 +102,8 @@
                                     <label
                                         style="color:#fff; text-transform: capitalize; font-family: 'avenirlight'; letter-spacing:1px; font-size: 15px;">Phone
                                         No.</label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone No. " value="{{ auth()->user()->phone }}"
-                                        required="">
+                                    <input type="text" name="phone" id="phone" placeholder="Phone No. "
+                                        value="{{ auth()->user()->phone }}" required="">
                                 </div>
 
                                 <div class="col-md-12 mb-10">
@@ -361,9 +361,10 @@
                     .then(data => {
                         console.log(data);
                         if (data.status) {
+                            // alert('Order created successfully.');
+                            window.location.replace("{{ route('order.confirm') }}");
                             console.log(data.orderId);
                             // launchRazorpayPayment(data.orderId);
-                            alert('hello')
                         } else {
                             alert('Failed to create order.');
                         }
