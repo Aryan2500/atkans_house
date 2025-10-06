@@ -94,12 +94,12 @@ class OrderController extends Controller
             $qrPath = storage_path('app/public/qrcode_temp.png');
             file_put_contents($qrPath, base64_decode($qrData['base64']));
 
-            Mail::to('arunmaurya2500@gmail.com')->send(
+            Mail::to($request->input('email'))->send(
                 new PaymentQrMail(
                     $qrPath,   // QR Base64
                     $qrData['upi_url'],  // UPI URL
                     $request->input('total'),                 // Amount
-                    $request->firstName         // Customer name
+                    $request->input('fname')         // Customer name
                 )
             );
             // dd($qr);
