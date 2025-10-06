@@ -186,24 +186,47 @@
 @endsection
 
 @foreach ($event->participants as $p)
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <div class="model-card">
-                    <div class="model-image-container">
-                        <img src="{{$p->user->onboardedImage->modelPhoto->photo_path}}"
-                            alt="Model" class="model-image">
-                        <div class="image-overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <h2 class="model-name">{{ $p->user->name }}</h2>
-                        <div class="votes-container">
-                            <span class="votes-label">Total Votes:</span>
-                            <span class="votes-count">1,247</span>
+    <div class="item">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="model-card">
+                        <div class="model-image-container">
+                            <img src="{{ $p->user->onboardedImage->modelPhoto->photo_path }}" alt="Model"
+                                class="model-image">
+                            <div class="image-overlay"></div>
                         </div>
-                        <button class="vote-btn">
-                            <span>Vote Now</span>
-                        </button>
+                        <div class="card-content">
+                            <h2 class="model-name">{{ $p->user->name }}</h2>
+                            <div class="votes-container">
+                                <span class="votes-label">Total Votes:</span>
+                                <span class="votes-count">{{$p->votes->count()}}</span>
+                            </div>
+                            @auth
+                                @php
+                                    $vote = App\Models\Vote::where('voter_id', Auth::user()->id)
+                                        ->where('event_id', $event->id)
+                                        ->first();
+                                    // dd();
+                                @endphp
+                                {{-- If Users has not voted allow him to vote , else restrict --}}
+                                @if (!$vote)
+                                    <form action="{{ route('vote.store') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="participation_id" value="{{ $p->id }}">
+                                        <input type="hidden" name="voter_id" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                        <input type="submit" class="vote-btn" value="Vote Now">
+                                    </form>
+                                @else
+                                    <button class="vote-btn" disabled>Already Voted</button>
+                                @endif
+                            @else
+                                <a class="vote-btn" href="{{ route('user.login', ['redirect' => url()->current()]) }}">
+                                    <span>Login to Vote</span>
+                                </a>
+                            @endauth
+                        </div>
                     </div>
                 </div>
             </div>

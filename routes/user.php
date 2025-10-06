@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthControler;
 use App\Http\Controllers\ModelProfileController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ParticipationController;
+use App\Http\Controllers\VoteController;
 use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -66,4 +67,6 @@ Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(functi
     Route::get('/logout', [AuthControler::class, 'logout'])->name('user.logout');
 
     Route::resource('participate', ParticipationController::class);
+
+    Route::resource('vote', VoteController::class);
 });

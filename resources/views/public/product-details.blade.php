@@ -324,15 +324,23 @@
                         </div>
                     @endif
 
-                    <!-- Get It Now -->
-                    <form action="{{ route('checkout') }}" method="GET" id="checkoutForm">
-                        <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="color_id" id="selected_color">
-                        <input type="hidden" name="size_id" id="selected_size">
-                        <button type="submit" class="button-2" style="width: 93%; border-radius:8px; padding: 4px 36px;">
+                    @auth
+                        <!-- Get It Now -->
+                        <form action="{{ route('checkout') }}" method="GET" id="checkoutForm">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <input type="hidden" name="color_id" id="selected_color">
+                            <input type="hidden" name="size_id" id="selected_size">
+                            <button type="submit" class="button-2" style="width: 93%; border-radius:8px; padding: 4px 36px;">
+                                Get It Now
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('user.login', ['redirect' => route('product.details', $product->id)]) }}"
+                            class="button-2" style="width: 93%; border-radius:8px; padding: 4px 36px;">
                             Get It Now
-                        </button>
-                    </form>
+                        </a>
+                    @endauth
+
                 </div>
 
                 <script>

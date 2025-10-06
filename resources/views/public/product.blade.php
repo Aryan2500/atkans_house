@@ -226,7 +226,6 @@
     <section class="blog section-padding">
         <div class="container">
             <div class="row">
-
                 @if ($products->count() > 0)
                     @foreach ($products as $product)
                         <div class="col-lg-3 col-md-12 mb-60">
@@ -272,14 +271,8 @@
                     </div>
                 @endif
 
-
-
-
-
-
-
-
                 {{-- ////////////////////////////////////// VOTING SECTION //////////////////////////////// --}}
+                @include('public.partials.alert')
 
                 @if ($events->count() > 0)
                     @foreach ($events as $event)
@@ -295,9 +288,9 @@
                         <div class="col-md-12">
                             <div class="owl-carousel owl-theme">
 
-                                <div class="item">
-                                    @include('public.partials.vote_section')
-                                </div>
+
+                                @include('public.partials.vote_section')
+
 
                             </div>
                         </div>

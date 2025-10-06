@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentQrMail;
 use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -84,14 +86,31 @@ class OrderController extends Controller
                 'quantity' => $request->input('quantity', 1),
                 'price' => $request->input('price', $request->input('total')),
             ]);
-            return response()->json(['message' => 'Order placed successfully!', 'status' => true, 'orderId' => $order->id], 200);
+
+            $qrData = generateUpiQrBase64("9599269070@pthdfc",   $request->input('total'));
+            // dd($qrData);
+
+            // Convert Base64 to temp PNG file
+            $qrPath = storage_path('app/public/qrcode_temp.png');
+            file_put_contents($qrPath, base64_decode($qrData['base64']));
+
+            Mail::to('arunmaurya2500@gmail.com')->send(
+                new PaymentQrMail(
+                    $qrPath,   // QR Base64
+                    $qrData['upi_url'],  // UPI URL
+                    $request->input('total'),                 // Amount
+                    $request->firstName         // Customer name
+                )
+            );
+            // dd($qr);
+
+
+
+            return response()->json(['message' => 'Order placed successfully!', 'status' => true, 'orderId' => $order->id, 'qr' => "qr"], 200);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage(), 'status' => false], 400);
         }
     }
-
-
-
 
     /**
      * Display the specified resource.

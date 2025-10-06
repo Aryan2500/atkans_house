@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
     <!-- START: Breadcrumbs-->
@@ -25,7 +25,8 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="productsTable" class="display table dataTable table-striped table-bordered">
+                        <table id="productsTable" class="display table dataTable table-striped table-bordered"
+                            data-title="Products List">
                             <thead>
                                 <tr>
                                     <th>#</th>

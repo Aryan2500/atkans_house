@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
     <div class="row">
@@ -196,3 +196,58 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    {{-- JustValidate CDN --}}
+    <script src="https://cdn.jsdelivr.net/npm/just-validate@4.3.0/dist/just-validate.production.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const validation = new JustValidate('.needs-validation');
+
+            validation
+                .addField('[name="name"]', [{
+                        rule: 'required',
+                        errorMessage: 'Product name is required',
+                    },
+                    {
+                        rule: 'minLength',
+                        value: 2,
+                        errorMessage: 'Name must be at least 2 characters',
+                    },
+                ])
+                .addField('[name="description"]', [{
+                        rule: 'required',
+                        errorMessage: 'Description is required',
+                    },
+                    {
+                        rule: 'minLength',
+                        value: 10,
+                        errorMessage: 'Description must be at least 10 characters',
+                    },
+                ])
+                .addField('[name="price"]', [{
+                        rule: 'required',
+                        errorMessage: 'Price is required',
+                    },
+                    {
+                        rule: 'number',
+                        errorMessage: 'Price must be a valid number',
+                    },
+                ])
+                .addField('[name="discount_percent"]', [{
+                    rule: 'number',
+                    errorMessage: 'Discount must be a number',
+                }, ])
+                .addField('[name="is_active"]', [{
+                    rule: 'required',
+                    errorMessage: 'Please select product status',
+                }, ])
+                .onSuccess((event) => {
+                    // Submit the form when validation passes
+                    event.target.submit();
+                });
+        });
+    </script>
+@endpush

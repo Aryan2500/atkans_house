@@ -46,13 +46,15 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @if ($model->photos && count($model->photos) > 0)
+                    @if (isset($model) && $model->photos && count($model->photos) > 0)
                         @foreach ($model->photos as $p)
                             <div class="col-sm-2 thumb pt-2">
                                 <img src="{{ asset($p->photo_path) }}" class="img-fluid mb-2" alt="white sample"
                                     value="{{ $p->id }}" data-toggle="modal" data-target="#galleryModal">
                             </div>
                         @endforeach
+                    @else
+                        <p>Model Profile Not Available / Profile Not Completed for this User.</p>
                     @endif
                 </div>
             </div>

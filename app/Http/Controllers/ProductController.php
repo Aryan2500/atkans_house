@@ -29,7 +29,7 @@ class ProductController extends Controller
     {
         //
         $products = Product::with(['images', 'sizes', 'colors'])->latest()->get();
-        return view("admin.products.index", compact("products"));
+        return view("adminV2.products.index", compact("products"));
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductController extends Controller
         //
         $sizes = Size::all();
         $colors = Color::all();
-        return view('admin.products.form', compact('sizes', 'colors'));
+        return view('adminV2.products.form', compact('sizes', 'colors'));
     }
 
     /**
@@ -113,7 +113,7 @@ class ProductController extends Controller
     {
         $sizes = Size::all();
         $colors = Color::all();
-        return view('admin.products.form', compact('sizes', 'colors', 'product'));
+        return view('adminV2.products.form', compact('sizes', 'colors', 'product'));
     }
 
     /**

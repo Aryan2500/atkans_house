@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'OFFICIAL_UPID' => env('OFFICIAL_UPID'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

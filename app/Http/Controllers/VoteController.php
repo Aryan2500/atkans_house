@@ -13,6 +13,7 @@ class VoteController extends Controller
     public function index()
     {
         //
+
     }
 
     /**
@@ -29,6 +30,15 @@ class VoteController extends Controller
     public function store(Request $request)
     {
         //
+        // 
+        // dd($request->all());
+        Vote::create([
+            'participation_id' => $request->participation_id,
+            'event_id' => $request->event_id,
+            'voter_id' => $request->voter_id
+        ]);
+
+        return redirect()->back()->with('success', 'Your Vote saved successfully!');
     }
 
     /**

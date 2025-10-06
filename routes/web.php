@@ -56,12 +56,13 @@ Route::get('/product-details/{product}', [ProductController::class, 'public_show
 
 Route::resource('subscriber', SubscribeController::class);
 
-Route::get('/checkout', [OrderController::class, 'create'])->name('checkout');
-Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [OrderController::class, 'create'])->name('checkout');
+    Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
+    Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+});
 
-
-Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
-Route::get('/order/update/payment-status/{order}', [PaymentController::class, 'updatePaymentStatus'])->name('order.update.payment-status');
+// Route::get('/order/update/payment-status/{order}', [PaymentController::class, 'updatePaymentStatus'])->name('order.update.payment-status');
 
 
 Route::get('/create-order/{order}', [PaymentController::class, 'createOrder'])->name('razorpay.create');

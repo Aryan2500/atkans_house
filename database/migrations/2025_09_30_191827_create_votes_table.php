@@ -17,8 +17,10 @@ return new class extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Event::class, 'event_id')->constrained('events')->onDelete('cascade');
             $table->foreignIdFor(User::class, 'voter_id')->constrained('users')->onDelete('cascade');
-            $table->foreignIdFor(OnboardImages::class)->constrained('onboard_images')->onDelete('cascade');
+
+            $table->foreignIdFor(Participation::class)->constrained('participation_id')->onDelete('cascade');
 
             $table->timestamps();
         });

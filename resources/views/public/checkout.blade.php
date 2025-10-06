@@ -44,7 +44,7 @@
                                         style="color:#fff; text-transform: capitalize; font-family: 'avenirlight'; letter-spacing:1px; font-size: 15px;">First
                                         Name</label>
                                     <input type="text" name="fname" id="fname" placeholder="First Name *"
-                                        required="">
+                                        value="{{ auth()->user()->firstName }}" required="">
                                 </div>
 
                                 <div class="col-md-6 mb-10">
@@ -52,10 +52,8 @@
                                         style="color:#fff; text-transform: capitalize;     font-family: 'avenirlight'; letter-spacing:1px; font-size: 15px;">Last
                                         Name</label>
                                     <input type="text" name="lname" id="lname" placeholder="Last Name *"
-                                        required="">
+                                        value="{{ auth()->user()->lastName }}" required="" required="">
                                 </div>
-
-
 
                                 <div class="col-md-6 mb-10">
                                     <label
@@ -104,7 +102,7 @@
                                     <label
                                         style="color:#fff; text-transform: capitalize; font-family: 'avenirlight'; letter-spacing:1px; font-size: 15px;">Phone
                                         No.</label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone No. "
+                                    <input type="text" name="phone" id="phone" placeholder="Phone No. " value="{{ auth()->user()->phone }}"
                                         required="">
                                 </div>
 
@@ -113,6 +111,7 @@
                                         style="color:#fff; text-transform: capitalize; font-family: 'avenirlight'; letter-spacing:1px; font-size: 15px;">Email
                                         Address</label>
                                     <input type="email" name="email" id="email" placeholder="Email address *"
+                                        value="{{ auth()->user()->email }}" {{ auth()->user()->email ? 'disabled' : '' }}
                                         required="">
                                 </div>
 
@@ -363,7 +362,8 @@
                         console.log(data);
                         if (data.status) {
                             console.log(data.orderId);
-                            launchRazorpayPayment(data.orderId);
+                            // launchRazorpayPayment(data.orderId);
+                            alert('hello')
                         } else {
                             alert('Failed to create order.');
                         }
@@ -372,55 +372,55 @@
             });
     </script>
     <script>
-        function launchRazorpayPayment(orderId) {
+        // function launchRazorpayPayment(orderId) {
 
-            fetch("/create-order/" + orderId)
-                .then(res => res.json())
-                .then(data => {
-                    var options = {
-                        "key": data.key,
-                        "amount": 100000, // paise
-                        "currency": "INR",
-                        "name": "Atkans Rack",
-                        "description": "Test Transaction",
-                        "order_id": data.orderId,
-                        "handler": function(response) {
-                            fetch("{{ route('razorpay.verify') }}", {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                                    },
-                                    body: JSON.stringify(response)
-                                }).then(res => res.json())
-                                .then(result => {
-                                    if (result.success) {
-                                        fetch("/order/update/payment-status/" + orderId, {
-                                            method: "GET",
-                                        }).then(res => res.json()).then(result => {
-                                            if (result.success) {
-                                                // window.location.replace =
-                                                //     "{{ route('order.confirm') }}";
-                                                window.history.pushState(null, null,
-                                                    "{{ route('order.confirm') }}");
-                                                window.history.go(1);
-                                                window.location.replace(
-                                                    "{{ route('order.confirm') }}");
+        //     fetch("/create-order/" + orderId)
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             var options = {
+        //                 "key": data.key,
+        //                 "amount": 100000, // paise
+        //                 "currency": "INR",
+        //                 "name": "Atkans Rack",
+        //                 "description": "Test Transaction",
+        //                 "order_id": data.orderId,
+        //                 "handler": function(response) {
+        //                     fetch("{{ route('razorpay.verify') }}", {
+        //                             method: "POST",
+        //                             headers: {
+        //                                 "Content-Type": "application/json",
+        //                                 "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        //                             },
+        //                             body: JSON.stringify(response)
+        //                         }).then(res => res.json())
+        //                         .then(result => {
+        //                             if (result.success) {
+        //                                 fetch("/order/update/payment-status/" + orderId, {
+        //                                     method: "GET",
+        //                                 }).then(res => res.json()).then(result => {
+        //                                     if (result.success) {
+        //                                         // window.location.replace =
+        //                                         //     "{{ route('order.confirm') }}";
+        //                                         window.history.pushState(null, null,
+        //                                             "{{ route('order.confirm') }}");
+        //                                         window.history.go(1);
+        //                                         window.location.replace(
+        //                                             "{{ route('order.confirm') }}");
 
-                                            }
-                                        })
-                                    }
-                                });
-                        },
-                        "theme": {
-                            "color": "#3399cc"
-                        }
-                    };
-                    var rzp1 = new Razorpay(options);
-                    rzp1.open();
-                    e.preventDefault();
-                });
+        //                                     }
+        //                                 })
+        //                             }
+        //                         });
+        //                 },
+        //                 "theme": {
+        //                     "color": "#3399cc"
+        //                 }
+        //             };
+        //             var rzp1 = new Razorpay(options);
+        //             rzp1.open();
+        //             e.preventDefault();
+        //         });
 
-        }
+        // }
     </script>
 @endpush

@@ -28,7 +28,11 @@
     <!-- Summernote -->
     <link rel="stylesheet" href="{{ asset('v2/plugins/summernote/summernote-bs4.min.css') }}">
 
-    
+    <link rel="stylesheet" href="{{ asset('v2/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('v2/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('v2/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
+
     @yield('styles')
 </head>
 
@@ -114,10 +118,27 @@
 
     <script src="{{ asset('v2/dist/js/pages/dashboard.js') }}"></script>
 
-    <script src="{{ asset('v2/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+    {{-- <script src="{{ asset('v2/plugins/jquery-validation/jquery.validate.min.js') }}"></script> --}}
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
 
+    <script src="{{ asset('v2/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('v2/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('dist/js/home.script.js') }}"></script>
+    <script src="{{ asset('v2/dist/js/datatables-init.js') }}"></script>
 
     @stack('scripts')
+
+
 </body>
 
 </html>
