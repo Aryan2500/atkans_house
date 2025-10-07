@@ -104,6 +104,12 @@
                                                 class="btn btn-sm btn-danger" onclick="confirmDelete(event, this)">
                                                 Remove
                                             </a>
+                                            @php
+                                                $votes = \App\Models\Vote::where('participation_id', $participant->id)
+                                                    ->where('event_id', $event->id)
+                                                    ->count();
+                                            @endphp
+                                            <p class="float-right mr-3"> Votes : <b>{{ $votes }} </b></p>
                                         @else
                                             <div class="d-flex justify-content-end">
 

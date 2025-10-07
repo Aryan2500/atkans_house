@@ -69,7 +69,7 @@ class VoteImageController extends Controller
             'event_id' => $request->event_id,
             'participation_id' => $participation->id,
         ])->delete();
-        return redirect()->route('event.show',  $request->event_id)->with('success', 'Candidate onboarded successfully!');
+        return redirect()->route('event.show',  $request->event_id)->with('success', 'Candidate removed successfully!');
     }
     public function index()
     {
