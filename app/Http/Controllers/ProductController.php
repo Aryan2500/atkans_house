@@ -34,7 +34,9 @@ class ProductController extends Controller
                 }
             })->get();
 
-        $events = Event::where('type', 'Show')->where('event_stage', 'running')->get();
+        $events = Event::where('type', 'Show')->where('event_stage', 'running')->with(['participants' => function ($query) {
+            $query->where('is_approved', 1);
+        }])->get();
         // dd($products->count());
         return view("public.product", compact("products", 'events'));
     }

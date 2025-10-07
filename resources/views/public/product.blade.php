@@ -323,13 +323,15 @@
                         </div>
 
                         <div class="col-md-12">
-                            <div class="owl-carousel owl-theme">
+                            @if ($event->participants->count() > 0)
+                                <div class="owl-carousel owl-theme">
 
+                                    @include('public.partials.vote_section')
 
-                                @include('public.partials.vote_section')
-
-
-                            </div>
+                                </div>
+                            @else
+                                <h5>No participants yet approved for this event</h5>
+                            @endif
                         </div>
                     @endforeach
                 @endif

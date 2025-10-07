@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\OnboardImages;
+use App\Models\Participation;
 use App\Models\User;
+use App\Models\Vote;
 use App\Models\VoteImage;
 use Illuminate\Http\Request;
 
@@ -42,6 +44,31 @@ class VoteImageController extends Controller
             'model_photo_id' => $request->image_id
         ]);
 
+        Participation::where('event_id', $request->event_id)->where('user_id', $request->user_id)->update([
+            'is_approved' => 1
+        ]);
+        return redirect()->route('event.show',  $request->event_id)->with('success', 'Candidate onboarded successfully!');
+    }
+
+
+    public function removeOnboardParticipants(Request $request)
+    {
+        // dd($request->all());
+        OnboardImages::where([
+            'user_id' => $request->user_id,
+            'event_id' => $request->event_id,
+        ])->delete();
+
+        $participation = Participation::where('event_id', $request->event_id)->where('user_id', $request->user_id)->first();
+
+        $participation->update([
+            'is_approved' => 0
+        ]);
+
+        Vote::where([
+            'event_id' => $request->event_id,
+            'participation_id' => $participation->id,
+        ])->delete();
         return redirect()->route('event.show',  $request->event_id)->with('success', 'Candidate onboarded successfully!');
     }
     public function index()

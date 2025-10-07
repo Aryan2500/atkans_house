@@ -99,7 +99,11 @@
                                         @if ($onboardImg ?? false && $onboardImg->user_id === $participant->user_id)
                                             <a href="#" class="btn btn-sm btn-success">Already Onboarded </a>
                                             <a href="{{ asset($onboardImg->modelPhoto->photo_path) }}" target="_blank"
-                                                class="btn btn-sm btn-danger">See Image</a>
+                                                class="btn btn-sm btn-warning">See Image</a>
+                                            <a href="{{ route('removeOnboard-participants', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
+                                                class="btn btn-sm btn-danger" onclick="confirmDelete(event, this)">
+                                                Remove
+                                            </a>
                                         @else
                                             <div class="d-flex justify-content-end">
 
@@ -127,7 +131,8 @@
 
                     <div class="mb-3">
                         @if ($event->hero_media_type === 'image')
-                            <img src="{{ asset($event->hero_media_url) }}" class="img-fluid rounded" alt="Event Hero Image">
+                            <img src="{{ asset($event->hero_media_url) }}" class="img-fluid rounded"
+                                alt="Event Hero Image">
                         @elseif($event->hero_media_type === 'video')
                             <video class="w-100 rounded" controls>
                                 <source src="{{ asset($event->hero_media_url) }}" type="video/mp4">
@@ -183,3 +188,30 @@
         <!-- /.card-body -->
     </div>
 @endsection
+
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmDelete(event, element) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'All the votes for this participant will be permanently deleted and cannot be retrieved!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Open link in new tab (since you used target="_blank")
+                    window.location.href = element.href;
+                }
+            });
+        }
+    </script>
+@endpush

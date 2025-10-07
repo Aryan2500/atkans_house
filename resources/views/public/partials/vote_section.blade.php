@@ -185,6 +185,7 @@
     </style>
 @endsection
 
+{{-- {{ dd($event->participants) }} --}}
 @foreach ($event->participants as $p)
     <div class="item">
         <div class="container">
@@ -200,7 +201,7 @@
                             <h2 class="model-name">{{ $p->user->name }}</h2>
                             <div class="votes-container">
                                 <span class="votes-label">Total Votes:</span>
-                                <span class="votes-count">{{$p->votes->count()}}</span>
+                                <span class="votes-count">{{ $p->votes->count() }}</span>
                             </div>
                             @auth
                                 @php
@@ -219,11 +220,11 @@
                                         <input type="submit" class="vote-btn" value="Vote Now">
                                     </form>
                                 @else
-                                    <button class="vote-btn" disabled>Already Voted</button>
+                                    <input type="submit" class="vote-btn" value="Already Voted" disabled>
                                 @endif
                             @else
-                                <a class="vote-btn" href="{{ route('user.login', ['redirect' => url()->current()]) }}">
-                                    <span>Login to Vote</span>
+                                <a href="{{ route('user.login', ['redirect' => url()->current()]) }}">
+                                    <input type="submit" class="vote-btn" value="Login To Vote">
                                 </a>
                             @endauth
                         </div>

@@ -105,6 +105,7 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
 
 
     Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
+    Route::get('/remove-onboard-participants', [VoteImageController::class, 'removeOnboardParticipants'])->name('removeOnboard-participants');
 
     Route::post('/onboard-participants', [VoteImageController::class, 'doOnboardParticipantsImage'])->name('onboard-participants.store');
 });
