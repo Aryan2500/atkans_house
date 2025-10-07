@@ -5,6 +5,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\HeroController;
 use App\Http\Controllers\HireRequestController;
 use App\Http\Controllers\InfluencerController;
 use App\Http\Controllers\MilestoneController;
@@ -99,6 +100,9 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
     Route::resource('products', ProductController::class);
 
     Route::resource('milestone', MilestoneController::class);
+
+    Route::resource('hero', HeroController::class);
+
 
     Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
 

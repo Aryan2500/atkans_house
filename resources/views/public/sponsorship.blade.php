@@ -60,10 +60,10 @@
 
                 <ul style="color:#fff; text-transform: captilize">
 
-                    <li>🎯 Direct Engagement With A Targeted Audience</li>
-                    <li>📢 Featured Branding Across Digital And On-site Platforms</li>
-                    <li>🤝 Networking With Decision-makers And Influencers</li>
-                    <li>🏆 Boosted Brand Awareness And Reputation</li>
+                    <li>Direct Engagement With A Targeted Audience</li>
+                    <li>Featured Branding Across Digital And On-site Platforms</li>
+                    <li>Networking With Decision-makers And Influencers</li>
+                    <li>Boosted Brand Awareness And Reputation</li>
 
                 </ul>
             </div>

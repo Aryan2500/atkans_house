@@ -290,15 +290,15 @@
                             </p>
 
                             <p style="font-weight:500; font-size:14px; color:#fff;">
-                                ✅ Material: {{ $product->material ?? 'N/A' }} <br>
-                                👕 Available sizes:
+                                Material: {{ $product->material ?? 'N/A' }} <br>
+                                Available sizes:
                                 @foreach ($product->sizes as $size)
                                     {{ $size->name }}@if (!$loop->last)
                                         ,
                                     @endif
                                 @endforeach
                                 <br>
-                                🎨 Multiple color options
+                                Multiple color options
                                 <br>
                             </p>
                         </div>

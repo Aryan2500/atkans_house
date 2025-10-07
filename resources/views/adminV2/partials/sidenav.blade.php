@@ -177,6 +177,14 @@
                                   <p>Gallery</p>
                               </a>
                           </li>
+
+                          <li class="nav-item">
+                              <a href="{{ route('hero.index') }}"
+                                  class="nav-link {{ request()->routeIs('hero.*') ? 'active' : '' }}">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Hero Section</p>
+                              </a>
+                          </li>
                       </ul>
                   </li>
 

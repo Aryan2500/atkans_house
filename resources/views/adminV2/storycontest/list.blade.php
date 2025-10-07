@@ -55,6 +55,8 @@
                                             @if ($story->photo)
                                                 <img src="{{ asset($story->photo) }}" alt="Photo" width="60"
                                                     height="60">
+                                                <a href="{{ asset($story->photo) }}" target="_blank"
+                                                    rel="noopener noreferrer">Open</a>
                                             @else
                                                 <span class="text-muted">No Photo</span>
                                             @endif
@@ -98,6 +100,22 @@
         </div>
     </div>
     <!-- END: Card DATA-->
+
+
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-labelledby="imagePreviewLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Image Preview</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Preview" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')

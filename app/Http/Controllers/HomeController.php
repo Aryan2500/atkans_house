@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Hero;
 use App\Models\ModelProfile;
 use App\Models\Product;
 use App\Models\Sponsorship;
@@ -29,7 +30,11 @@ class HomeController extends Controller
 
         $products = Product::with(['images'])->latest()->take(20)->get();
 
-        return view('public.home', compact('featured', 'upcomingEvents', 'sponsorships', 'rampwalkEvent', 'products'));
+        $hero = Hero::where('is_active', true)->get();
+
+        // dd($hero);
+
+        return view('public.home', compact('featured', 'upcomingEvents', 'sponsorships', 'rampwalkEvent', 'products', 'hero'));
     }
 
     /**
