@@ -6,6 +6,7 @@ use App\Models\Color;
 use App\Models\Event;
 use App\Models\Product;
 use App\Models\Size;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,11 +15,24 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
 
-    public function public_index()
+    public function public_index(Request $request)
     {
         //
-        $products = Product::with(['images'])->latest()->get();
-
+        // dd($request->category);
+        $products = Product::with(['images'])
+            ->where('is_active', true)
+            ->when($request->category, function ($q) use ($request) {
+                $q->where('type', $request->category);
+            })
+            ->when($request->budget, function ($q) use ($request) {
+                if ($request->budget === 'low') {
+                    $q->where('price', '<', 5000);
+                } elseif ($request->budget === 'mid') {
+                    $q->whereBetween('price', [5000, 10000]);
+                } elseif ($request->budget === 'high') {
+                    $q->where('price', '>', 10000);
+                }
+            })->get();
 
         $events = Event::where('type', 'Show')->where('event_stage', 'running')->get();
         // dd($products->count());
@@ -52,8 +66,8 @@ class ProductController extends Controller
             'name',
             'description',
             'price',
+            'type',
             'discount_price',
-            'discount_percent',
             'material',
             'is_active'
         ]));
@@ -125,8 +139,8 @@ class ProductController extends Controller
             'name',
             'description',
             'price',
+            'type',
             'discount_price',
-            'discount_percent',
             'material',
             'is_active'
         ]));

@@ -17,6 +17,32 @@
                             @method('PUT')
                         @endif
 
+                        {{-- Type --}}
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type" name="type" class="form-control" required onchange="changeType(this)">
+                                <option value="">--Select--</option>
+                                <option value="Skincare"
+                                    {{ old('type', $product->type ?? '') == 'Skincare' ? 'selected' : '' }}>
+                                    Skincare</option>
+                                <option value="Clothing"
+                                    {{ old('type', $product->type ?? '') == 'Clothing' ? 'selected' : '' }}>
+                                    Clothing</option>
+                                <option value="Magazines"
+                                    {{ old('type', $product->type ?? '') == 'Magazines' ? 'selected' : '' }}>
+                                    Magazines</option>
+                                <option value="Online courses"
+                                    {{ old('type', $product->type ?? '') == 'Online courses' ? 'selected' : '' }}>
+                                    Online courses</option>
+                                <option value="Show tickets"
+                                    {{ old('type', $product->type ?? '') == 'Show tickets' ? 'selected' : '' }}>
+                                    Show tickets</option>
+                                <option value="Show participation passes"
+                                    {{ old('type', $product->type ?? '') == 'Show participation passes' ? 'selected' : '' }}>
+                                    Show participation passes</option>
+
+                            </select>
+                        </div>
                         {{-- Product Name --}}
                         <div class="form-group">
                             <label for="name">Product Name</label>
@@ -42,22 +68,22 @@
                                 <input type="number" step="0.01" name="discount_price" class="form-control"
                                     value="{{ old('discount_price', $product->discount_price ?? '') }}">
                             </div>
-                            <div class="form-group col-md-4">
+                            {{-- <div class="form-group col-md-4">
                                 <label for="discount_percent">Discount %</label>
                                 <input type="number" name="discount_percent" class="form-control"
                                     value="{{ old('discount_percent', $product->discount_percent ?? '') }}">
-                            </div>
+                            </div> --}}
                         </div>
 
                         {{-- Material --}}
-                        <div class="form-group">
+                        <div class="form-group" id="materialDiv" style="display: none">
                             <label for="material">Material</label>
                             <input type="text" name="material" class="form-control"
                                 value="{{ old('material', $product->material ?? '') }}">
                         </div>
 
                         {{-- Sizes --}}
-                        <div class="form-group">
+                        <div class="form-group" id="sizesDiv" style="display: none">
                             <label for="sizes">Available Sizes</label>
                             <div class="d-flex flex-wrap">
                                 @foreach ($sizes as $size)
@@ -81,7 +107,7 @@
                         </div>
 
                         {{-- Colors --}}
-                        <div class="form-group">
+                        <div class="form-group" id="colorsDiv" style="display: none">
                             <label for="colors">Available Colors</label>
                             <div class="d-flex flex-wrap">
                                 @foreach ($colors as $color)
@@ -207,6 +233,16 @@
             const validation = new JustValidate('.needs-validation');
 
             validation
+                .addField('[name="type"]', [{
+                        rule: 'required',
+                        errorMessage: 'Product type is required',
+                    },
+                    {
+                        rule: 'minLength',
+                        value: 2,
+                        errorMessage: 'Name must be at least 2 characters',
+                    },
+                ])
                 .addField('[name="name"]', [{
                         rule: 'required',
                         errorMessage: 'Product name is required',
@@ -236,10 +272,10 @@
                         errorMessage: 'Price must be a valid number',
                     },
                 ])
-                .addField('[name="discount_percent"]', [{
-                    rule: 'number',
-                    errorMessage: 'Discount must be a number',
-                }, ])
+                // .addField('[name="discount_percent"]', [{
+                //     rule: 'number',
+                //     errorMessage: 'Discount must be a number',
+                // }, ])
                 .addField('[name="is_active"]', [{
                     rule: 'required',
                     errorMessage: 'Please select product status',
@@ -249,5 +285,25 @@
                     event.target.submit();
                 });
         });
+    </script>
+
+    <script>
+        function changeType(selectElement) {
+            const value = selectElement.value;
+
+            const colorsDiv = document.getElementById('colorsDiv');
+            const sizesDiv = document.getElementById('sizesDiv');
+            const materialDiv = document.getElementById('materialDiv');
+
+            if (value === 'Clothing') {
+                colorsDiv.style.display = 'block';
+                sizesDiv.style.display = 'block';
+                materialDiv.style.display = 'block';
+            } else {
+                colorsDiv.style.display = 'none';
+                sizesDiv.style.display = 'none';
+                materialDiv.style.display = 'none';
+            }
+        }
     </script>
 @endpush

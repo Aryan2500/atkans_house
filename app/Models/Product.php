@@ -16,9 +16,10 @@ class Product extends Model
         'description',
         'price',
         'discount_price',
-        'discount_percent',
+        // 'discount_percent',
         'material',
         'is_active',
+        'type',
     ];
 
     // Auto-generate slug if not provided

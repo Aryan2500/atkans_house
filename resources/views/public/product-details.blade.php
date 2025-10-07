@@ -280,47 +280,57 @@
                         @endif
                     </div>
 
-                    <!-- Description -->
-                    <div class="description">
-                        <h4 style="font-weight:500; font-size:27px;">Product Description</h4>
-                        <p style="font-weight:500; font-size:14px; color:#fff;">
-                            {{ $product->description }}
-                        </p>
 
-                        <p style="font-weight:500; font-size:14px; color:#fff;">
-                            ✅ Material: {{ $product->material ?? 'N/A' }} <br>
-                            👕 Available sizes:
-                            @foreach ($product->sizes as $size)
-                                {{ $size->name }}@if (!$loop->last)
-                                    ,
-                                @endif
-                            @endforeach
-                            <br>
-                            🎨 Multiple color options
-                            <br>
-                        </p>
-                    </div>
+                    @if ($product->type == 'Clothing')
+                        <!-- Description -->
+                        <div class="description">
+                            <h4 style="font-weight:500; font-size:27px;">Product Description</h4>
+                            <p style="font-weight:500; font-size:14px; color:#fff;">
+                                {{ $product->description }}
+                            </p>
 
-                    <!-- Colors -->
-                    @if ($product->colors->count())
-                        <div class="color-picker">
-                            @foreach ($product->colors as $color)
-                                <div class="color-box {{ $loop->first ? 'active' : '' }}"
-                                    data-color-id="{{ $color->id }}"
-                                    style="background-color: {{ $color->hex_code ?? '#000' }} !important;">
-                                </div>
-                            @endforeach
+                            <p style="font-weight:500; font-size:14px; color:#fff;">
+                                ✅ Material: {{ $product->material ?? 'N/A' }} <br>
+                                👕 Available sizes:
+                                @foreach ($product->sizes as $size)
+                                    {{ $size->name }}@if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                                <br>
+                                🎨 Multiple color options
+                                <br>
+                            </p>
                         </div>
-                    @endif
 
-                    <!-- Sizes -->
-                    @if ($product->sizes->count())
-                        <div class="size-options">
-                            @foreach ($product->sizes as $size)
-                                <button class="size" onclick="selectSize(this)" data-size-id="{{ $size->id }}">
-                                    {{ $size->name }}
-                                </button>
-                            @endforeach
+                        <!-- Colors -->
+                        @if ($product->colors->count())
+                            <div class="color-picker">
+                                @foreach ($product->colors as $color)
+                                    <div class="color-box {{ $loop->first ? 'active' : '' }}"
+                                        data-color-id="{{ $color->id }}"
+                                        style="background-color: {{ $color->hex_code ?? '#000' }} !important;">
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+
+                        <!-- Sizes -->
+                        @if ($product->sizes->count())
+                            <div class="size-options">
+                                @foreach ($product->sizes as $size)
+                                    <button class="size" onclick="selectSize(this)" data-size-id="{{ $size->id }}">
+                                        {{ $size->name }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        @endif
+                    @else
+                        <div class="description">
+                            <h4 style="font-weight:500; font-size:27px;">Product Description</h4>
+                            <p style="font-weight:500; font-size:14px; color:#fff;">
+                                {{ $product->description }}
+                            </p>
                         </div>
                     @endif
 
@@ -345,33 +355,37 @@
 
                 <script>
                     // Color selection
-                    document.querySelectorAll('.color-box').forEach(box => {
-                        box.addEventListener('click', function() {
-                            document.querySelectorAll('.color-box').forEach(b => b.classList.remove('selected'));
-                            this.classList.add('selected');
-                            document.getElementById('selected_color').value = this.getAttribute('data-color-id');
+                    @if ($product->type == 'Clothing')
+
+
+                        document.querySelectorAll('.color-box').forEach(box => {
+                            box.addEventListener('click', function() {
+                                document.querySelectorAll('.color-box').forEach(b => b.classList.remove('selected'));
+                                this.classList.add('selected');
+                                document.getElementById('selected_color').value = this.getAttribute('data-color-id');
+                            });
                         });
-                    });
 
-                    // Size selection
-                    function selectSize(el) {
-                        document.querySelectorAll('.size').forEach(b => b.classList.remove('active'));
-                        el.classList.add('active');
-                        document.getElementById('selected_size').value = el.getAttribute('data-size-id');
-                    }
-
-                    // Prevent form submission if no size/color selected
-                    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
-                        const color = document.getElementById('selected_color').value;
-                        const size = document.getElementById('selected_size').value;
-
-                        console.log(color, size);
-
-                        if (!color || !size) {
-                            e.preventDefault();
-                            alert("Please select both color and size before proceeding.");
+                        // Size selection
+                        function selectSize(el) {
+                            document.querySelectorAll('.size').forEach(b => b.classList.remove('active'));
+                            el.classList.add('active');
+                            document.getElementById('selected_size').value = el.getAttribute('data-size-id');
                         }
-                    });
+
+                        // Prevent form submission if no size/color selected
+                        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+                            const color = document.getElementById('selected_color').value;
+                            const size = document.getElementById('selected_size').value;
+
+                            console.log(color, size);
+
+                            if (!color || !size) {
+                                e.preventDefault();
+                                alert("Please select both color and size before proceeding.");
+                            }
+                        });
+                    @endif
                 </script>
 
             </div>

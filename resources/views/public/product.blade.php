@@ -226,6 +226,43 @@
     <section class="blog section-padding">
         <div class="container">
             <div class="row">
+                <div class="col-md-2 mb-10">
+                    <select id="filterBudget">
+                        <option value="">Budget</option>
+                        <option value="low" {{ request('budget') == 'low' ? 'selected' : '' }}>Below ₹5,000</option>
+                        <option value="mid" {{ request('budget') == 'mid' ? 'selected' : '' }}>₹5,000 - ₹10,000
+                        </option>
+                        <option value="high" {{ request('budget') == 'high' ? 'selected' : '' }}>Above ₹10,000
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-10">
+                    <select id="filterCategory">
+                        <option value="">Category</option>
+
+                        <option value="Skincare" {{ request('category') == 'Skincare' ? 'selected' : '' }}>
+                            Skincare</option>
+                        <option value="Clothing" {{ request('category') == 'Clothing' ? 'selected' : '' }}>
+                            Clothing</option>
+                        <option value="Magazines" {{ request('category') == 'Magazines' ? 'selected' : '' }}>
+                            Magazines</option>
+                        <option value="Online courses" {{ request('category') == 'Online courses' ? 'selected' : '' }}>
+                            Online courses</option>
+                        <option value="Show tickets" {{ request('category') == 'Show tickets' ? 'selected' : '' }}>
+                            Show tickets</option>
+                        <option value="Show participation passes"
+                            {{ request('category') == 'Show participation passes' ? 'selected' : '' }}>
+                    </select>
+                </div>
+
+                <div class="col-md-2 mb-10">
+                    <button onclick="filterProducts()" style="padding: 12px 12px;width: 100%;border-radius: 9px;"
+                        class="button-1">Search</button>
+                </div>
+            </div>
+
+            <div class="row">
                 @if ($products->count() > 0)
                     @foreach ($products as $product)
                         <div class="col-lg-3 col-md-12 mb-60">
@@ -240,7 +277,7 @@
                                         {{ $product->name }}
                                     </h6>
                                     <p class="price" style="font-family: 'avenirlight'; font-weight:700;">
-                                        {{ $product->price }}</p>
+                                        &#8377; {{ $product->price }}</p>
                                     <a href="{{ route('product.details', $product->id) }}" class="button-3"
                                         style="
                                     padding: 8px 30px;
@@ -302,3 +339,18 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        function filterProducts() {
+            const budget = document.getElementById('filterBudget').value;
+            const category = document.getElementById('filterCategory').value;
+
+            const queryParams = new URLSearchParams();
+            if (budget) queryParams.append('budget', budget);
+            if (category) queryParams.append('category', category);
+
+            window.location.href = `{{ url()->current() }}?${queryParams.toString()}`;
+        }
+    </script>
+@endpush
