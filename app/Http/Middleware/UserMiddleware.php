@@ -13,12 +13,11 @@ class UserMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         if (auth()->check() && (auth()->user()->role === 'user' || auth()->user()->role === 'model')) {
             return $next($request);
         }
-
         abort(403); // Forbidden
     }
 }

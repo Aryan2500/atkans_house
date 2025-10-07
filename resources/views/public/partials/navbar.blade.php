@@ -74,13 +74,30 @@
                         </ul>
                     </li>
                 @else
-                    <li class="nav-item">
-                        <form method="Get" action="{{ route('user.logout') }}">
-                            @csrf
-                            <button type="submit"
-                                class="nav-link btn btn-link text-white text-decoration-none">Logout</button>
-                        </form>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" data-bs-auto-close="outside">
+                            Account <i class="ti-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                            <li>
+                                <form method="Get"
+                                    action="{{ auth()->user()->role == 'admin' ? route('logout') : route('user.logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        class="nav-link btn btn-link text-white text-decoration-none">Logout</button>
+                                </form>
+                            </li>
+                            @if (Auth::user()->role == 'admin')
+                                <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
+                            @else
+                                <li><a href="{{ route('user.dashboard') }}" class="dropdown-item">Dashboard</a></li>
+                            @endif
+                        </ul>
                     </li>
+
+
+
                 @endguest
 
                 <li class="nav-item">

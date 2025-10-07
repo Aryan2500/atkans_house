@@ -31,7 +31,7 @@ Route::prefix('auth')->middleware('guest')->group(function () {
 });
 
 
-Route::prefix('user')->middleware(['auth', UserMiddleware::class])->group(function () {
+Route::prefix('user')->middleware([  UserMiddleware::class])->group(function () {
     Route::get('/dashboard', function () {
         $upcomingEventsCount = 323;
         $myBookingsCount = 333;
