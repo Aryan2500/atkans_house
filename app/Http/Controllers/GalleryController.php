@@ -18,12 +18,12 @@ class GalleryController extends Controller
     public function index()
     {
         $galleries = Gallery::latest()->get();
-        return view('admin.gallery.index', compact('galleries'));
+        return view('adminV2.gallery.index', compact('galleries'));
     }
 
     public function create()
     {
-        return view('admin.gallery.form');
+        return view('adminV2.gallery.form');
     }
 
     public function store(Request $request)
@@ -50,7 +50,7 @@ class GalleryController extends Controller
 
     public function edit(Gallery $gallery)
     {
-        return view('admin.gallery.form', compact('gallery'));
+        return view('adminV2.gallery.form', compact('gallery'));
     }
 
     public function update(Request $request, Gallery $gallery)

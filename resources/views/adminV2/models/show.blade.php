@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
     <!-- START: Breadcrumbs-->
@@ -21,9 +21,7 @@
     <div class="row">
         <div class="col-12 mt-3">
             <div class="position-relative">
-                <div class="background-image-maker py-5"></div>
-                <div class="holder-image">
-                </div>
+                
                 <div class="position-relative px-3 py-5">
                     <div class="media d-md-flex d-block">
                         <a href="#">
@@ -32,7 +30,7 @@
                         </a>
                         <div class="media-body z-index-1">
                             <div class="pl-4">
-                                <h1 class="display-4 text-uppercase text-white mb-0">{{ $model->user->name ?? 'N/A' }}</h1>
+                                <h1 class="display-4 text-uppercase text-black mb-0">{{ $model->user->name ?? 'N/A' }}</h1>
                                 <h6 class="text-uppercase text-white mb-0">
                                     {{ ucfirst($model->status) }}
                                 </h6>
@@ -53,7 +51,12 @@
                         </ul>
                     </div>
                     <div class="align-self-center ml-auto text-center text-sm-right">
-                        <a href="{{ $model->instagram_link }}"><i class="icon-social-facebook h5"></i></a>
+                        <a href="{{ $model->instagram_link }}" target="_blank">
+                            <img src="https://img.freepik.com/premium-vector/instagram-logo-with-colorful-gradient_1273375-1516.jpg?semt=ais_hybrid&w=740&q=80"
+                                alt="" srcset="" width="40" height="40">
+
+
+                        </a>
                         {{-- <a href="#"><i class="icon-social-google h5"></i></a>
                         <a href="#"><i class="icon-social-github h5"></i></a> --}}
                     </div>

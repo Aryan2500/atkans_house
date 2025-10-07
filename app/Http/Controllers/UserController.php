@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('rols')->get();
-        return view('admin.users.index', compact('users'));
+        return view('adminV2.users.index', compact('users'));
     }
 
     /**
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.users.form', compact('roles'));
+        return view('adminV2.users.form', compact('roles'));
     }
 
     /**
@@ -55,7 +55,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::with('roles')->findOrFail($id);
-        return view('admin.users.show', compact('user'));
+        return view('adminV2.users.show', compact('user'));
     }
 
     /**
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('admin.users.form', compact('user', 'roles'));
+        return view('adminV2.users.form', compact('user', 'roles'));
     }
 
     /**

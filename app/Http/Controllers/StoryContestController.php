@@ -14,7 +14,7 @@ class StoryContestController extends Controller
     {
         //
         $storyContests = StoryContest::all();
-        return view('admin.storycontest.list', compact('storyContests'));
+        return view('adminV2.storycontest.list', compact('storyContests'));
     }
 
     /**
@@ -73,7 +73,7 @@ class StoryContestController extends Controller
     {
         //
         $storyContest = StoryContest::findOrFail($id);
-        return view('admin.storycontest.edit', compact('storyContest'));
+        return view('adminV2.storycontest.edit', compact('storyContest'));
     }
 
     /**

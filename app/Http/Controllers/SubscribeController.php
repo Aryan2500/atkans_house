@@ -14,7 +14,7 @@ class SubscribeController extends Controller
     {
         //
         $subscribers = Subscriber::all();
-        return view('admin.subscriber.index', compact('subscribers'));
+        return view('adminV2.subscriber.index', compact('subscribers'));
     }
 
     /**

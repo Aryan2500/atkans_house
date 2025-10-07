@@ -1,9 +1,9 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
     <div class="row">
         <div class="col-12 mt-3">
-            @include('admin.partials.alerts')
+            @include('adminV2.partials.alerts')
 
             <div class="card">
                 <div class="card-header">

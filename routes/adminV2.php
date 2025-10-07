@@ -85,10 +85,10 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
 
     Route::resource('subscribers', SubscribeController::class);
 
-    Route::get('/admin/profile', [AuthControler::class, 'edit'])->name('admin.profile.edit');
-    Route::put('/admin/profile', [AuthControler::class, 'update'])->name('admin.profile.update');
+    Route::get('/profile', [AuthControler::class, 'edit'])->name('admin.profile.edit');
+    Route::put('/profile', [AuthControler::class, 'update'])->name('admin.profile.update');
 
-    Route::put('/admin/profile/password', [AuthControler::class, 'updatePassword'])->name('admin.profile.password.update');
+    Route::put('/profile/password', [AuthControler::class, 'updatePassword'])->name('admin.profile.password.update');
 
     //Size
     Route::resource('sizes', SizeController::class);

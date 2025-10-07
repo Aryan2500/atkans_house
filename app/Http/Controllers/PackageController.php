@@ -15,7 +15,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::all();
-        return view('admin.packages.index', compact('packages'));
+        return view('adminV2.packages.index', compact('packages'));
     }
 
     /**
@@ -24,7 +24,7 @@ class PackageController extends Controller
     public function create()
     {
         //
-        return view('admin.packages.form');
+        return view('adminV2.packages.form');
     }
 
     /**
@@ -73,7 +73,7 @@ class PackageController extends Controller
     public function edit(string $id)
     {
         $package = Package::findOrFail($id);
-        return view('admin.packages.form', compact('package'));
+        return view('adminV2.packages.form', compact('package'));
     }
 
     /**

@@ -1,6 +1,20 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
+    <div class="row">
+        <div class="col-12 align-self-center">
+            <div class="sub-header mt-3 py-3 align-self-center d-sm-flex w-100 rounded">
+                <div class="w-sm-100 mr-auto">
+                    <h4 class="mb-0">Admin Profile </h4>
+                </div>
+                <ol class="breadcrumb bg-transparent align-self-center m-0 p-0">
+                    <li class="breadcrumb-item">Home</li>
+                    <li class="breadcrumb-item active">Admin Profile Update</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -10,7 +24,7 @@
                         <h5 class="mb-0">Edit Profile</h5>
                     </div>
                     <div class="card-body">
-                        @include('admin.partials.alerts')
+                        @include('adminV2.partials.alerts')
 
                         <form action="{{ route('admin.profile.update') }}" method="POST">
                             @csrf

@@ -20,7 +20,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('items')->latest()->get();
         // dd($orders);
-        return view('admin.orders.index', compact('orders'));
+        return view('adminV2.orders.index', compact('orders'));
     }
 
     public function create(Request $request)
@@ -115,7 +115,7 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::with('items')->findOrFail($id);
-        return view('admin.orders.show', compact('order'));
+        return view('adminV2.orders.show', compact('order'));
     }
 
     /**
@@ -124,7 +124,7 @@ class OrderController extends Controller
     public function edit(string $id)
     {
         $order = Order::with('items')->findOrFail($id);
-        return view('admin.orders.edit', compact('order'));
+        return view('adminV2.orders.edit', compact('order'));
     }
 
     /**

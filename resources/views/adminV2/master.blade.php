@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="{{ asset('v2/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('v2/plugins/fontawesome-free/css/all.min.css') }}">
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('v2/ionicons/2.0.1/css/ionicons.min.css') }}">
+
+    
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet"
         href="{{ asset('v2/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">

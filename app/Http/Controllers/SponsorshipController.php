@@ -27,7 +27,7 @@ class SponsorshipController
     {
         //
         $sponsorships = Sponsorship::all();
-        return view('admin.sponsorships.list', compact('sponsorships'));
+        return view('adminV2.sponsorships.list', compact('sponsorships'));
     }
 
     /**
@@ -98,7 +98,7 @@ class SponsorshipController
     {
         //
         $sponsorship = Sponsorship::with('sponsorshipTypes')->findOrFail($id);
-        return view('admin.sponsorships.show', compact('sponsorship'));
+        return view('adminV2.sponsorships.show', compact('sponsorship'));
     }
 
     /**
@@ -108,7 +108,7 @@ class SponsorshipController
     {
         //
         $sponsorship = Sponsorship::find($id);
-        return view('admin.sponsorships.edit', compact('sponsorship'));
+        return view('adminV2.sponsorships.edit', compact('sponsorship'));
     }
 
     /**

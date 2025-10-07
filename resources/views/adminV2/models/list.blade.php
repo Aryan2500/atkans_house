@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('adminV2.master')
 
 @section('content')
     <!-- START: Breadcrumbs-->

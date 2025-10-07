@@ -25,7 +25,7 @@ class PhotoShootBookingController extends Controller
             $booking->add_ons = json_decode($booking->add_ons, true);
         }
         // dd($bookings);
-        return view('admin.shootbookings.index', compact('bookings'));
+        return view('adminV2.shootbookings.index', compact('bookings'));
     }
 
     /**

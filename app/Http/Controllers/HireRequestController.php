@@ -16,7 +16,7 @@ class HireRequestController
         //
         $hireRequests  = HireRequest::with('model.user')->get();
         // dd($hireRequests);
-        return view('admin.hirerequest.index', compact('hireRequests'));
+        return view('adminV2.hirerequest.index', compact('hireRequests'));
     }
 
     /**

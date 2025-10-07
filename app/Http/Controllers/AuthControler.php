@@ -79,7 +79,7 @@ class AuthControler extends Controller
 
     public function edit()
     {
-        return view('admin.adminprofile.edit');
+        return view('adminV2.adminprofile.edit');
     }
     public function update(Request $request)
     {

@@ -46,7 +46,7 @@ class ModelController
     {
         //
         $models = ModelProfile::with('user')->get();
-        return view('admin.models.list', compact('models'));
+        return view('adminV2.models.list', compact('models'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ModelController
     public function show(string $id)
     {
         $model = ModelProfile::with('user')->find($id);
-        return view('admin.models.show', compact('model'));
+        return view('adminV2.models.show', compact('model'));
     }
 
     /**
@@ -89,7 +89,7 @@ class ModelController
     {
         //
         $model = ModelProfile::with('user')->find($id);
-        return view('admin.models.edit', compact('model'));
+        return view('adminV2.models.edit', compact('model'));
     }
 
     /**

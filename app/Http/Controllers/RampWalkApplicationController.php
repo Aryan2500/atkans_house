@@ -35,7 +35,7 @@ class RampWalkApplicationController
         $applications = RampWalkApplication::with(['modelProfile.user', 'event'])->latest()->get();
 
         // dd($applications);
-        return view('admin.applications.list', compact('applications'));
+        return view('adminV2.applications.list', compact('applications'));
     }
 
     /**
@@ -123,7 +123,7 @@ class RampWalkApplicationController
     {
         $application = RampWalkApplication::with(['modelProfile.user', 'event'])->findOrFail($id);
 
-        return view('admin.applications.show', compact('application'));
+        return view('adminV2.applications.show', compact('application'));
     }
 
     /**

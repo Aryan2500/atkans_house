@@ -17,7 +17,7 @@ class InfluencerController extends Controller
 
         $influencers = Influencer::all();
         // dd($influencers);
-        return view('admin.influencersponsors.list', compact('influencers'));
+        return view('adminV2.influencersponsors.list', compact('influencers'));
     }
 
     /**
@@ -83,7 +83,7 @@ class InfluencerController extends Controller
     {
         //
         $influencer = Influencer::findOrFail($id);
-        return view('admin.influencersponsors.edit', compact('influencer'));
+        return view('adminV2.influencersponsors.edit', compact('influencer'));
     }
 
     /**
