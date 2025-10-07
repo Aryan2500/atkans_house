@@ -58,7 +58,7 @@ class OrderController extends Controller
      * Show the form for creating a new resource.
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request->all());
         try {
 
@@ -88,7 +88,7 @@ class OrderController extends Controller
                 'price' => $request->input('price', $request->input('total')),
             ]);
 
-            $qrData = generateUpiQrBase64("9599269070@pthdfc",   $request->input('total'));
+            $qrData = generateUpiQrBase64("samsinghsingh58-3@okhdfcbank",   $request->input('total'));
             // dd($qrData);
 
             // Convert Base64 to temp PNG file
