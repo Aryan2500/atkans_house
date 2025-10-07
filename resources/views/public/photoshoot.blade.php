@@ -176,7 +176,7 @@
                                         class="button-3 mt-30">Discover
                                         Pakages</a>
                                 </div>
-                                <a data-bs-toggle="modal" data-bs-target="#bookingModel" data-bs-whatever="@mdo"
+                                <a data-bs-toggle="modal" data-bs-target="#bookingModel" data-bs-whatever="@mdo"  onclick="setPackage({{ $p->id }})"
                                     href="#0" class="rmore active">
                                     <div class="arrow"> <span>₹</span>{{ $p->price }}</div>
                                     <div class="br-left-top">
