@@ -91,7 +91,7 @@
                             @if (Auth::user()->role == 'admin')
                                 <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
                             @else
-                                <li><a href="{{ route('user.dashboard') }}" class="dropdown-item">Dashboard</a></li>
+                                <li><a href="{{ route('user.events') }}" class="dropdown-item">Dashboard</a></li>
                             @endif
                         </ul>
                     </li>

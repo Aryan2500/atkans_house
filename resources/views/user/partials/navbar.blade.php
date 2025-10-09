@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <!-- Logo / Dashboard Home -->
-        <a class="navbar-brand fw-bold" href="{{ route('user.dashboard') }}">
+        <a class="navbar-brand fw-bold" href="{{ route('user.profile') }}">
             <img src="{{ asset('img/logo.png') }}" class="logo-img" alt="Logo" style="height:40px;">
 
         </a>
@@ -17,13 +17,6 @@
         <div class="collapse navbar-collapse" id="dashboardNavbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                <!-- Dashboard Home -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('user.dashboard') ? 'active' : '' }}"
-                        href="{{ route('user.dashboard') }}">
-                        <i class="fa-solid fa-chart-line me-1"></i> Dashboard
-                    </a>
-                </li>
 
                 <!-- My Events -->
                 <li class="nav-item">
@@ -41,13 +34,6 @@
                     </a>
                 </li>
 
-                <!-- Notifications -->
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('user.notifications') ? 'active' : '' }}"
-                        href="{{ route('user.notifications') }}">
-                        <i class="fa-solid fa-bell me-1"></i> Notifications
-                    </a>
-                </li>
 
                 <!-- Account Dropdown -->
                 <li class="nav-item dropdown">
@@ -59,7 +45,7 @@
                         <li><a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a></li>
                         <li><a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a></li>
                     </ul>
-                </li>
+                </li>   
 
             </ul>
         </div>

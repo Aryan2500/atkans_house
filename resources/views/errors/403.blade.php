@@ -7,7 +7,7 @@
     <title>403 Forbidden</title>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #2a2c37, #292230);
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;

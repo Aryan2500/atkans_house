@@ -33,6 +33,8 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Total</th>
+                                    <th>Product Type</th>
+                                    <th>Order Item</th>
                                     <th>Status</th>
                                     <th>Payment</th>
                                     <th>Placed On</th>
@@ -47,6 +49,29 @@
                                         <td>{{ $order->email }}</td>
                                         <td>{{ $order->phone }}</td>
                                         <td>₹{{ number_format($order->total, 2) }}</td>
+                                        <td>
+                                            {{ $order->items->first()->product ? $order->items->first()->product->type : 'N/A' }}
+                                        </td>
+
+                                        @if ($order->items->count() > 1)
+                                            @foreach ($order->items as $item)
+                                                <td>{{ $item->name }}</td>
+                                            @endforeach
+                                        @else
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <p>
+                                                        {{ $order->items->first()->product ? $order->items->first()->product->name : 'N/A' }}
+                                                    </p> &nbsp;
+                                                    <img height="40" width="40"
+                                                        src="{{ asset($order->items->first()->product ? $order->items->first()->product->images->first()->image_url : 'https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp-95907_800x675.jpg') }}"
+                                                        alt="" srcset="">
+                                                </div>
+
+
+                                            </td>
+                                        @endif
+
 
                                         <td>
                                             @php
@@ -76,12 +101,12 @@
                                         <td>{{ $order->created_at->format('d M Y, h:i A') }}</td>
 
                                         <td>
-                                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-sm btn-info"
-                                                title="View">
+                                            <a href="{{ route('orders.show', $order->id) }}"
+                                                class="btn btn-sm btn-info mt-2" title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-warning"
-                                                title="View">
+                                            <a href="{{ route('orders.edit', $order->id) }}"
+                                                class="btn btn-sm btn-warning mt-2" title="View">
                                                 <i class="fa fa-pen"></i>
                                             </a>
 
@@ -90,7 +115,7 @@
                                                 style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-danger"
+                                                <button class="btn btn-sm btn-danger mt-2"
                                                     onclick="return confirm('Are you sure you want to delete this order?')">
                                                     <i class="fa fa-trash"></i>
                                                 </button>

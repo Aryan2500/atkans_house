@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HeroController;
 use App\Http\Controllers\HireRequestController;
 use App\Http\Controllers\InfluencerController;
+use App\Http\Controllers\LoginLogsController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\OrderController;
@@ -102,6 +103,9 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
     Route::resource('milestone', MilestoneController::class);
 
     Route::resource('hero', HeroController::class);
+
+    Route::resource('logs', LoginLogsController::class);
+
 
 
     Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');

@@ -7,6 +7,7 @@ use App\Models\Color;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Size;
+use GPBMetadata\Google\Api\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -60,9 +61,11 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+
+        // dd(auth()->user()->id);
         try {
 
-            $order = Order::create([
+            $order = auth()->user()->orders()->create([
                 'first_name' => $request->input('fname'),
                 'last_name' => $request->input('lname'),
                 'email' => $request->input('email'),
@@ -77,6 +80,7 @@ class OrderController extends Controller
                 'shipping' => $request->input('shipping', 0),
                 'tax' => $request->input('tax', 0),
                 'total' => $request->input('total', 0),
+                // 'user_id' => auth()->user()->id
             ]);
 
             // Create one order item for now (single product case)

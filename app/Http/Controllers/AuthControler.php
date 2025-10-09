@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoginLogs;
 use App\Models\Otp;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Jenssegers\Agent\Agent;
 
 class AuthControler extends Controller
 {
@@ -40,6 +42,19 @@ class AuthControler extends Controller
 
             session(['permissions' => $permissions]);
 
+            $agent = new Agent();
+            $agent->setUserAgent($request->userAgent());
+            // dd($agent);
+            LoginLogs::create([
+                'user_id'    => auth()->user()->id,
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'device'     => $agent->device(),
+                'os'         => $agent->platform(),
+                'browser'    => $agent->browser(),
+                'login_at'   => now(),
+            ]);
+
             // dd($redirectUrl);
             if ($redirectUrl) {
                 return redirect($redirectUrl);
@@ -47,7 +62,7 @@ class AuthControler extends Controller
 
             if (auth()->user()->role == 'user') {
 
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.events');
             }
             if (auth()->user()->role == 'admin') {
 

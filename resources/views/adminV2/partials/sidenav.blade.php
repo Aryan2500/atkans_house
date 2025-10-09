@@ -72,8 +72,6 @@
                           </p>
                       </a>
                   </li>
-
-
                   <li class="nav-item">
                       <a href="{{ route('orders.index') }}"
                           class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
@@ -81,7 +79,6 @@
                           <p>Orders</p>
                       </a>
                   </li>
-
                   <li class="nav-item">
                       <a href="{{ route('packages.index') }}"
                           class="nav-link {{ request()->routeIs('packages.*') ? 'active' : '' }}">
@@ -129,6 +126,16 @@
                           class="nav-link {{ request()->routeIs('hireRequests.*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-briefcase"></i>
                           <p>Hire Requests</p>
+                      </a>
+                  </li>
+
+                  <!-- Logs -->
+                  <li class="nav-header">Logs</li>
+                  <li class="nav-item">
+                      <a href="{{ route('logs.index') }}"
+                          class="nav-link {{ request()->routeIs('logs.*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-envelope"></i>
+                          <p>Login Logs</p>
                       </a>
                   </li>
 
