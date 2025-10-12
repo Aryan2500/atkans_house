@@ -60,7 +60,7 @@ class RampWalkApplicationController
             'category'   => 'required|string',
             'instagram'  => 'required|url',
             'phone'      => 'required|string',
-            'portfolio'  => 'required|file|mimes:jpeg,png,pdf|max:2048',
+            'portfolio'  => 'required|file|mimes:jpeg,png,pdf|max:50048',
         ]);
 
         // dd($request->all());
@@ -80,7 +80,7 @@ class RampWalkApplicationController
                     'name'     => $request->name,
                     'email'    => $request->email,
                     'gender'   => $request->gender,
-                    'role'     => 'model',
+                    'role'     => 'user',
                     'password' => Hash::make(Str::random(10)),
                 ]);
 
@@ -112,6 +112,7 @@ class RampWalkApplicationController
 
             return back()->with('success', 'Thank you! Your registration has been received.');
         } catch (\Throwable $e) {
+            dd($e);
             return back()->with('error', 'Something went wrong. Please try again.')->withInput();
         }
     }

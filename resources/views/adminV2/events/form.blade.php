@@ -196,8 +196,8 @@
 
                             <div class="col-md-6">
                                 <label for='number_of_rounds' class="form-label">Number of Rounds</label>
-                                <input type="number" name="number_of_rounds" class="form-control"
-                                    value="{{ old('number_of_rounds', $event->number_of_rounds ?? '') }}">
+                                <input type="hidden" name="number_of_rounds" class="form-control"
+                                    value="{{ old('number_of_rounds', $event->number_of_rounds ?? '0') }}">
                             </div>
                         </div>
 

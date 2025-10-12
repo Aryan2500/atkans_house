@@ -51,8 +51,6 @@
 
             </div>
 
-
-
             <div class="row mb-30">
 
 
@@ -94,7 +92,7 @@
                                     Now</a>
 
                                 <a data-bs-toggle="modal" data-bs-target="#sponsorshipModel" data-bs-whatever="@mdo"
-                                    href="#0" class="rmore active">
+                                    onclick="setPackage({{ $t->id }})" href="#0" class="rmore active">
 
                                     <div class="br-left-top">
                                         <svg viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -110,6 +108,7 @@
                                             </path>
                                         </svg>
                                     </div>
+                                    {{ $t->price }}
                                 </a>
                             </div>
                         </div>

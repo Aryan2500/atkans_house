@@ -31,7 +31,7 @@
                         </a>
                         <div class="media-body z-index-1">
                             <div class="pl-4">
-                                <h1 class="display-4 text-uppercase text-white mb-0">
+                                <h1 class="display-4 text-uppercase text-black mb-0">
                                     {{ $application->modelProfile->user->name ?? 'N/A' }}</h1>
                                 <h6 class="text-uppercase text-white mb-0">{{ ucfirst($application->status) }} Application
                                 </h6>

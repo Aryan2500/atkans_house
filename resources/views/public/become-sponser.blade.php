@@ -103,7 +103,7 @@
                                     <select name="interested_product" id="interested_product">
                                         <option value="">Choose</option>
                                         @foreach ($products as $p)
-                                            <option value="Kids"
+                                            <option value="{{ $p->name }}"
                                                 {{ old('interested_product') == $p->name ? 'selected' : '' }}>
                                                 {{ $p->name }}</option>
                                         @endforeach

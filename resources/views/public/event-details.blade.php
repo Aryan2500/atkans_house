@@ -18,6 +18,7 @@
                                 {{ $event->location }}</div>
 
 
+                            {{-- @if ($event->type == 'Show') --}}
                             @auth
 
                                 @php
@@ -42,6 +43,8 @@
                                 <a href="{{ route('user.login', ['redirect' => url()->current()]) }}"
                                     class="button-3 mb-15 mt-4">Login to Participate</a>
                             @endauth
+                            {{-- @endif --}}
+
 
                         </div>
                     </div>

@@ -174,9 +174,9 @@
                                     </ul> <a data-bs-toggle="modal" data-bs-target="#bookingModel"
                                         onclick="setPackage({{ $p->id }})" data-bs-whatever="@mdo" href="#0"
                                         class="button-3 mt-30">Discover
-                                        Pakages</a>
+                                        Pakages  - ₹{{ $p->price }}</a>
                                 </div>
-                                <a data-bs-toggle="modal" data-bs-target="#bookingModel" data-bs-whatever="@mdo"  onclick="setPackage({{ $p->id }})"
+                                {{-- <a data-bs-toggle="modal" data-bs-target="#bookingModel" data-bs-whatever="@mdo"  onclick="setPackage({{ $p->id }})"
                                     href="#0" class="rmore active">
                                     <div class="arrow"> <span>₹</span>{{ $p->price }}</div>
                                     <div class="br-left-top">
@@ -195,7 +195,7 @@
                                                 fill="#000"></path>
                                         </svg>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     @endforeach
@@ -257,6 +257,7 @@
                                     </select>
                                 </div> --}}
 
+                                <label for="shootDate"> Shoot Date</label>
                                 <div class="col-md-6 form-group">
                                     <input type="date" name="shoot_date" id="shootDate" class="form-control"
                                         placeholder="Shoot Date">
