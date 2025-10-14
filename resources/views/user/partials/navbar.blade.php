@@ -1,23 +1,22 @@
 <!-- Dashboard Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <!-- Logo / Dashboard Home -->
-        <a class="navbar-brand fw-bold" href="{{ route('user.profile') }}">
-            <img src="{{ asset('img/logo.png') }}" class="logo-img" alt="Logo" style="height:40px;">
 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid px-6">
+        <!-- Logo -->
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('img/logo.png') }}" class="logo-img" alt="">
         </a>
 
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardNavbar"
-            aria-controls="dashboardNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
         </button>
 
         <!-- Menu -->
-        <div class="collapse navbar-collapse" id="dashboardNavbar">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
-
                 <!-- My Events -->
                 <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('user.events') ? 'active' : '' }}"
@@ -45,7 +44,7 @@
                         <li><a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a></li>
                         <li><a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a></li>
                     </ul>
-                </li>   
+                </li>
 
             </ul>
         </div>

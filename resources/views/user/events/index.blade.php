@@ -100,7 +100,7 @@
 
 
                 @foreach ($participatedEvents as $pe)
-                    <div class="col-4" style="border: 1px solid yellow;padding: 15px;">
+                    <div class="col-12 col-md-6 col-xl-3 mb-4" style="border: 1px solid yellow;padding: 15px;">
 
                         <div class="event-grid">
                             @php

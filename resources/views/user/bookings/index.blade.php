@@ -90,7 +90,7 @@
                 </div>
             @else
                 @foreach ($bookings as $order)
-                    <div class="col-3 mb-4">
+                    <div class="col-12 col-md-6 col-xl-3 mb-4">
                         <div class="order-card" style="border: 1px solid #E0E722;padding: 30px;">
                             <div class="order-header">
                                 <div>
