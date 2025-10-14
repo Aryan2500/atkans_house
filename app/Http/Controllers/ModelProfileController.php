@@ -28,6 +28,7 @@ class ModelProfileController extends Controller
         $profile = ModelProfile::find($id);
 
         $this->service->update($request, $profile);
+        $profile->update(['is_profile_completed' => 1]);
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }

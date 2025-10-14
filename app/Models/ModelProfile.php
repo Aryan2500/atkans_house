@@ -25,6 +25,7 @@ class ModelProfile extends Model
         'weight_kg',
         'category',
         'status',
+        'is_profile_completed',
         'is_featured'
     ];
     public function user()

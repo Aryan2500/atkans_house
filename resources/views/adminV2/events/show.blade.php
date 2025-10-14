@@ -81,8 +81,8 @@
                                                 </a>
                                             </span>
                                             <span
-                                                class="description {{ $participant->user->name ? 'text-success' : 'text-danger' }}">
-                                                {{ $participant->user->name ? 'Eligible' : 'Profile Not Completed' }}
+                                                class="description {{ $participant->user->modelProfile->is_profile_completed ? 'text-success' : 'text-danger' }}">
+                                                {{ $participant->user->modelProfile->is_profile_completed ? 'Profile Completed' : 'Profile Not Completed' }}
                                             </span>
                                         </div>
                                         <!-- /.user-block -->
