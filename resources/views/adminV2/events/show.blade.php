@@ -75,11 +75,15 @@
                                                 src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?semt=ais_hybrid&w=740&q=80"
                                                 alt="User image">
                                             <span class="username">
-                                                <a href="#">{{ $participant->user->name ?? 'Anonymous' }} (
-                                                    {{ $participant->user->email ?? 'N/A' }})</a>
+                                                <a href="mailto:{{ $participant->user->email ?? '' }}">
+                                                    {{ $participant->user->name ?? 'N/A' }}
+                                                    ({{ $participant->user->email ?? 'N/A' }})
+                                                </a>
                                             </span>
                                             <span
-                                                class="description text-success">{{ $participant->user->name ? 'Eligible' : 'Profile Not Completed' }}</span>
+                                                class="description {{ $participant->user->name ? 'text-success' : 'text-danger' }}">
+                                                {{ $participant->user->name ? 'Eligible' : 'Profile Not Completed' }}
+                                            </span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p class="text-muted mb-1">
