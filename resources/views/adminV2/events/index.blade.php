@@ -32,9 +32,9 @@
                                     <th>Title</th>
                                     <th>Location</th>
                                     <th>Dates</th>
-                                    <th>Registered</th>
-                                    <th>status</th>
-                                    <th>Notified To All</th>
+                                    <th>Registration Deadline</th>
+                                    <th>Status</th>
+                                    {{-- <th>Notified To All</th> --}}
                                     <th>Created</th>
 
                                     <th>Actions</th>
@@ -51,10 +51,22 @@
                                             –
                                             {{ \Carbon\Carbon::parse($event->end_date)->format('d M Y') }}
                                         </td>
-                                        <td>{{ $event->total_registered }}+</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($event->registration_deadline)->format('d M Y') }}
+                                        </td>
 
-                                        <td>{{ $event->event_stage }}</td>
-                                        <td>{{ $event->has_notified ? 'Yes' : 'No' }}</td>
+                                        <td>
+                                            <span
+                                                class="badge 
+        {{ $event->event_stage == 'published' ? 'bg-primary' : '' }}
+        {{ $event->event_stage == 'closed' ? 'bg-danger' : '' }}
+        {{ $event->event_stage == 'upcoming' ? 'bg-info' : '' }}
+        {{ $event->event_stage == 'cancelled' ? 'bg-warning text-dark' : '' }}
+        {{ $event->event_stage == 'running' ? 'bg-success' : '' }}
+        text-uppercase px-3 py-1">
+                                                {{ ucfirst($event->event_stage) }}
+                                            </span>
+                                        </td> {{-- <td>{{ $event->has_notified ? 'Yes' : 'No' }}</td> --}}
                                         <td>{{ $event->created_at->format('d M Y') }}</td>
                                         <td>
                                             {{-- <a href="{{ route('event.show', $event->id) }}" class="btn btn-sm btn-primary"
