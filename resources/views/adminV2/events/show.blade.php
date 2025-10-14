@@ -75,15 +75,28 @@
                                                 src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?semt=ais_hybrid&w=740&q=80"
                                                 alt="User image">
                                             <span class="username">
-                                                <a href="#">{{ $participant->user->name }}</a>
+                                                <a href="#">{{ $participant->user->name ?? 'Anonymous' }} (
+                                                    {{ $participant->user->email ?? 'N/A' }})</a>
                                             </span>
-                                            <span class="description text-success">Eligible</span>
+                                            <span
+                                                class="description text-success">{{ $participant->user->name ? 'Eligible' : 'Profile Not Completed' }}</span>
                                         </div>
                                         <!-- /.user-block -->
-                                        <p>
-                                            Aspiring model from {{ $participant->user->state }}, passionate about ramp walks
-                                            and
-                                            fashion shows.
+                                        <p class="text-muted mb-1">
+                                            <i class="fa-solid fa-location-dot me-1"></i>
+                                            <strong>Category:</strong>
+                                            {{ $participant->user->modelProfile ? $participant->user->modelProfile->category : 'N/A' }}
+                                            <span class="mx-2">|</span>
+
+                                            <a href="{{ $participant->user->modelProfile ? $participant->user->modelProfile->instagram_link : 'N/A' }}"
+                                                class="text-info" target="_blank">
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1200px-Instagram_logo_2022.svg.png"
+                                                    alt="" srcset="" width="30" height="30">
+                                            </a>
+                                            <span class="mx-2">|</span>
+                                            <strong>Gender:</strong> {{ $participant->user->gender ?? 'N/A' }}
+                                            <span class="mx-2">|</span>
+                                            <strong>Phone:</strong> {{ $participant->user->phone ?? 'N/A' }}
                                         </p>
 
                                         @php
