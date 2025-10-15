@@ -69,7 +69,7 @@
                             @if ($event->participants->count() > 0)
                                 @foreach ($event->participants as $participant)
                                     <!-- Participant 1 -->
-                                    <div class="post">
+                                    <div class="post" style="border: 2px solid grey; padding: 15px">
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm"
                                                 src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?semt=ais_hybrid&w=740&q=80"
@@ -128,10 +128,19 @@
                                             @endphp
                                             <p class="float-right mr-3"> Votes : <b>{{ $votes }} </b></p>
                                         @else
-                                            <div class="d-flex justify-content-end">
+                                            <div><br>
+                                                <p style="color: black;font-size: 14px;">Before onboarding, check
+                                                    eligibility</p>
+                                                <div class="d-flex justify-content-end">
 
-                                                <a href="{{ route('onboard-participants', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
-                                                    class="btn btn-sm btn-primary">Onboard</a>
+                                                    <a href="{{ route('onboard-participants', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
+                                                        class="btn btn-sm btn-primary">Onboard</a>
+
+                                                    <a href="{{ route('participants.eligiblity', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
+                                                        class="btn btn-sm btn-secondary ml-1">Check Eligibility</a>
+
+                                                </div>
+
                                             </div>
                                         @endif
 

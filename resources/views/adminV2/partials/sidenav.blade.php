@@ -23,175 +23,223 @@
           <nav class="mt-2">
               <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                   data-accordion="false">
-
-                  <!-- Dashboard -->
-                  <li class="nav-item">
-                      <a href="{{ route('admin.dashboard') }}"
-                          class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-tachometer-alt"></i>
-                          <p>Dashboard</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('admin.dashboard'))
+                      <!-- Dashboard -->
+                      <li class="nav-item">
+                          <a href="{{ route('admin.dashboard') }}"
+                              class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-tachometer-alt"></i>
+                              <p>Dashboard</p>
+                          </a>
+                      </li>
+                  @endif
 
                   <!-- Models Management -->
-                  <li class="nav-header">Models Management</li>
+                  @if (hasPermission('stories.index', 'ramp-applications.index', 'models.index'))
+                      <li class="nav-header">Models Management</li>
+                  @endif
+                  @if (hasPermission('models.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('models.index') }}"
+                              class="nav-link {{ request()->routeIs('models.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-users"></i>
+                              <p>Models</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('models.index') }}"
-                          class="nav-link {{ request()->routeIs('models.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-users"></i>
-                          <p>Models</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('ramp-applications.index') }}"
-                          class="nav-link {{ request()->routeIs('ramp-applications.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-walking"></i>
-                          <p>R. Walk Applications</p>
-                      </a>
-                  </li>
-
-                  <li class="nav-item">
-                      <a href="{{ route('stories.index') }}"
-                          class="nav-link {{ request()->routeIs('stories.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-book"></i>
-                          <p>Story Contest</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('ramp-applications.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('ramp-applications.index') }}"
+                              class="nav-link {{ request()->routeIs('ramp-applications.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-walking"></i>
+                              <p>R. Walk Applications</p>
+                          </a>
+                      </li>
+                  @endif
+                  @if (hasPermission('stories.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('stories.index') }}"
+                              class="nav-link {{ request()->routeIs('stories.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-book"></i>
+                              <p>Story Contest</p>
+                          </a>
+                      </li>
+                  @endif
 
 
                   <!-- Products & Orders -->
-                  <li class="nav-header">Products & Orders</li>
+                  @if (hasPermission('products.index', 'orders.index', 'packages.index'))
+                      <li class="nav-header">Products & Orders</li>
+                  @endif
+                  @if (hasPermission('products.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('products.index') }}"
+                              class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-shopping-basket"></i>
+                              <p>
+                                  Products
+                              </p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('products.index') }}"
-                          class="nav-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-shopping-basket"></i>
-                          <p>
-                              Products
-                          </p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('orders.index') }}"
-                          class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-list"></i>
-                          <p>Orders</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('packages.index') }}"
-                          class="nav-link {{ request()->routeIs('packages.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-box"></i>
-                          <p>Packages</p>
-                      </a>
-                  </li>
+
+                  @if (hasPermission('orders.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('orders.index') }}"
+                              class="nav-link {{ request()->routeIs('orders.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-list"></i>
+                              <p>Orders</p>
+                          </a>
+                      </li>
+                  @endif
+
+                  @if (hasPermission('packages.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('packages.index') }}"
+                              class="nav-link {{ request()->routeIs('packages.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-box"></i>
+                              <p>Packages</p>
+                          </a>
+                      </li>
+                  @endif
+
                   <!-- Events & Engagement -->
-                  <li class="nav-header">Events & Engagement</li>
+                  @if (hasPermission('hireRequests.index', 'event.index', 'sponsership.index', 'influencers.index', 'bookings.index'))
+                      <li class="nav-header">Events & Engagement</li>
+                  @endif
+                  @if (hasPermission('event.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('event.index') }}"
+                              class="nav-link {{ request()->routeIs('event.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-calendar-alt"></i>
+                              <p>Events</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('event.index') }}"
-                          class="nav-link {{ request()->routeIs('event.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-calendar-alt"></i>
-                          <p>Events</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('sponsership.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('sponsership.index') }}"
+                              class="nav-link {{ request()->routeIs('sponsership.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-hand-holding-usd"></i>
+                              <p>Sponsorships</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('sponsership.index') }}"
-                          class="nav-link {{ request()->routeIs('sponsership.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-hand-holding-usd"></i>
-                          <p>Sponsorships</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('influencers.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('influencers.index') }}"
+                              class="nav-link {{ request()->routeIs('influencers.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-user-friends"></i>
+                              <p>Influencers Sponsors</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('influencers.index') }}"
-                          class="nav-link {{ request()->routeIs('influencers.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-user-friends"></i>
-                          <p>Influencers Sponsors</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('bookings.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('bookings.index') }}"
+                              class="nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-camera"></i>
+                              <p>PhotoShoot Bookings</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('bookings.index') }}"
-                          class="nav-link {{ request()->routeIs('bookings.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-camera"></i>
-                          <p>PhotoShoot Bookings</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('hireRequests.index'))
+                      <li class="nav-item">
+                          <a href="{{ route('hireRequests.index') }}"
+                              class="nav-link {{ request()->routeIs('hireRequests.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-briefcase"></i>
+                              <p>Hire Requests</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <li class="nav-item">
-                      <a href="{{ route('hireRequests.index') }}"
-                          class="nav-link {{ request()->routeIs('hireRequests.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-briefcase"></i>
-                          <p>Hire Requests</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('logs.index'))
+                      <!-- Logs -->
+                      <li class="nav-header">Logs</li>
+                      <li class="nav-item">
+                          <a href="{{ route('logs.index') }}"
+                              class="nav-link {{ request()->routeIs('logs.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-envelope"></i>
+                              <p>Login Logs</p>
+                          </a>
+                      </li>
+                  @endif
 
-                  <!-- Logs -->
-                  <li class="nav-header">Logs</li>
-                  <li class="nav-item">
-                      <a href="{{ route('logs.index') }}"
-                          class="nav-link {{ request()->routeIs('logs.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-envelope"></i>
-                          <p>Login Logs</p>
-                      </a>
-                  </li>
-
-                  <!-- Audience -->
-                  <li class="nav-header">Audience</li>
-                  <li class="nav-item">
-                      <a href="{{ route('subscribers.index') }}"
-                          class="nav-link {{ request()->routeIs('subscribers.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-envelope"></i>
-                          <p>Subscribers</p>
-                      </a>
-                  </li>
+                  @if (hasPermission('subscribers.index'))
+                      <!-- Audience -->
+                      <li class="nav-header">Audience</li>
+                      <li class="nav-item">
+                          <a href="{{ route('subscribers.index') }}"
+                              class="nav-link {{ request()->routeIs('subscribers.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-envelope"></i>
+                              <p>Subscribers</p>
+                          </a>
+                      </li>
+                  @endif
 
                   <!-- Settings -->
-                  <li class="nav-header">Settings & Administration</li>
+                  @if (hasPermission('role.index', 'user.index', 'gallery.index', 'hero.index'))
+                      <li class="nav-header">Settings & Administration</li>
+                  @endif
+
 
                   <li
                       class="nav-item has-treeview {{ request()->routeIs('role.*') || request()->routeIs('user.*') || request()->routeIs('gallery.*') ? 'menu-open' : '' }}">
-                      <a href="#"
-                          class="nav-link {{ request()->routeIs('role.*') || request()->routeIs('user.*') || request()->routeIs('gallery.*') ? 'active' : '' }}">
-                          <i class="nav-icon fas fa-cogs"></i>
-                          <p>
-                              Master Settings
-                              <i class="right fas fa-angle-left"></i>
-                          </p>
-                      </a>
+                      @if (hasPermission('role.index', 'user.index', 'gallery.index', 'hero.index'))
+                          <a href="#"
+                              class="nav-link {{ request()->routeIs('role.*') || request()->routeIs('user.*') || request()->routeIs('gallery.*') ? 'active' : '' }}">
+                              <i class="nav-icon fas fa-cogs"></i>
+                              <p>
+                                  Master Settings
+                                  <i class="right fas fa-angle-left"></i>
+                              </p>
+                          </a>
+                      @endif
                       <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                              <a href="{{ route('role.index') }}"
-                                  class="nav-link {{ request()->routeIs('role.*') ? 'active' : '' }}">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Roles</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="{{ route('user.index') }}"
-                                  class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Users</p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="{{ route('gallery.index') }}"
-                                  class="nav-link {{ request()->routeIs('gallery.*') ? 'active' : '' }}">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Gallery</p>
-                              </a>
-                          </li>
+                          @if (hasPermission('role.index'))
+                              <li class="nav-item">
+                                  <a href="{{ route('role.index') }}"
+                                      class="nav-link {{ request()->routeIs('role.*') ? 'active' : '' }}">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Roles</p>
+                                  </a>
+                              </li>
+                          @endif
+                          @if (hasPermission('user.index'))
+                              <li class="nav-item">
+                                  <a href="{{ route('user.index') }}"
+                                      class="nav-link {{ request()->routeIs('user.*') ? 'active' : '' }}">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Users</p>
+                                  </a>
+                              </li>
+                          @endif
 
-                          <li class="nav-item">
-                              <a href="{{ route('hero.index') }}"
-                                  class="nav-link {{ request()->routeIs('hero.*') ? 'active' : '' }}">
-                                  <i class="far fa-circle nav-icon"></i>
-                                  <p>Hero Section</p>
-                              </a>
-                          </li>
+                          @if (hasPermission('gallery.index'))
+                              <li class="nav-item">
+                                  <a href="{{ route('gallery.index') }}"
+                                      class="nav-link {{ request()->routeIs('gallery.*') ? 'active' : '' }}">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Gallery</p>
+                                  </a>
+                              </li>
+                          @endif
+
+                          @if (hasPermission('hero.index'))
+                              <li class="nav-item">
+                                  <a href="{{ route('hero.index') }}"
+                                      class="nav-link {{ request()->routeIs('hero.*') ? 'active' : '' }}">
+                                      <i class="far fa-circle nav-icon"></i>
+                                      <p>Hero Section</p>
+                                  </a>
+                              </li>
+                          @endif
                       </ul>
                   </li>
 

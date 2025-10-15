@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(OnboardImages::class, 'user_id');
     }
+
+    public function loginLogs()
+    {
+        return $this->hasMany(LoginLogs::class);
+    }
 }

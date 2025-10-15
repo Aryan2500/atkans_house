@@ -19,6 +19,10 @@
 
 
                             {{-- @if ($event->type == 'Show') --}}
+                            @if ($event->milestone)
+                                <p href="#" class=" mb-15 mt-4"> {{ $event->milestone->rule_name }} </p>
+                                <p href="#" class=" mb-15 mt-4">Achieve your milestones and shine bright!</p>
+                            @endif
                             @auth
 
                                 @php
@@ -29,7 +33,9 @@
 
                                 @if ($p)
                                     <br>
-                                    <p href="#" class="button-3 mb-15 mt-4">Participated ✅</p>
+                                    <p href="#" class="button-3 mb-15 mt-4"> Wait For Approval</p>
+                                    <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
+                                        live for voting in the Show Gallery.</p>
                                 @else
                                     <form action="{{ route('participate.store') }}" method="post">
                                         @csrf

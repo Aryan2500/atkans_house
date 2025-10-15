@@ -9,4 +9,9 @@ class Permission extends Model
     //
     protected $table = 'permissions';
     protected $fillable = ['name', 'display_name', 'url'];
+
+    function group()
+    {
+        return $this->belongsTo(Permissiongroup::class, 'group_id');
+    }
 }

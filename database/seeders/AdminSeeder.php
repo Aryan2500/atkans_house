@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('12345678'),
-            'role' => 'admin',
+            'user_type' => 'admin',
             'role_id' => 1,
         ]);
 
@@ -29,7 +29,7 @@ class AdminSeeder extends Seeder
             'gender' => 'Male',
             'password' => bcrypt('12345678'),
             'phone' => '1234567890',
-            'role' => 'user',
+            'user_type' => 'user',
             'role_id' => 3,
         ]);
 
@@ -41,7 +41,7 @@ class AdminSeeder extends Seeder
             'gender' => 'Male',
             'password' => bcrypt('12345678'),
             'phone' => '1234567890',
-            'role' => 'user',
+            'user_type' => 'user',
             'role_id' => 3,
         ]);
 
@@ -53,7 +53,7 @@ class AdminSeeder extends Seeder
             'gender' => 'Male',
             'password' => bcrypt('12345678'),
             'phone' => '1234567890',
-            'role' => 'user',
+            'user_type' => 'user',
             'role_id' => 3,
         ]);
 
@@ -65,7 +65,7 @@ class AdminSeeder extends Seeder
             'gender' => 'Male',
             'password' => bcrypt('12345678'),
             'phone' => '1234567890',
-            'role' => 'user',
+            'user_type' => 'user',
             'role_id' => 3,
         ]);
     }

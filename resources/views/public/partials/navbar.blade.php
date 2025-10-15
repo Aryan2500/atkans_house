@@ -82,13 +82,13 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
                             <li>
                                 <form method="Get"
-                                    action="{{ auth()->user()->role == 'admin' ? route('logout') : route('user.logout') }}">
+                                    action="{{ auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'staff' ? route('logout') : route('user.logout') }}">
                                     @csrf
                                     <button type="submit"
                                         class="nav-link btn btn-link text-white text-decoration-none">Logout</button>
                                 </form>
                             </li>
-                            @if (Auth::user()->role == 'admin')
+                            @if (Auth::user()->user_type == 'admin' || Auth::user()->user_type == 'staff')
                                 <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Dashboard</a></li>
                             @else
                                 <li><a href="{{ route('user.events') }}" class="dropdown-item">Dashboard</a></li>

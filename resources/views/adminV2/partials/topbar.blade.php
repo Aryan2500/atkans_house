@@ -30,13 +30,17 @@
                  <i class="far fa-user"></i>
              </a>
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                 <a href="{{ route('admin.profile.edit') }}" class="dropdown-item">
-                     Profile
-                 </a>
+                 @if (hasPermission('admin.profile.edit'))
+                     <a href="{{ route('admin.profile.edit') }}" class="dropdown-item">
+                         Profile
+                     </a>
+                 @endif
                  <div class="dropdown-divider"></div>
-                 <a href="{{ route('logout') }}" class="dropdown-item">
-                     Logout
-                 </a>
+                 @if (hasPermission('logout'))
+                     <a href="{{ route('logout') }}" class="dropdown-item">
+                         Logout
+                     </a>
+                 @endif
              </div>
          </li>
 

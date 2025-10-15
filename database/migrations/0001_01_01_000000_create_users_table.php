@@ -27,7 +27,7 @@ return new class extends Migration
             $table->bigInteger('phone')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->enum('role', ['admin', 'user', 'client', 'staff'])->default('user');
+            $table->enum('user_type', ['admin', 'user', 'client', 'staff'])->default('user');
             $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
             $table->foreignId('role_id')->onDelete('cascade')->nullable();
             $table->rememberToken();

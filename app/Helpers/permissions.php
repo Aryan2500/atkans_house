@@ -431,21 +431,4 @@ return [
             'url' => '/logout',
         ],
     ],
-
-    'package_type' => [
-        'pp' => 'Photography Packages',
-        'st' => 'Sponsorship Tiers',
-
-    ],
-
-    'rule_types' => [
-        'min_purchase' => 'Minimum Purchase Amount',
-        'max_purchase' => 'Maximum Purchase Amount',
-        'purchase_count' => 'Minimum Number of Orders',
-        'min_login_count' => 'Minimum Login Count',
-        'profile_completed' => 'Profile Completion Required',
-        'order_within_days' => 'Purchase Within Last X Days',
-        
-    ],
-
 ];

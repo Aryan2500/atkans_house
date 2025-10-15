@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();       // e.g., 'edit_user'
             $table->string('display_name');         // e.g., 'Edit User'
-            $table->string('url');                  // e.g., '/admin/users/{id}/edit'
+            $table->string('group_id')->nullable();                  // e.g., '/admin/users/{id}/edit'
+            $table->string('url')->nullable();                  // e.g., '/admin/users/{id}/edit'
+
             $table->timestamps();
         });
     }

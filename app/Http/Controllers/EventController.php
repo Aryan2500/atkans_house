@@ -40,6 +40,7 @@ class EventController
 
         // dd(config('constant.rule_types'));
         $milestones = Milestone::orderBy('created_at', 'desc')->get();
+        dd($milestones);
         return view('adminV2.events.form', compact('milestones'));
     }
 
@@ -149,7 +150,7 @@ class EventController
         $event = Event::findOrFail($id);
         // dd($event->milestone);
         $milestones = Milestone::orderBy('created_at', 'desc')->get();
-
+        //  dd($milestones);
         return view('adminV2.events.form', compact('event', 'milestones'));
     }
 
@@ -157,7 +158,8 @@ class EventController
      * Update the specified resource in storage.
      */
     public function update(Request $request, Event $event)
-    {
+    {  
+        //  dd($request->all());
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',

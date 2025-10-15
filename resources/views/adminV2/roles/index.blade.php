@@ -61,15 +61,18 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
 
-                                            <form action="{{ route('role.destroy', $role->id) }}" method="POST"
-                                                style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this role?')">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            @if ($role->id != 1)
+                                                <form action="{{ route('role.destroy', $role->id) }}" method="POST"
+                                                    style="display:inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this role?')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

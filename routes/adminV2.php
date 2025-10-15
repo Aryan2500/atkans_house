@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthControler;
+use App\Http\Controllers\CheckEligiblityController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
@@ -29,87 +30,101 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckPermission;
 use App\Models\Sponsership;
 use App\Models\Sponsorship;
+use Google\Rpc\Context\AttributeContext\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('adminv2/dashboard', function () {
-    $header = 'Dashboards';
-    return view('adminV2.dashboard.dashboard', compact('header'));
-});
+// Route::get('adminv2/dashboard', function () {
+//     $header = 'Dashboards';
+//     return view('adminV2.dashboard.dashboard', compact('header'));
+// });
 
 Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(function () {
-    // Route::prefix('admin')->middleware(['auth', CheckPermission::class])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    // Models
-    Route::resource('models', ModelController::class);
+    Route::middleware(['auth', CheckPermission::class])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        // Models
+        Route::resource('models', ModelController::class);
 
-    // Events (Ramp Walk Events)
-    Route::resource('event', EventController::class);
+        // Events (Ramp Walk Events)
+        Route::resource('event', EventController::class);
 
-    // Volunteers
-    Route::resource('volunteers', VolunteerController::class);
+        // Volunteers
+        Route::resource('volunteers', VolunteerController::class);
 
-    // Hire Requests
-    Route::resource('hireRequests', HireRequestController::class);
-    Route::patch('admin/hire-requests/{id}/{status}', [HireRequestController::class, 'updateStatus'])->name('hireRequests.updateStatus');
+        // Hire Requests
+        Route::resource('hireRequests', HireRequestController::class);
+        Route::patch('admin/hire-requests/{id}/{status}', [HireRequestController::class, 'updateStatus'])->name('hireRequests.updateStatus');
 
-    // Ramp Walk Applications
-    Route::resource('ramp-applications', RampWalkApplicationController::class);
+        // Ramp Walk Applications
+        Route::resource('ramp-applications', RampWalkApplicationController::class);
 
-    Route::post('/ramp-applications/{id}/approve', [RampwalkApplicationController::class, 'approve'])->name('ramp-applications.approve');
-    Route::post('/ramp-applications/{id}/reject', [RampwalkApplicationController::class, 'reject'])->name('ramp-applications.reject');
+        Route::post('/ramp-applications/{id}/approve', [RampwalkApplicationController::class, 'approve'])->name('ramp-applications.approve');
+        Route::post('/ramp-applications/{id}/reject', [RampwalkApplicationController::class, 'reject'])->name('ramp-applications.reject');
 
-    Route::resource('bookings', PhotoShootBookingController::class);
+        Route::resource('bookings', PhotoShootBookingController::class);
 
-    Route::resource('orders', OrderController::class);
+        Route::resource('orders', OrderController::class);
 
-    Route::resource('influencers', InfluencerController::class);
-    Route::resource('stories', StoryContestController::class);
-
-
-    Route::resource('packages', PackageController::class);
-
-    // Sponsership Management
-    Route::resource('sponsership', SponsorshipController::class);
-
-    // Role Management
-    Route::resource('role', RoleController::class);
-
-    // User  Management
-    Route::resource('user', UserController::class);
+        Route::resource('influencers', InfluencerController::class);
+        Route::resource('stories', StoryContestController::class);
 
 
-    // Payments
-    Route::resource('payments', PaymentController::class);
+        Route::resource('packages', PackageController::class);
 
-    Route::resource('gallery', GalleryController::class);
+        // Sponsership Management
+        Route::resource('sponsership', SponsorshipController::class);
 
+        // Role Management
+        Route::resource('role', RoleController::class);
 
-    Route::resource('subscribers', SubscribeController::class);
-
-    Route::get('/profile', [AuthControler::class, 'edit'])->name('admin.profile.edit');
-    Route::put('/profile', [AuthControler::class, 'update'])->name('admin.profile.update');
-
-    Route::put('/profile/password', [AuthControler::class, 'updatePassword'])->name('admin.profile.password.update');
-
-    //Size
-    Route::resource('sizes', SizeController::class);
-
-    //Color
-    Route::resource('colors', ColorController::class);
-    // Products
-    Route::resource('products', ProductController::class);
-
-    Route::resource('milestone', MilestoneController::class);
-
-    Route::resource('hero', HeroController::class);
-
-    Route::resource('logs', LoginLogsController::class);
+        // User  Management
+        Route::resource('user', UserController::class);
 
 
+        // Payments
+        Route::resource('payments', PaymentController::class);
 
-    Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
-    Route::get('/remove-onboard-participants', [VoteImageController::class, 'removeOnboardParticipants'])->name('removeOnboard-participants');
+        Route::resource('gallery', GalleryController::class);
 
-    Route::post('/onboard-participants', [VoteImageController::class, 'doOnboardParticipantsImage'])->name('onboard-participants.store');
+
+        Route::resource('subscribers', SubscribeController::class);
+
+        Route::get('/profile', [AuthControler::class, 'edit'])->name('admin.profile.edit');
+        Route::put('/profile', [AuthControler::class, 'update'])->name('admin.profile.update');
+
+        Route::put('/profile/password', [AuthControler::class, 'updatePassword'])->name('admin.profile.password.update');
+
+        //Size
+        Route::resource('sizes', SizeController::class);
+
+        //Color
+        Route::resource('colors', ColorController::class);
+        // Products
+        Route::resource('products', ProductController::class);
+
+        //Milestone
+        Route::resource('milestone', MilestoneController::class);
+
+        //Hero
+        Route::resource('hero', HeroController::class);
+
+        //LoginLogs
+        Route::resource('logs', LoginLogsController::class);
+
+
+        //Eligiblity
+        Route::get('/participants-eligiblity', [CheckEligiblityController::class, 'checkEligiblityView'])->name('participants.eligiblity');
+
+        //Send Milestone Email
+        Route::post('/send-milestone-email', [CheckEligiblityController::class, 'sendMilestoneEmail'])->name('send-milestone-email');
+
+        // Show Participants Image list
+        Route::get('/onboard-participants', [VoteImageController::class, 'onboardParticipantsImage'])->name('onboard-participants');
+
+        // Remove Participants from show
+        Route::get('/remove-onboard-participants', [VoteImageController::class, 'removeOnboardParticipants'])->name('removeOnboard-participants');
+
+        // Onboard Participants in show
+        Route::post('/onboard-participants', [VoteImageController::class, 'doOnboardParticipantsImage'])->name('onboard-participants.store');
+    });
 });

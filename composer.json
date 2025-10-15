@@ -34,7 +34,9 @@
         },
         "files": [
             "app/Helpers/EmailPhoneHelper.php",
-            "app/Helpers/QrHelper.php"
+            "app/Helpers/QrHelper.php",
+            "app/Helpers/permissions.php",
+            "app/Helpers/PermissionHelper.php"
         ]
     },
     "autoload-dev": {

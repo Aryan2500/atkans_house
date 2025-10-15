@@ -2,17 +2,20 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ModelProfileSeeder extends Seeder
+class NewPermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
-        \App\Models\ModelProfile::factory()->count(15)->create();
+        foreach (PERMISSIONS as $key => $p) {
+            Permission::create($p);
+        }
     }
 }

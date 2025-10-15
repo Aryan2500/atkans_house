@@ -21,10 +21,6 @@ return new class extends Migration
 
             // Operator (=, >=, <=, etc.)
             $table->string('operator')->default('=');
-
-            $table->foreignIdFor(Event::class)->nullable()->onDelete('null')->default(
-                null
-            );
             $table->timestamps();
         });
     }

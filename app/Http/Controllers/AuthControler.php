@@ -60,11 +60,11 @@ class AuthControler extends Controller
                 return redirect($redirectUrl);
             }
 
-            if (auth()->user()->role == 'user') {
+            if (auth()->user()->user_type == 'user') {
 
                 return redirect()->route('user.events');
             }
-            if (auth()->user()->role == 'admin') {
+            if (auth()->user()->user_type == 'admin' || auth()->user()->user_type == 'staff') {
 
                 return redirect()->route('admin.dashboard');
             }
@@ -75,17 +75,16 @@ class AuthControler extends Controller
             ])->withInput();
         }
 
-
         return $data;
     }
 
     public function logout()
     {
-        $role = auth()->user()->role;
+        $u_type = auth()->user()->user_type;
 
         Auth::logout();
         session()->flush();
-        if ($role == 'admin') {
+        if ($u_type == 'admin' || $u_type == 'staff') {
             return redirect()->route("login.page");
         } else {
             return redirect()->route("user.login");

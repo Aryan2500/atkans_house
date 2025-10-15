@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use App\Models\Permissiongroup;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class RoleController extends Controller
         //
         // dd(config('constant.permissions'));
         $permissions  = Permission::all();
-        return view("adminV2.roles.form", compact("permissions"));
+        $permissionsGroups = Permissiongroup::all();
+        return view("adminV2.roles.form", compact("permissions", "permissionsGroups"));
     }
 
     /**
@@ -69,7 +71,9 @@ class RoleController extends Controller
         //
         $role = Role::with('permissions')->findOrFail($id);
         $permissions  = Permission::all();
-        return view("adminV2.roles.form", compact("role", "permissions"));
+        $permissionsGroups = Permissiongroup::all();
+
+        return view("adminV2.roles.form", compact("role", "permissions" , "permissionsGroups"));
     }
 
     /**
