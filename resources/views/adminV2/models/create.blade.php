@@ -7,109 +7,132 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4>Upload Chapters for a Book</h4>
+                    <h4>Add New Model</h4>
                 </div>
+
                 <div class="card-body">
-                    <form class="needs-validation" novalidate method="POST" enctype="multipart/form-data"
-                        action="{{ route('chapter.store') }}">
+                    <form method="POST" action="{{ route('models.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        {{-- 🔗 Select Book --}}
+                        {{-- Name --}}
                         <div class="form-group">
-                            <label for="book_id">Select Book</label>
-                            <select class="form-control" id="book_id" name="book_id" required>
-                                <option value="">-- Select Book --</option>
-                                @foreach ($books as $book)
-                                    <option value="{{ $book->id }}">{{ $book->title }}</option>
-                                @endforeach
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                            @error('name')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Email --}}
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Date of Birth --}}
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" name="dob" class="form-control" value="{{ old('dob') }}" required>
+                            @error('dob')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- City --}}
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="city" class="form-control" value="{{ old('city') }}" required>
+                            @error('city')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- State --}}
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" name="state" class="form-control" value="{{ old('state') }}" required>
+                            @error('state')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Phone --}}
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ old('phone') }}" required>
+                            @error('phone')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Instagram Link --}}
+                        <div class="form-group">
+                            <label>Instagram Link</label>
+                            <input type="url" name="instagram_link" class="form-control"
+                                value="{{ old('instagram_link') }}">
+                            @error('instagram_link')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Height --}}
+                        <div class="form-group">
+                            <label>Height (cm)</label>
+                            <input type="number" name="height_cm" class="form-control" value="{{ old('height_cm') }}"
+                                required>
+                            @error('height_cm')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Weight --}}
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" name="weight_kg" class="form-control" value="{{ old('weight_kg') }}"
+                                required>
+                            @error('weight_kg')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Status --}}
+                        <div class="form-group">
+                            <label>Current Status</label>
+                            <select name="status" class="form-control" required>
+                                <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="approved" {{ old('status') == 'approved' ? 'selected' : '' }}>Approved
+                                </option>
+                                <option value="rejected" {{ old('status') == 'rejected' ? 'selected' : '' }}>Rejected
+                                </option>
                             </select>
+                            @error('status')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
-                        {{-- ✅ Common: Is Free --}}
+                        {{-- Featured Checkbox --}}
                         <div class="form-group form-check mt-3">
-                            <input type="checkbox" class="form-check-input" id="is_free" name="is_free" checked>
-                            <label class="form-check-label" for="is_free">All Chapters Free?</label>
+                            <input type="checkbox" name="featured" class="form-check-input" id="featuredCheckbox"
+                                {{ old('featured') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="featuredCheckbox">Featured</label>
                         </div>
 
-                        <hr>
-
-                        {{-- 🔁 Chapter Repeater --}}
-                        <div id="chapter-repeater">
-                            <div class="chapter-block border p-3 mb-3 rounded bg-light">
-                                <div class="form-row">
-                                    <div class="col-md-6 mb-3">
-                                        <label>Chapter Title</label>
-                                        <input type="text" name="chapters[0][title]" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Chapter Number</label>
-                                        <input type="number" name="chapters[0][chapter_number]" class="form-control"
-                                            required>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>PDF File</label>
-                                        <input type="file" name="chapters[0][file_url]" accept=".pdf"
-                                            class="form-control-file" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Description (optional)</label>
-                                    <textarea name="chapters[0][description]" class="form-control" rows="2"></textarea>
-                                </div>
-                                <button type="button" class="btn btn-danger btn-sm remove-chapter">Remove</button>
-                            </div>
+                        {{-- Photo --}}
+                        <div class="form-group">
+                            <label>Photo</label>
+                            <input type="file" name="photo" class="form-control-file" accept="image/*" required>
+                            @error('photo')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
 
-                        <button type="button" class="btn btn-secondary mb-3" id="add-chapter">+ Add Another
-                            Chapter</button>
-
-                        <button class="btn btn-success btn-block" type="submit">📥 Upload All Chapters</button>
+                        <button type="submit" class="btn btn-success mt-3">Create Model</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        let chapterIndex = 1;
-
-        document.getElementById('add-chapter').addEventListener('click', function() {
-            const container = document.getElementById('chapter-repeater');
-
-            const template = `
-            <div class="chapter-block border p-3 mb-3 rounded bg-light">
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label>Chapter Title</label>
-                        <input type="text" name="chapters[${chapterIndex}][title]" class="form-control" required>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>Chapter Number</label>
-                        <input type="number" name="chapters[${chapterIndex}][chapter_number]" class="form-control" required>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label>PDF File</label>
-                        <input type="file" name="chapters[${chapterIndex}][file_url]" accept=".pdf" class="form-control-file" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Description (optional)</label>
-                    <textarea name="chapters[${chapterIndex}][description]" class="form-control" rows="2"></textarea>
-                </div>
-                <button type="button" class="btn btn-danger btn-sm remove-chapter">Remove</button>
-            </div>
-        `;
-
-            container.insertAdjacentHTML('beforeend', template);
-            chapterIndex++;
-        });
-
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('remove-chapter')) {
-                e.target.closest('.chapter-block').remove();
-            }
-        });
-    </script>
-@endpush

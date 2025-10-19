@@ -18,12 +18,10 @@ return new class extends Migration
 
             $table->string('portfolio_path')->nullable();
             $table->string('photo')->nullable();
-            $table->date('dob')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
-            $table->string('phone')->nullable();
             $table->string('instagram_link');
-            $table->string('category');
+            $table->string('category')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->integer('height_cm');
             $table->integer('weight_kg');

@@ -46,7 +46,7 @@
                 <div class="icon">
                     <i class="ion ion-briefcase"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ route('hireRequests.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -62,7 +62,7 @@
                 <div class="icon">
                     <i class="ion ion-calendar"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ route('event.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -72,15 +72,45 @@
             <!-- small box -->
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>{{ $volunteerCount }}</h3>
-                    <p>Volunteers</p>
+                    <h3>{{ $products }}</h3>
+                    <p>Total Products</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-people"></i>
+                    <i class="nav-icon fas fa-shopping-basket"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="{{ route('products.index') }}" class="small-box-footer">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $orders }}</h3>
+                    <p>Total Orders</p>
+                </div>
+                <div class="icon">
+                    <i class="nav-icon fas fa-list"></i>
+                </div>
+                <a href="{{ route('orders.index') }}" class="small-box-footer">
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $earnings }}</h3>
+                    <p>Total Earnings</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+
             </div>
         </div>
     </div>

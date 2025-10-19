@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreModelRequest;
 use App\Models\ModelProfile;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ModelController
 {
@@ -45,7 +49,7 @@ class ModelController
     public function index()
     {
         //
-        $models = ModelProfile::with('user')->get();
+        $models = ModelProfile::with('user')->latest()->get();
         return view('adminV2.models.list', compact('models'));
     }
 
@@ -55,14 +59,76 @@ class ModelController
     public function create()
     {
         //
+        return view('adminV2.models.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreModelRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            // ✅ Try to find existing user
+            $user = User::where('email', $request->email)->first();
+
+            if ($user) {
+                // 🧩 Update user details if found
+                $user->update([
+                    'name' => $request->name,
+                    'dob' => $request->dob,
+                    'phone' => $request->phone,
+                ]);
+            } else {
+                // 🆕 Create new user if not found
+                $user = User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'dob' => $request->dob,
+                    'phone' => $request->phone,
+                    'password' => bcrypt(Str::random(8)),
+                ]);
+            }
+
+            // ✅ Check if this user already has a ModelProfile
+            if ($user->modelProfile) {
+                return back()->with('error', 'This user already has a model profile.')->withInput();
+            }
+
+            // ✅ Handle photo upload
+            $photoPath = null;
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $filename = time() . '_model_' . uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/models/media'), $filename);
+                $photoPath = 'uploads/models/media/' . $filename;
+            }
+
+            // ✅ Create ModelProfile using relation
+            $modelProfile = $user->modelProfile()->create([
+                'city' => $request->city,
+                'state' => $request->state,
+                'instagram_link' => $request->instagram_link,
+                'height_cm' => $request->height_cm,
+                'weight_kg' => $request->weight_kg,
+                'status' => $request->status,
+                'featured' => $request->has('featured'),
+                'photo' => $photoPath,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('models.index')->with('success', 'Model created successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            if (Str::contains($e->getMessage(), 'Duplicate entry')) {
+                return back()->with('error', 'Email already exists. Please try again.')->withInput();
+            }
+
+            return back()->with('error', 'Failed to create model: ' . $e->getMessage())->withInput();
+        }
     }
 
     /**
@@ -97,31 +163,45 @@ class ModelController
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'status' => 'required|in:pending,approved,rejected',
-            'photo' => 'nullable|image|max:2048',
-        ]);
+        // dd($request->all());
 
-        $model = ModelProfile::findOrFail($id);
+        try {
+            $request->validate([
+                'status' => 'required|in:pending,approved,rejected',
+                'photo' => 'nullable|image|max:2048',
+            ]);
 
-        if ($request->hasFile('photo')) {
-            // Optional: delete old photo
-            if ($model->photo && file_exists(public_path($model->photo))) {
-                unlink(public_path($model->photo));
+            $model = ModelProfile::findOrFail($id);
+
+            if ($request->hasFile('photo')) {
+                // Optional: delete old photo
+                if ($model->photo && file_exists(public_path($model->photo))) {
+                    unlink(public_path($model->photo));
+                }
+
+                $modelImage = $request->file('photo');
+                $modelImageName = time() . '_model_profile_' . uniqid() . '.' . $modelImage->getClientOriginalExtension();
+                $modelImage->move(public_path('uploads/models/media'), $modelImageName);
+
+                $model->photo = 'uploads/models/media/' . $modelImageName;
             }
 
-            $modelImage = $request->file('photo');
-            $modelImageName = time() . '_model_profile_' . uniqid() . '.' . $modelImage->getClientOriginalExtension();
-            $modelImage->move(public_path('uploads/models/media'), $modelImageName);
+            $model->user->name = $request->name;
+            $model->user->email = $request->email;
+            $model->user->dob = $request->dob;
+            $model->user->phone = $request->phone;
+            $model->user->save();
+            $model->status = $request->status;
+            $model->is_featured = $request->has('featured');
+            $model->save();
 
-            $model->photo = 'uploads/models/media/' . $modelImageName;
+            return redirect()->route('models.index')->with('success', 'Model updated successfully.');
+        } catch (\Exception $e) {
+            if (Str::contains($e->getMessage(), 'Duplicate entry')) {
+                return back()->with('error', 'Email already exists. Please try again.')->withInput();
+            }
+            // return redirect()->back()->with('error', 'Failed to update the model. Please try again.'. $e->getMessage());
         }
-
-        $model->status = $request->status;
-        $model->is_featured = $request->has('featured');
-        $model->save();
-
-        return redirect()->route('models.index')->with('success', 'Model updated successfully.');
     }
 
 

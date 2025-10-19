@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Html\Colors;
 
 class ColorController extends Controller
 {
@@ -13,6 +14,11 @@ class ColorController extends Controller
     public function index()
     {
         //
+
+        $colors = Color::all();
+
+        // Return only the HTML partial (Blade snippet)
+        return view('adminV2.partials.color-list', compact('colors'))->render();
     }
 
     /**
@@ -33,6 +39,7 @@ class ColorController extends Controller
             $exists = Color::where('name', $request->name)->exists();
 
             if ($exists) {
+                return response()->json(['error' => 'You have already  this size  name !'], 400);
                 return redirect()->back()->withErrors('You have already  this size  name !');
             }
             Color::create([

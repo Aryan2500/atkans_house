@@ -12,7 +12,11 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+
+        $sizes = Size::all();
+
+        // Return only the HTML partial (Blade snippet)
+        return view('adminV2.partials.size-list', compact('sizes'))->render();
     }
 
     /**
@@ -34,6 +38,7 @@ class SizeController extends Controller
             $exists = Size::where('name', $request->name)->exists();
 
             if ($exists) {
+                return response()->json(['error' => 'You have already  this size  name !'], 400);
                 return redirect()->back()->withErrors('You have already  this size  name !');
             }
             Size::create([

@@ -85,20 +85,8 @@
                         {{-- Sizes --}}
                         <div class="form-group" id="sizesDiv" style="display: none">
                             <label for="sizes">Available Sizes</label>
-                            <div class="d-flex flex-wrap">
-                                @foreach ($sizes as $size)
-                                    <div class="form-check mr-3">
-                                        <input type="checkbox" name="sizes[{{ $size->id }}]" class="form-check-input"
-                                            id="size_{{ $size->id }}"
-                                            {{ isset($product) && $product->sizes->contains($size->id) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="size_{{ $size->id }}">
-                                            {{ $size->name }} | {{ $size->number ?? 0 }}
-                                        </label>
-                                        <input type="number" name="stock[{{ $size->id }}]" placeholder="Stock"
-                                            class="form-control form-control-sm mt-1"
-                                            value="{{ isset($product) ? $product->sizes->find($size->id)?->pivot->stock : 0 }}">
-                                    </div>
-                                @endforeach
+                            <div class="d-flex flex-wrap" id="size-list">
+                                @include('adminV2.partials.size-list')
                             </div>
 
                             {{-- Shortcut to Add Size --}}
@@ -109,19 +97,8 @@
                         {{-- Colors --}}
                         <div class="form-group" id="colorsDiv" style="display: none">
                             <label for="colors">Available Colors</label>
-                            <div class="d-flex flex-wrap">
-                                @foreach ($colors as $color)
-                                    <div class="form-check mr-3">
-                                        <input type="checkbox" name="colors[]" value="{{ $color->id }}"
-                                            class="form-check-input" id="color_{{ $color->id }}"
-                                            {{ isset($product) && $product->colors->contains($color->id) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="color_{{ $color->id }}">
-                                            <span class="badge" style="background: {{ $color->hex_code ?? '#ccc' }}">
-                                                {{ $color->name }}
-                                            </span>
-                                        </label>
-                                    </div>
-                                @endforeach
+                            <div class="d-flex flex-wrap" id="color-list">
+                                @include('adminV2.partials.color-list')
                             </div>
 
                             {{-- Shortcut to Add Color --}}
@@ -176,7 +153,7 @@
     <div class="modal fade" id="addSizeModal" tabindex="-1" role="dialog" aria-labelledby="addSizeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="POST" action="{{ route('sizes.store') }}">
+            <form method="POST" action="{{ route('sizes.store') }}" id="addSizeForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -187,7 +164,7 @@
                         <input type="text" name="name" class="form-control"
                             placeholder="Enter size (e.g. S, M, 40)" required>
                         <br>
-                        <input type="text" name="number" class="form-control"
+                        <input type="number" name="number" class="form-control"
                             placeholder="Enter size  in Number (e.g. 32, 36, 40)">
                     </div>
                     <div class="modal-footer">
@@ -202,7 +179,7 @@
     <div class="modal fade" id="addColorModal" tabindex="-1" role="dialog" aria-labelledby="addColorModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="POST" action="{{ route('colors.store') }}">
+            <form method="POST" action="{{ route('colors.store') }}" id="addColorForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
@@ -288,6 +265,13 @@
     </script>
 
     <script>
+        if (document.getElementById('type').value == "{{ $product->type }}") {
+            // alert("hello")
+            document.getElementById('colorsDiv').style.display = 'block';
+            document.getElementById('sizesDiv').style.display = 'block';
+            document.getElementById('materialDiv').style.display = 'block';
+        };
+
         function changeType(selectElement) {
             const value = selectElement.value;
 
@@ -305,5 +289,136 @@
                 materialDiv.style.display = 'none';
             }
         }
+    </script>
+
+    <script>
+        // Simple toast helper
+        function showToast(message, type = 'success') {
+            let bg = type === 'success' ? 'bg-success' : 'bg-danger';
+            let toast = $(`
+            <div class="toast ${bg} text-white" style="position: fixed; top: 20px; right: 20px; z-index: 2000;" data-delay="3000">
+                <div class="toast-body">${message}</div>
+            </div>
+        `);
+            $('body').append(toast);
+            toast.toast('show');
+            toast.on('hidden.bs.toast', function() {
+                $(this).remove();
+            });
+        }
+    </script>
+    <script>
+        // 🔁 Function to refresh the size list
+        function refreshSizeList() {
+            $.ajax({
+                url: "{{ route('sizes.index') }}", // 👈 We'll create this route
+                type: 'GET',
+                success: function(html) {
+                    $('#size-list').html(html);
+                },
+                error: function() {
+                    showToast('Failed to refresh size list', 'error');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // 🔁 Function to refresh the size list
+        function refreshColorList() {
+            $.ajax({
+                url: "{{ route('colors.index') }}", // 👈 We'll create this route
+                type: 'GET',
+                success: function(html) {
+                    $('#color-list').html(html);
+                },
+                error: function() {
+                    showToast('Failed to refresh size list', 'error');
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#addSizeForm').on('submit', function(e) {
+                e.preventDefault();
+
+                let form = $(this);
+                let actionUrl = form.attr('action');
+                let formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: actionUrl,
+                    data: formData,
+                    success: function(response) {
+                        // ✅ Close the modal
+                        $('#addSizeModal').modal('hide');
+
+                        // ✅ Reset the form
+                        form[0].reset();
+
+                        // ✅ Show success toast
+                        showToast('Size added successfully!', 'success');
+
+                        refreshSizeList();
+
+                        // Optionally refresh size list
+                        // loadSizes(); 
+                    },
+                    error: function(xhr) {
+                        let errorMsg = xhr.responseJSON?.error || xhr.responseJSON?.message ||
+                            'Something went wrong';
+                        console.error(xhr);
+                        // console.error(errorMsg);
+                        showToast(errorMsg, 'error');
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#addColorForm').on('submit', function(e) {
+                e.preventDefault();
+
+                let form = $(this);
+                let actionUrl = form.attr('action');
+                let formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: actionUrl,
+                    data: formData,
+                    success: function(response) {
+                        // ✅ Close the modal
+                        $('#addColorModal').modal('hide');
+
+                        // ✅ Reset the form
+                        form[0].reset();
+
+                        // ✅ Show success toast
+                        showToast('Color added successfully!', 'success');
+
+                        // Optionally refresh size list
+                        refreshColorList();
+
+                    },
+                    error: function(xhr) {
+                        let errorMsg = xhr.responseJSON?.error || xhr.responseJSON?.message ||
+                            'Something went wrong';
+                        // console.error(xhr);
+                        // console.error(errorMsg);
+                        showToast(errorMsg, 'error');
+                    }
+                });
+            });
+
+
+        });
     </script>
 @endpush

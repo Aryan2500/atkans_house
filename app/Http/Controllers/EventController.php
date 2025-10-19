@@ -37,10 +37,9 @@ class EventController
      */
     public function create()
     {
-
         // dd(config('constant.rule_types'));
         $milestones = Milestone::orderBy('created_at', 'desc')->get();
-        dd($milestones);
+        // dd($milestones);
         return view('adminV2.events.form', compact('milestones'));
     }
 

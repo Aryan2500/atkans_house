@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('firebase_uid')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->bigInteger('phone')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->enum('user_type', ['admin', 'user', 'client', 'staff'])->default('user');

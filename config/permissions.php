@@ -242,42 +242,40 @@ define('PERMISSIONS', [
 
     // Sizes Management
     [
-        'name' => 'size.index',
+        'name' => 'sizes.index',
         'display_name' => 'View Size',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.show',
+        'name' => 'sizes.show',
         'display_name' => 'Show Size Detail',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.create',
+        'name' => 'sizes.create',
         'display_name' => 'Create Size',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.store',
+        'name' => 'sizes.store',
         'display_name' => 'Store Size',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.edit',
+        'name' => 'sizes.edit',
         'display_name' => 'Edit Size',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.update',
+        'name' => 'sizes.update',
         'display_name' => 'Update Size',
         'group_id' => 5,
     ],
     [
-        'name' => 'size.destroy',
+        'name' => 'sizes.destroy',
         'display_name' => 'Delete Size',
         'group_id' => 5,
     ],
-
-
 
 
 

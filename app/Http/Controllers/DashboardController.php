@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\HireRequest;
 use App\Models\ModelProfile;
+use App\Models\Order;
 use App\Models\Permission;
+use App\Models\Product;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -29,7 +31,9 @@ class DashboardController
             'totalModels' => ModelProfile::count(),
             'pendingHires' => HireRequest::where('status', 'pending')->count(),
             'totalEvents' => Event::all()->count(),
-            'volunteerCount' => Volunteer::count(),
+            'products' => Product::count(),
+            'orders' => Order::count(),
+            'earnings' => Order::where('payment_status', 'paid')->sum('total'),
             'upcomingEvents' => $upcomingEvents,
             'header' => 'Dashboards'
         ]);

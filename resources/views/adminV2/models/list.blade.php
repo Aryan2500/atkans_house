@@ -48,8 +48,8 @@
                                         <td>{{ $model->user->name ?? 'N/A' }}</td>
                                         <td>{{ $model->user->email ?? 'N/A' }}</td>
 
-                                        <td>{{ \Carbon\Carbon::parse($model->dob)->format('d M Y') }}</td>
-                                        <td>{{ $model->phone ?? 'N/A' }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($model->user->dob)->format('d M Y') }}</td>
+                                        <td>{{ $model->user->phone ?? 'N/A' }}</td>
                                         <td>
                                             <span
                                                 class="badge badge-{{ $model->status == 'approved' ? 'success' : ($model->status == 'pending' ? 'warning' : 'danger') }}">
@@ -90,7 +90,11 @@
                                 @endforeach
                             </tbody>
                         </table>
-
+                        <div class="mt-3">
+                            <a href="{{ route('models.create') }}" class="btn btn-success">
+                                + Add New Model
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
