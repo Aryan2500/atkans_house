@@ -95,18 +95,16 @@
             <div class="glass-effect rounded-2xl shadow-2xl p-8 md:p-10">
 
                 <!-- Error Alert -->
-                @if (session('error'))
-                    <div
+                @if ($errors->any())
+                    <div id="errAlert"
                         class="max-w-md mx-auto my-4 bg-red-500 border border-red-700 text-white px-4 py-3 rounded-lg shadow-md flex items-center justify-between">
                         <div class="flex items-center space-x-2">
-                            <!-- Icon -->
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            <span>{{ session('error') }}</span>
+
+                            @foreach ($errors->all() as $error)
+                                <li style="list-style: none">{{ $error }}</li>
+                            @endforeach
                         </div>
-                        <button class="text-white font-bold">&times;</button>
+                        <button onclick="dismissAlert('errAlert')" class="text-white font-bold">&times;</button>
                     </div>
                 @endif
 
@@ -163,7 +161,7 @@
                     <div class="flex items-center justify-between">
 
                         <div class="text-sm">
-                            <a href="#"
+                            <a href="{{ route('user.fpassword') }}"
                                 class="text-blue-400 hover:text-blue-300 transition duration-300 underline">
                                 Forgot password?
                             </a>
@@ -187,7 +185,7 @@
                         </button>
                     </div>
 
-                    <!-- Divider -->
+                    {{-- <!-- Divider -->
                     <div class="mt-6">
                         <div class="relative">
                             <div class="absolute inset-0 flex items-center">
@@ -201,19 +199,6 @@
 
                     <!-- Social Login -->
                     <div class="mt-6 grid grid-cols-1 gap-3">
-                        {{-- <button
-                            class="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-md shadow-sm bg-gray-800 bg-opacity-50 text-sm font-medium text-white hover:bg-opacity-70 transition duration-300">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M19.99 10.187c0-.82-.069-1.417-.216-2.037H10.2v3.698h5.62c-.113.876-.608 2.058-1.775 2.888l-.069.448 2.585 1.99.18.017c1.64-1.501 2.592-3.713 2.592-6.004z" />
-                                <path
-                                    d="M10.2 19.931c2.347 0 4.312-.768 5.749-2.087l-2.696-2.455c-.769.51-1.683.784-3.053.784-2.297 0-4.31-1.471-5.017-3.472l-.448.035-2.676 2.059-.035.446c1.452 2.865 4.365 4.69 8.176 4.69z" />
-                                <path
-                                    d="M5.183 11.701c-.198-.51-.308-1.025-.308-1.514s.11-1.004.308-1.514l-.037-.464-2.728-2.137-.446.017C.69 7.314 0 8.869 0 10.187c0 1.318.69 2.873 1.972 4.014l2.765-2.137.446-.363z" />
-                                <path
-                                    d="M10.2 4.688c1.518 0 2.786.656 3.422 1.215l2.45-2.313C14.498 1.915 12.53.069 10.2.069c-3.811 0-6.724 1.825-8.176 4.69L4.8 6.897c.708-2.002 2.72-3.472 5.017-3.472z" />
-                            </svg>
-                        </button> --}}
 
                         <div class="mt-4">
                             <button id="phoneOtpBtn"
@@ -222,7 +207,7 @@
                             </button>
                         </div>
 
-                    </div>
+                    </div> --}}
                 </form>
 
                 <!-- Sign up link -->
@@ -322,5 +307,15 @@
     });
 </script>
 
+
+<script>
+    function dismissAlert(id) {
+        const alert = document.getElementById(id);
+        if (alert) {
+            alert.classList.add('opacity-0', 'translate-y-[-10px]');
+            setTimeout(() => alert.remove(), 300);
+        }
+    }
+</script>
 
 </html>

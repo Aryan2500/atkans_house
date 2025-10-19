@@ -15,6 +15,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         if (auth()->check() && (auth()->user()->user_type === 'admin' || auth()->user()->user_type === 'staff')) {
             return $next($request);
         }

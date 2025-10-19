@@ -15,7 +15,8 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && (auth()->user()->role === 'user' || auth()->user()->role === 'model')) {
+        // dd(auth()->user()->user_type);
+        if (auth()->check() && (auth()->user()->user_type === 'user' || auth()->user()->user_type === 'model')) {
             return $next($request);
         }
         abort(403); // Forbidden

@@ -94,7 +94,7 @@
                         {{-- Featured Checkbox --}}
                         <div class="form-group form-check mt-3">
                             <input type="checkbox" name="featured" class="form-check-input" id="featuredCheckbox"
-                                {{ old('featured', $model->featured) ? 'checked' : '' }}>
+                                {{ old('featured', $model->is_featured) ? 'checked' : '' }}>
                             <label class="form-check-label" for="featuredCheckbox">Featured</label>
                         </div>
 

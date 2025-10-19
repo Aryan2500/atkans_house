@@ -30,6 +30,13 @@ Route::prefix('auth')->middleware('guest')->group(function () {
         ->name('otp.email-verification');
 
     Route::post('/register', [AuthControler::class, 'doRegistration'])->name("user.doRegistration");
+
+    Route::get('/forgot-password', function () {
+        return view('user.auth.forgetpassword');
+    })->name("user.fpassword");
+
+
+    Route::post('/forgot-password', [AuthControler::class, 'sendNewPasswordToRegisteredEmail'])->name("user.sendNewPassword");
 });
 
 

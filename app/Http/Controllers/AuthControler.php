@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendNewPasswordOnEmail;
 use App\Models\LoginLogs;
 use App\Models\Otp;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Jenssegers\Agent\Agent;
@@ -81,7 +84,7 @@ class AuthControler extends Controller
     public function logout()
     {
         $u_type = auth()->user()->user_type;
-
+        // dd($u_type);
         Auth::logout();
         session()->flush();
         if ($u_type == 'admin' || $u_type == 'staff') {
@@ -236,7 +239,7 @@ class AuthControler extends Controller
             'password' => Hash::make($request->password),
             'email_verified_at' => filter_var($contact, FILTER_VALIDATE_EMAIL) ? now() : null,
             'phone_verified_at' => preg_match('/^[0-9]{10}$/', $contact) ? now() : null,
-            'role' => 'user'
+            'user_type' => 'user'
         ]);
 
         // Delete OTP after successful registration
@@ -244,5 +247,23 @@ class AuthControler extends Controller
 
 
         return response()->json(['status' => true, 'message' => 'Registration completed successfully', 'user' => $user]);
+    }
+
+    public function sendNewPasswordToRegisteredEmail(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $user = User::where('email', request('email'))->first();
+            if (!$user) {
+                return redirect()->back()->with('error', 'User not found!')->withInput();
+            }
+            $newPass =   time();
+            $user->password = Hash::make($newPass);
+            $user->save();
+            Mail::to($user->email)->send(new SendNewPasswordOnEmail($user, $newPass));
+            return redirect()->back()->with('success', 'New password has been  sent to your Registered Email!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong! Please try again later.')->withInput();
+        }
     }
 }
