@@ -88,6 +88,38 @@
                             @enderror
                         </div>
 
+                        {{-- Biography --}}
+                        <div class="form-group">
+                            <label>Biography </label>
+                            <input type="text" name="biography" class="form-control" value="{{ old('biography') }}"
+                                required>
+                            @error('biography')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+
+                        {{-- Experience --}}
+                        <div class="form-group">
+                            <label>Experience </label>
+                            <input type="text" name="experience" class="form-control" value="{{ old('experience') }}"
+                                required>
+                            @error('experience')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- availability --}}
+                        <div class="form-group">
+                            <label>Availability </label>
+                            <input type="text" name="availability" class="form-control"
+                                value="{{ old('availability') }}" required>
+                            @error('availability')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+
                         {{-- Weight --}}
                         <div class="form-group">
                             <label>Weight (kg)</label>

@@ -28,20 +28,21 @@
                 </div>
                 <div class="col-lg-6 offset-lg-1 col-md-12 cont">
                     <h2 style="margin-bottom:0px"><span>{{ $model->user->name }}</span> </h2>
+                    {{-- @dd($model->user) --}}
                     <p class=" mb-10" style=" font-family: 'avenirlight'; font-size:17px; color:#fff">Age :
-                        {{ \Carbon\Carbon::parse($model->dob)->age }} Fashion &
-                        Commercial Model | {{ $model->state }} ,{{ $model->city }}</p>
+                        {{ \Carbon\Carbon::parse($model->user->dob)->age }} | {{ $model->category }} Model |
+                        {{ $model->state }} ,{{ $model->city }}</p>
                     <hr>
-                    <h5 class="mb-10">Portfolio</h5>
-                    <p class="text-sm mb-0" style=" font-family: 'avenirlight';  color:#fff;margin-bottom:15px;">
+                    {{-- <h5 class="mb-10">Portfolio</h5> --}}
+                    {{-- <p class="text-sm mb-0" style=" font-family: 'avenirlight';  color:#fff;margin-bottom:15px;">
                         Includes fashion, bridal, lifestyle shoots, and TV ads.<br>
-                    </p>
-                    <a href="#" class="text-white-600"
-                        style="color:#fff; font-size:16px; text-decoration:underline">View Full Portfolio</a>
+                    </p> --}}
+                    {{-- <a href="#" class="text-white-600"
+                        style="color:#fff; font-size:16px; text-decoration:underline">View Full Portfolio</a> --}}
                     <!-- tab -->
                     <ul class="nav nav-tabs simpl-bord mt-30" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation"> <span class="nav-link active cursor-pointer"
-                                id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills">biography</span> </li>
+                                id="skills-tab" data-bs-toggle="tab" data-bs-target="#skills">Biography</span> </li>
                         <li class="nav-item" role="presentation"> <span class="nav-link cursor-pointer" id="biography-tab"
                                 data-bs-toggle="tab" data-bs-target="#biography">Experience</span> </li>
                         <li class="nav-item" role="presentation"> <span class="nav-link cursor-pointer" id="education-tab"
@@ -49,16 +50,19 @@
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="skills" role="tabpanel" aria-labelledby="skills-tab">
-                            <p style=" font-family: 'avenirlight'; color:#fff; font-size:16px;">Ayushi Mehra is a
+                            <p style=" font-family: 'avenirlight'; color:#fff; font-size:16px;">
+                                {{-- Ayushi Mehra is a
                                 professional fashion and commercial model based in Mumbai, India. With a striking presence
                                 and versatile look, Aarav has worked with leading fashion brands and appeared in several ad
                                 campaigns. Known for his dedication, discipline, and effortless charm on camera, he brings a
-                                unique edge to every project he works on.</p>
+                                unique edge to every project he works on. --}}
+                                {{ $model->biography }}
+                            </p>
                         </div>
                         <div class="tab-pane fade" id="biography" role="tabpanel" aria-labelledby="biography-tab">
 
                             <ul class="list-unstyled list mb-60">
-                                <li>
+                                {{-- <li>
                                     <div class="list-icon"> <span class="ti-check"></span> </div>
                                     <div class="list-text">
                                         <p>5+ years in fashion, editorial, and ad campaigns</p>
@@ -82,15 +86,21 @@
                                     <div class="list-text">
                                         <p>Editorials: Femina, Elle India, Harper's Bazaar</p>
                                     </div>
-                                </li>
+                                </li> --}}
+
+                                {{ $model->experience }}
+
 
                             </ul>
                         </div>
                         <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
                             <p class="text-sm text-gray-700">
-                                Available for shoots in Delhi, Mumbai, Bangalore & international bookings.<br>
+                                {{-- Available for shoots in Delhi, Mumbai, Bangalore & international bookings.<br>
                                 Open for: fashion shows, bridal shoots, ad campaigns, influencer content.<br>
-                                Weekdays & weekends (2–3 days advance notice).
+                                Weekdays & weekends (2–3 days advance notice). --}}
+
+                                {{ $model->availability }}
+
                             </p>
                         </div>
                     </div>

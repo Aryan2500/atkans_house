@@ -17,8 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $featured = ModelProfile::where(['is_featured' => true, 'status' => 'approved'])->orderBy('created_at', 'desc')->get();
+        $featured = ModelProfile::where(['is_featured' => 1, 'status' => 'approved'])->orderBy('created_at', 'desc')->get();
 
+        // dd($featured);
         // $upcomingEvents = Event::whereDate('end_date', '>=', Carbon::today())->where('show_on_home_page', true)
         $upcomingEvents = Event::where('show_on_home_page', true)
             ->orderBy('end_date')

@@ -264,14 +264,18 @@
         });
     </script>
 
-    <script>
-        if (document.getElementById('type').value == "{{ $product->type }}") {
-            // alert("hello")
-            document.getElementById('colorsDiv').style.display = 'block';
-            document.getElementById('sizesDiv').style.display = 'block';
-            document.getElementById('materialDiv').style.display = 'block';
-        };
+    @if (isset($product))
+        <script>
+            if (document.getElementById('type').value == "{{ $product->type }}") {
+                // alert("hello")
+                document.getElementById('colorsDiv').style.display = 'block';
+                document.getElementById('sizesDiv').style.display = 'block';
+                document.getElementById('materialDiv').style.display = 'block';
+            };
+        </script>
+    @endif
 
+    <script>
         function changeType(selectElement) {
             const value = selectElement.value;
 

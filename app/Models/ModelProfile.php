@@ -24,7 +24,10 @@ class ModelProfile extends Model
         'category',
         'status',
         'is_profile_completed',
-        'is_featured'
+        'is_featured',
+        'experience',
+        'biography',
+        'availability'
     ];
     public function user()
     {

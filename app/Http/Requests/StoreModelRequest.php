@@ -32,6 +32,9 @@ class StoreModelRequest extends FormRequest
             'weight_kg' => 'required|numeric|min:30|max:200',
             'status' => 'required|in:pending,approved,rejected',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:10048', // max 10MB
+            'experience' => 'nullable|string',
+            'biography' => 'nullable|string',
+            'availability' => 'nullable|string',
         ];
     }
 

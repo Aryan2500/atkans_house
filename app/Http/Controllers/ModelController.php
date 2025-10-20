@@ -14,6 +14,33 @@ class ModelController
 {
     public function public_index(Request $request)
     {
+        // $models = ModelProfile::with('user')
+        //     ->where('status', 'approved')
+        //     ->when($request->city, fn($q) => $q->where('city', 'LIKE', '%' . $request->city . '%'))
+        //     ->when($request->category, fn($q) => $q->where('category', $request->category))
+        //     ->when($request->budget, function ($q) use ($request) {
+        //         if ($request->budget === 'low') {
+        //             $q->where('expected_budget', '<', 5000);
+        //         } elseif ($request->budget === 'mid') {
+        //             $q->whereBetween('expected_budget', [5000, 10000]);
+        //         } elseif ($request->budget === 'high') {
+        //             $q->where('expected_budget', '>', 10000);
+        //         }
+        //     })
+        //     ->when($request->age, function ($q) use ($request) {
+        //         $ageRange = explode('-', $request->age);
+        //         if (count($ageRange) === 2) {
+        //             $from = Carbon::now()->subYears($ageRange[1])->format('Y-m-d');
+        //             $to = Carbon::now()->subYears($ageRange[0])->format('Y-m-d');
+        //             $q->whereBetween('dob', [$from, $to]);
+        //         }
+        //     })
+        //     ->when($request->gender, function ($q) use ($request) {
+        //         // Filter through related user's gender
+        //         $q->whereHas('user', fn($userQ) => $userQ->where('gender', $request->gender));
+        //     })->get();
+
+
         $models = ModelProfile::with('user')
             ->where('status', 'approved')
             ->when($request->city, fn($q) => $q->where('city', 'LIKE', '%' . $request->city . '%'))
@@ -30,15 +57,21 @@ class ModelController
             ->when($request->age, function ($q) use ($request) {
                 $ageRange = explode('-', $request->age);
                 if (count($ageRange) === 2) {
-                    $from = Carbon::now()->subYears($ageRange[1])->format('Y-m-d');
-                    $to = Carbon::now()->subYears($ageRange[0])->format('Y-m-d');
-                    $q->whereBetween('dob', [$from, $to]);
+                    $from = \Carbon\Carbon::now()->subYears($ageRange[1])->format('Y-m-d');
+                    $to = \Carbon\Carbon::now()->subYears($ageRange[0])->format('Y-m-d');
+
+                    // 👇 Now filter through the related `user` table instead of ModelProfile
+                    $q->whereHas('user', function ($userQ) use ($from, $to) {
+                        $userQ->whereBetween('dob', [$from, $to]);
+                    });
                 }
             })
             ->when($request->gender, function ($q) use ($request) {
                 // Filter through related user's gender
                 $q->whereHas('user', fn($userQ) => $userQ->where('gender', $request->gender));
-            })->get();
+            })
+            ->get();
+
 
         return view('public.models', compact('models'));
     }
@@ -67,6 +100,7 @@ class ModelController
      */
     public function store(StoreModelRequest $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
 
         try {
@@ -106,13 +140,16 @@ class ModelController
             }
 
             // ✅ Create ModelProfile using relation
-            $modelProfile = $user->modelProfile()->create([
+            $user->modelProfile()->create([
                 'city' => $request->city,
                 'state' => $request->state,
                 'instagram_link' => $request->instagram_link,
                 'height_cm' => $request->height_cm,
                 'weight_kg' => $request->weight_kg,
                 'status' => $request->status,
+                'experience' => $request->experience,
+                'biography' => $request->biography,
+                'availability' => $request->availability,
                 'featured' => $request->has('featured'),
                 'photo' => $photoPath,
             ]);
@@ -192,6 +229,9 @@ class ModelController
             $model->user->phone = $request->phone;
             $model->user->save();
             $model->status = $request->status;
+            $model->experience = $request->experience;
+            $model->biography = $request->biography;
+            $model->availability = $request->availability;
             $model->is_featured = $request->has('featured');
             $model->save();
 

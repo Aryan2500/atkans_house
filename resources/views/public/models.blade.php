@@ -131,7 +131,7 @@
                                             @endif
                                             <div class="text" style="padding-top: 10px;">
                                                 <h5 class="name" style="margin-bottom: 5px;">{{ $m->user->name }}</h5>
-                                                <h6 class="position">Age : {{ \Carbon\Carbon::parse($m->dob)->age }}
+                                                <h6 class="position">Age : {{ \Carbon\Carbon::parse($m->user->dob)->age }}
                                                 </h6>
                                                 <div class="icon"> <a href="{{ route('profile', $m->id) }}"
                                                         class="button-1">View Profile</a> </div>
