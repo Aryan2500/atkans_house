@@ -302,7 +302,7 @@
                                                     class="button-1">Hire me</a> </div>
                                             <div class="text">
                                                 <h4 class="name">{{ $f->user->name }}</h4>
-                                                <h6 class="position">Age : {{ \Carbon\Carbon::parse($f->dob)->age }}</h6>
+                                                <h6 class="position">Age : {{ \Carbon\Carbon::parse($f->user->dob)->age }}</h6>
                                             </div>
                                         </div>
                                     </div>
