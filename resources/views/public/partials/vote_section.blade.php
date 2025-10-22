@@ -27,7 +27,7 @@
         .model-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: fit;
             transition: transform 0.5s ease;
         }
 
