@@ -145,13 +145,13 @@
                                         <div class="col-md-6 mb-10">
                                             <label>Phone Number</label>
                                             <input type="text" name="phone" id="phone" placeholder="Phone Number"
-                                                value="{{ old('phone') ?? auth()->user()->phone }} ">
+                                                value="{{ old('phone') ?? auth()->user()->phone }}">
                                         </div>
 
                                         <div class="col-md-6 mb-10">
                                             <label>Email Address</label>
                                             <input type="email" name="email" id="email" placeholder="Email address"
-                                                value="{{ old('email') ?? auth()->user()->email }} "
+                                                value="{{ old('email') ?? auth()->user()->email }}"
                                                 {{ auth()->user()->email ? 'disabled' : '' }}>
                                         </div>
 
