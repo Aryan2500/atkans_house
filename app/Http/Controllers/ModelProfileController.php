@@ -31,4 +31,10 @@ class ModelProfileController extends Controller
         $profile->update(['is_profile_completed' => 1]);
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
+
+    public function uploadImage(Request $request)
+    {
+        $this->service->handlePhotos($request, auth()->user()->modelProfile);
+        return redirect()->back()->with('success', 'Photos uploaded successfully!');
+    }
 }

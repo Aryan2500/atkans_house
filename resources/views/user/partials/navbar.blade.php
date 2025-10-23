@@ -40,8 +40,10 @@
                         aria-expanded="false" data-bs-auto-close="outside">
                         Account <i class="ti-angle-down"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" style="right: 30px;">
                         <li><a href="{{ route('user.profile') }}" class="dropdown-item">Profile</a></li>
+                        <li><a href="{{ route('user.change-password') }}" class="dropdown-item">Change Password</a></li>
+
                         <li><a href="{{ route('user.logout') }}" class="dropdown-item">Logout</a></li>
                     </ul>
                 </li>

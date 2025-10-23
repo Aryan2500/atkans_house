@@ -28,7 +28,7 @@ class ModelProfileService
         ]));
 
         $user->update([
-            'phone' => $request->phone, 
+            'phone' => $request->phone,
             'name' => $request->name,
             'gender' => $request->gender
         ]);
@@ -72,7 +72,7 @@ class ModelProfileService
     /**
      * Handle multiple photo uploads.
      */
-    protected function handlePhotos(Request $request, ModelProfile $model, string $fieldName = 'portfolio'): void
+    public function handlePhotos(Request $request, ModelProfile $model, string $fieldName = 'portfolio'): void
     {
         // dd($request->file($fieldName));
         if ($request->file($fieldName) && count($request->file($fieldName))) {

@@ -66,9 +66,17 @@ Route::prefix('user')->middleware([UserMiddleware::class])->group(function () {
 
     Route::resource('/modelprofile', ModelProfileController::class)->only(['store', 'update']);
 
+    Route::post('/upload-image', [ModelProfileController::class, 'uploadImage'])->name('user.upload-image');
+
     Route::get('/logout', [AuthControler::class, 'logout'])->name('user.logout');
 
     Route::resource('participate', ParticipationController::class);
 
     Route::resource('vote', VoteController::class);
+
+    Route::get('/change-password', function () {
+        return view('user.change-password.index');
+    });
+
+    Route::post('/change-password',  [AuthControler::class, 'updatePassword'])->name('user.change-password');
 });

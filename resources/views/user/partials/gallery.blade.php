@@ -30,10 +30,31 @@
           @endforeach
       @endif
 
+      @if (auth()->user()->modelprofile != null)
+          <div class="col-sm-2 thumb pt-2 text-center">
+              <!-- Form to upload image -->
+              <form id="galleryForm" action="{{ route('user.upload-image') }}" method="POST"
+                  enctype="multipart/form-data">
+                  @csrf
+
+                  <!-- Hidden file input -->
+                  <input type="file" id="galleryImage" name="portfolio[]"
+                      accept="image/.jpg, image/.png, image/.jpeg" style="display: none;"
+                      onchange="document.getElementById('galleryForm').submit();" multiple />
+
+                  <!-- Add image button -->
+                  <button type="button" class="btn btn-primary rounded-circle shadow"
+                      style="width: 50px; height: 50px; font-size: 22px;"
+                      onclick="document.getElementById('galleryImage').click()">
+                      <i class="fa fa-plus"></i>
+                  </button>
+              </form>
+          </div>
+      @endif
+
+
+
   </div>
-
-
-
 
   <div class="modal fade" id="galleryModal">
       <div class="modal-dialog modal-lg">
@@ -78,6 +99,16 @@
                   $('.thumb').removeClass('selected');
                   $(this).addClass('selected');
               });
+          });
+      </script>
+
+      <script>
+          document.getElementById('galleryImage').addEventListener('change', function() {
+              const form = document.getElementById('galleryForm');
+              const button = form.querySelector('button');
+              button.disabled = true;
+              button.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+              form.submit();
           });
       </script>
   @endpush

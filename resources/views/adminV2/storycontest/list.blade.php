@@ -53,14 +53,23 @@
                                         </td>
                                         <td>
                                             @if ($story->photo)
-                                                <img src="{{ asset($story->photo) }}" alt="Photo" width="60"
-                                                    height="60">
+                                                <!-- Open in new tab -->
                                                 <a href="{{ asset($story->photo) }}" target="_blank"
-                                                    rel="noopener noreferrer">Open</a>
+                                                    rel="noopener noreferrer">
+                                                    <img src="{{ asset($story->photo) }}" alt="Photo" width="60"
+                                                        height="60">
+                                                </a>
+
+                                                <!-- Download button -->
+                                                <a href="{{ asset($story->photo) }}" download
+                                                    class="btn btn-sm btn-outline-primary ms-2">
+                                                    Download
+                                                </a>
                                             @else
                                                 <span class="text-muted">No Photo</span>
                                             @endif
                                         </td>
+
                                         <td>
                                             <span class="badge badge-{{ $story->is_active ? 'success' : 'secondary' }}">
                                                 {{ $story->is_active ? 'Active' : 'Inactive' }}

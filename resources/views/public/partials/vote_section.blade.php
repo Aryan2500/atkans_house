@@ -27,22 +27,26 @@
         .model-image {
             width: 100%;
             height: 100%;
-            object-fit: fit;
+            object-fit: cover;
             transition: transform 0.5s ease;
+        }
+
+        .model-card:hover {
+            cursor: pointer
         }
 
         .model-card:hover .model-image {
             transform: scale(1.1);
         }
 
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
-        }
+        /* .image-overlay {
+                                                                        position: absolute;
+                                                                        top: 0;
+                                                                        left: 0;
+                                                                        right: 0;
+                                                                        bottom: 0;
+                                                                        background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+                                                                    } */
 
         .card-content {
             padding: 25px;
@@ -193,8 +197,8 @@
                 <div class="col-auto">
                     <div class="model-card">
                         <div class="model-image-container">
-                            <img src="{{ $p->user->onboardedImage->modelPhoto->photo_path }}" alt="Model"
-                                class="model-image">
+                            <img src="{{ $p->user->onboardedImage->modelPhoto->photo_path }}" alt="white sample"
+                                data-toggle="modal" data-target="#galleryModal" class="model-image">
                             <div class="image-overlay"></div>
                         </div>
                         <div class="card-content">
@@ -220,11 +224,11 @@
                                         <input type="submit" class="vote-btn" value="Vote Now">
                                     </form>
                                 @else
-                                    <input type="submit" class="vote-btn" value="Already Voted" disabled>
+                                    <input type="submit" class="vote-btn text-center" value="Already Voted" disabled>
                                 @endif
                             @else
                                 <a href="{{ route('user.login', ['redirect' => url()->current()]) }}">
-                                    <input type="submit" class="vote-btn" value="Login To Vote">
+                                    <input type="submit" class="vote-btn  text-center" value="Login To Vote">
                                 </a>
                             @endauth
                         </div>
@@ -237,7 +241,28 @@
 
 
 
-
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // When any image with data-toggle="modal" is clicked
+            $('img[data-toggle="modal"]').on('click', function() {
+                // Get the src of the clicked image
+                var imgSrc = $(this).attr('src');
+
+                // Set the src to the modal image
+                $('#galleryModal img').attr('src', imgSrc);
+
+                // Open the modal
+                $('#galleryModal').modal('show');
+            });
+
+            $('.thumb').click(function() {
+
+                // Highlight selected thumbnail
+                $('.thumb').removeClass('selected');
+                $(this).addClass('selected');
+            });
+        });
+    </script>
 @endpush

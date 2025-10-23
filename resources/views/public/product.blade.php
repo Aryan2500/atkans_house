@@ -332,6 +332,28 @@
                             @else
                                 <h5>No participants yet approved for this event</h5>
                             @endif
+
+                            {{-- 🔹 Modal for Full Image View --}}
+                            <div class="modal fade" id="galleryModal">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="galleryModalLabel">Modal Image</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <!-- left column -->
+                                                <div class="col-md-12 text-center">
+                                                    <img src="" class="img-fluid mb-2" alt="white sample">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
                         </div>
                     @endforeach
                 @endif

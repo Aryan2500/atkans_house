@@ -112,9 +112,9 @@
                                         <h6 class="mb-1">{{ $event->title }}</h6>
                                         <small class="text-muted">{{ $event->location }}</small>
                                     </div>
-                                    <span class="badge {{ $event->is_free_entry ? 'bg-success' : 'bg-warning' }}">
+                                    {{-- <span class="badge {{ $event->is_free_entry ? 'bg-success' : 'bg-warning' }}">
                                         {{ $event->is_free_entry ? 'Free Entry' : 'Paid Entry' }}
-                                    </span>
+                                    </span> --}}
                                 </div><br>
 
                                 <div class="event-body">

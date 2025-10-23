@@ -31,9 +31,13 @@
                                         ->exists();
                                 @endphp
 
-                                @if ($p)
+                                @if ($p->is_approved == false)
                                     <br>
                                     <p href="#" class="button-3 mb-15 mt-4"> Wait For Approval</p>
+                                    <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
+                                        live for voting in the Show Gallery.</p>
+                                @elseif ($p->is_approved == true)
+                                    <p href="#" class="button-3 mb-15 mt-4"> Application been approved</p>
                                     <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
                                         live for voting in the Show Gallery.</p>
                                 @else
@@ -50,7 +54,6 @@
                                     class="button-3 mb-15 mt-4">Login to Participate</a>
                             @endauth
                             {{-- @endif --}}
-
 
                         </div>
                     </div>
