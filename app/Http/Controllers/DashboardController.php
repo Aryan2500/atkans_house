@@ -19,6 +19,33 @@ class DashboardController
      */
     public function index()
     {
+
+        $now = Carbon::now();
+
+        // Find all active events where end_date < now
+        $expiredShows = Event::whereDate('end_date', '<=', $now)
+            ->where('event_stage', '!=', 'closed')
+            ->where('type', 'Show')
+            ->get();
+
+        if ($expiredShows->isEmpty()) {
+            // return;
+        }
+
+        foreach ($expiredShows as $event) {
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
         // dd(session('permissions'));
         // $now = Carbon::today();
         $upcomingEvents = Event::where('event_stage', 'published')

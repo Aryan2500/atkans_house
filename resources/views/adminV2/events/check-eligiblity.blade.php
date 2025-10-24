@@ -157,8 +157,18 @@
                     <div class="tab-pane fade show active" id="milestone1" role="tabpanel">
                         <h5 class="mb-3"> Profile Completion</h5>
                         <div class="milestone-status">
-                            <p><strong>Status:</strong> <span
-                                    class="status-badge status-approved">{{ $user->modelProfile->is_profile_completed ? 'Profile Completed' : 'Profile Incomplete' }}</span>
+                            <p><strong>Status:</strong>
+                                @php
+                                    // dd($user->modelProfile);
+                                @endphp
+                                <span class="status-badge status-{{ $user->modelProfile == null || !$user->modelProfile->is_profile_completed ? 'rejected' : 'approved' }}">
+                                    @if ($user->modelProfile == null || !$user->modelProfile->is_profile_completed)
+                                        {{ 'Profile not completed' }}
+                                    @elseif ($user->modelProfile->is_profile_completed)
+                                        {{ 'Profile completed' }}
+                                    @endif
+
+                                </span>
                             </p>
                             <p><strong>Remarks:</strong> {{ $user->name }} has completed their Profile details
                                 successfully.</p>

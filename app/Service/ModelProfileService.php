@@ -25,7 +25,12 @@ class ModelProfileService
             "category",
             "height_cm",
             "weight_kg",
+
         ]));
+
+        $user->modelProfile()->update([
+            'is_profile_completed' => 1
+        ]);
 
         $user->update([
             'phone' => $request->phone,

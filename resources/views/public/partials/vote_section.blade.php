@@ -197,7 +197,7 @@
                 <div class="col-auto">
                     <div class="model-card">
                         <div class="model-image-container">
-                            <img src="{{ $p->user->onboardedImage->modelPhoto->photo_path }}" alt="white sample"
+                            <img src="{{ $p->user->onboardedImage->modelPhoto  ? $p->user->onboardedImage->modelPhoto->photo_path : '' }}" alt="white sample"
                                 data-toggle="modal" data-target="#galleryModal" class="model-image">
                             <div class="image-overlay"></div>
                         </div>

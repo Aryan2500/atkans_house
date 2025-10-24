@@ -99,4 +99,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(LoginLogs::class);
     }
+
+    public function wins()
+    {
+        return $this->hasMany(Win::class);
+    }
 }

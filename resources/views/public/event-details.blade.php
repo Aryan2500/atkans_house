@@ -28,16 +28,16 @@
                                 @php
                                     $p = \App\Models\Participation::where('event_id', $event->id)
                                         ->where('user_id', auth()->id())
-                                        ->exists();
+                                        ->first();
                                 @endphp
 
-                                @if ($p->is_approved == false)
+                                @if ($p && $p->is_approved == false)
                                     <br>
                                     <p href="#" class="button-3 mb-15 mt-4"> Wait For Approval</p>
                                     <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
                                         live for voting in the Show Gallery.</p>
-                                @elseif ($p->is_approved == true)
-                                    <p href="#" class="button-3 mb-15 mt-4"> Application been approved</p>
+                                @elseif ($p && $p->is_approved == true)
+                                    <p href="#" class="button-3 mb-15 mt-4"> Application approved</p>
                                     <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
                                         live for voting in the Show Gallery.</p>
                                 @else
