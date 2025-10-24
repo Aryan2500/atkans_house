@@ -33,6 +33,14 @@
                     </a>
                 </li>
 
+                <!-- Gallery -->
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::routeIs('user.gallery') ? 'active' : '' }}"
+                        href="{{ route('user.gallery') }}">
+                        <i class="fa-solid fa-images me-1"></i>
+                        My Gallery
+                    </a>
+                </li>
 
                 <!-- Account Dropdown -->
                 <li class="nav-item dropdown">

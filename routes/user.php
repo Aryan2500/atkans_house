@@ -79,4 +79,8 @@ Route::prefix('user')->middleware([UserMiddleware::class])->group(function () {
     });
 
     Route::post('/change-password',  [AuthControler::class, 'updatePassword'])->name('user.change-password');
+
+    Route::get('/gallery', function () {
+        return view('user.gallery.index');
+    })->name('user.gallery');
 });
