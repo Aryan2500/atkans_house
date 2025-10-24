@@ -29,29 +29,30 @@ class CloseExpiredEvents extends Command
     {
         $now = Carbon::now();
 
-        // Find all active events where end_date < now
-        $expiredEvents = Event::whereDate('end_date', '<=', $now)
+        // 1️⃣ Expired events (end datetime passed)
+        $expiredEvents = Event::where('end_date', '<', $now)
             ->where('event_stage', '!=', 'closed')
             ->get();
 
-        $runningEvents = Event::whereDate('start_date', '<=', $now)
-            ->whereDate('end_date', '>=', $now)
-            ->where('event_stage', '!=', 'running')
-            ->orWhere('event_stage', '==', 'published')
+        // 2️⃣ Running events (current datetime between start and end)
+        $runningEvents = Event::where('start_date', '<=', $now)
+            ->where('end_date', '>=', $now)
+            ->whereNotIn('event_stage', ['running', 'closed'])
             ->get();
 
-        if ($expiredEvents->isEmpty() && $runningEvents->isEmpty()) {
-            return;
+        // 3️⃣ Update logic
+        if ($expiredEvents->isNotEmpty()) {
+            foreach ($expiredEvents as $event) {
+                $event->event_stage = 'closed';
+                $event->save();
+            }
         }
 
-        foreach ($expiredEvents as $event) {
-            $event->event_stage = 'closed';
-            $event->save();
-        }
-
-        foreach ($runningEvents as $event) {
-            $event->event_stage = 'running';
-            $event->save();
+        if ($runningEvents->isNotEmpty()) {
+            foreach ($runningEvents as $event) {
+                $event->event_stage = 'running';
+                $event->save();
+            }
         }
     }
 }

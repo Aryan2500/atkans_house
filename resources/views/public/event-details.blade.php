@@ -18,42 +18,52 @@
                                 {{ $event->location }}</div>
 
 
-                            {{-- @if ($event->type == 'Show') --}}
-                            @if ($event->milestone)
-                                <p href="#" class=" mb-15 mt-4"> {{ $event->milestone->rule_name }} </p>
-                                <p href="#" class=" mb-15 mt-4">Achieve your milestones and shine bright!</p>
-                            @endif
-                            @auth
-
-                                @php
-                                    $p = \App\Models\Participation::where('event_id', $event->id)
-                                        ->where('user_id', auth()->id())
-                                        ->first();
-                                @endphp
-
-                                @if ($p && $p->is_approved == false)
-                                    <br>
-                                    <p href="#" class="button-3 mb-15 mt-4"> Wait For Approval</p>
-                                    <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
-                                        live for voting in the Show Gallery.</p>
-                                @elseif ($p && $p->is_approved == true)
-                                    <p href="#" class="button-3 mb-15 mt-4"> Application approved</p>
-                                    <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will go
-                                        live for voting in the Show Gallery.</p>
-                                @else
-                                    <form action="{{ route('participate.store') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="event_id" value="{{ $event->id }}">
-                                        <button type="submit" class="button-3 mb-15 mt-4">Participate
-                                            Now</button>
-
-                                    </form>
+                            @if ($event->event_stage == 'pending' || $event->event_stage == 'upcoming')
+                                @if ($event->milestone)
+                                    <p href="#" class=" mb-15 mt-4"> {{ $event->milestone->rule_name }} </p>
+                                    <p href="#" class=" mb-15 mt-4">Achieve your milestones and shine bright!</p>
                                 @endif
-                            @else
-                                <a href="{{ route('user.login', ['redirect' => url()->current()]) }}"
-                                    class="button-3 mb-15 mt-4">Login to Participate</a>
-                            @endauth
-                            {{-- @endif --}}
+                                @auth
+
+                                    @php
+                                        $p = \App\Models\Participation::where('event_id', $event->id)
+                                            ->where('user_id', auth()->id())
+                                            ->first();
+                                    @endphp
+
+                                    @if ($p && $p->is_approved == false)
+                                        <br>
+                                        <p href="#" class="button-3 mb-15 mt-4"> Wait For Approval</p>
+                                        <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will
+                                            go
+                                            live for voting in the Show Gallery.</p>
+                                    @elseif ($p && $p->is_approved == true)
+                                        <p href="#" class="button-3 mb-15 mt-4"> Application approved</p>
+                                        <p href="#" class=" mb-15 mt-4">Get ready to shine! Once approved, your photo will
+                                            go
+                                            live for voting in the Show Gallery.</p>
+                                    @else
+                                        <form action="{{ route('participate.store') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="event_id" value="{{ $event->id }}">
+                                            <button type="submit" class="button-3 mb-15 mt-4">Participate
+                                                Now</button>
+
+                                        </form>
+                                    @endif
+                                @else
+                                    <a href="{{ route('user.login', ['redirect' => url()->current()]) }}"
+                                        class="button-3 mb-15 mt-4">Login to Participate</a>
+                                @endauth
+                            @elseif($event->event_stage == 'running')
+                                <a href="#" class="button-3 mb-15 mt-4">Oops! you are late </a>
+                                <p class=" mb-15 mt-4"> The event has already begun — new registrations are now closed. Stay
+                                    tuned for the next one!</p>
+                            @elseif($event->event_stage == 'closed')
+                                <a href="#" class="button-3 mb-15 mt-4">Oops! you are late </a>
+                                <p class=" mb-15 mt-4"> The event has already closed - Stay
+                                    tuned for the next one!</p>
+                            @endif
 
                         </div>
                     </div>

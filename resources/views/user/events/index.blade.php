@@ -107,11 +107,24 @@
                                 $event = $pe->event;
                             @endphp
                             <div class="event-card">
-                                <div class="event-header">
+                                <div class="event-header ">
                                     <div>
                                         <h6 class="mb-1">{{ $event->title }}</h6>
                                         <small class="text-muted">{{ $event->location }}</small>
                                     </div>
+                                    @php
+                                        $win = auth()->user()->wins->where('event_id', $event->id)->first();
+                                    @endphp
+                                    @if ($win)
+                                        <p class="float-end mb-4">
+
+                                            <span
+                                                style="font-size: 2.5rem; color: #FFD700; text-shadow: 0 0 8px rgba(255,215,0,0.8);">
+                                                🏆
+                                            </span>
+
+                                        </p>
+                                    @endif
                                     {{-- <span class="badge {{ $event->is_free_entry ? 'bg-success' : 'bg-warning' }}">
                                         {{ $event->is_free_entry ? 'Free Entry' : 'Paid Entry' }}
                                     </span> --}}

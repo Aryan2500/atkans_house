@@ -8,6 +8,7 @@ use App\Models\Participation;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\VoteImage;
+use App\Models\Win;
 use Illuminate\Http\Request;
 
 class VoteImageController extends Controller
@@ -68,6 +69,11 @@ class VoteImageController extends Controller
         Vote::where([
             'event_id' => $request->event_id,
             'participation_id' => $participation->id,
+        ])->delete();
+
+        Win::where([
+            'event_id' => $request->event_id,
+            'user_id' =>  $request->user_id
         ])->delete();
         return redirect()->route('event.show',  $request->event_id)->with('success', 'Candidate removed successfully!');
     }

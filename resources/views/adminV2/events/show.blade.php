@@ -84,7 +84,27 @@
                                                 class="description {{ $participant->user->modelProfile ? ($participant->user->modelProfile->is_profile_completed ? 'text-success' : 'text-danger') : 'text-danger' }}">
                                                 {{ $participant->user->modelProfile ? ($participant->user->modelProfile->is_profile_completed ? 'Profile Completed' : 'Profile Not Completed') : 'Profile Not Completed' }}
                                             </span>
+                                            <p class="float-right">
+                                                @php
+                                                    $win = $participant->user->wins
+                                                        ->where('event_id', $event->id)
+                                                        ->first();
+                                                @endphp
+
+                                            <p class="float-right mb-0">
+                                                @if ($win)
+                                                    <span
+                                                        style="font-size: 2.5rem; color: #FFD700; text-shadow: 0 0 8px rgba(255,215,0,0.8);">
+                                                        🏆
+                                                    </span>
+                                                @endif
+                                            </p>
+
+                                            {{-- {{ dd($participant->user->wins) }} --}}
+                                            </p>
                                         </div>
+
+
                                         <!-- /.user-block -->
                                         <p class="text-muted mb-1">
                                             <i class="fa-solid fa-location-dot me-1"></i>
@@ -144,6 +164,12 @@
                                             </div>
                                         @endif
 
+                                        @if ($onboardImg ?? false && $onboardImg->user_id === $participant->user_id)
+                                            @if ($event->event_stage == 'closed')
+                                                <a href="{{ route('declare-winner', ['user_id' => $participant->user_id, 'event_id' => $event->id]) }}"
+                                                    class="btn btn-sm btn-primary ml-1">Declare Winner</a>
+                                            @endif
+                                        @endif
 
 
                                     </div>

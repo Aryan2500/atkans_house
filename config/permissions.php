@@ -445,6 +445,16 @@ define('PERMISSIONS', [
         'display_name' => 'Check Eligiblity Screen',
         'group_id' => 8,
     ],
+    [
+        'name' => 'removeOnboard-participants',
+        'display_name' => 'Remove Onboard Participants Screen',
+        'group_id' => 8,
+    ],
+    [
+        'name' => 'declare-winner',
+        'display_name' => 'Declare Winner ',
+        'group_id' => 8,
+    ],
 
 
 

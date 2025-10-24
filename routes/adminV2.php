@@ -25,6 +25,7 @@ use App\Http\Controllers\StoryContestController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\VoteController;
 use App\Http\Controllers\VoteImageController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CheckPermission;
@@ -111,7 +112,6 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
         //LoginLogs
         Route::resource('logs', LoginLogsController::class);
 
-
         //Eligiblity
         Route::get('/participants-eligiblity', [CheckEligiblityController::class, 'checkEligiblityView'])->name('participants.eligiblity');
 
@@ -126,5 +126,8 @@ Route::prefix('adminv2')->middleware(['auth', AdminMiddleware::class])->group(fu
 
         // Onboard Participants in show
         Route::post('/onboard-participants', [VoteImageController::class, 'doOnboardParticipantsImage'])->name('onboard-participants.store');
+
+        //Declare Winner
+        Route::get('/declare-winner', [VoteController::class, 'declareWinner'])->name('declare-winner');
     });
 });
