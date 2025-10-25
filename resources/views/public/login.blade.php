@@ -57,13 +57,13 @@
                     <div class="mb-3">
                         <label for="emailaddress" class="form-label">Email address</label>
                         <input type="email" name="email" id="emailaddress" class="form-control"
-                            placeholder="admin@example.com" required autofocus value="admin@gmail.com">
+                            placeholder="admin@example.com" required autofocus value="{{ old('email') }}">
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" id="password" class="form-control"
-                            placeholder="Enter your password" required value="12345678">
+                            placeholder="Enter your password" required >
                         <div class="text-end mt-1">
                             <a href="{{ route('password.request') }}" class="small text-muted">Forgot Password?</a>
                         </div>
