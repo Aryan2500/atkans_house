@@ -266,7 +266,7 @@
 
     @if (isset($product))
         <script>
-            if (document.getElementById('type').value == "{{ $product->type }}") {
+            if (document.getElementById('type').value == "{{ $product->type }}" && "{{ $product->type }}" == "Clothing") {
                 // alert("hello")
                 document.getElementById('colorsDiv').style.display = 'block';
                 document.getElementById('sizesDiv').style.display = 'block';
