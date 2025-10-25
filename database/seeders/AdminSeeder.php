@@ -21,52 +21,52 @@ class AdminSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        User::create([
-            'name' => 'Siddharth',
-            'firstName' => 'Siddharth',
-            'lastName' => 'Atkans',
-            'email' => 'user1@gmail.com',
-            'gender' => 'Male',
-            'password' => bcrypt('12345678'),
-            'phone' => '1234567890',
-            'user_type' => 'user',
-            'role_id' => 3,
-        ]);
+        // User::create([
+        //     'name' => 'Siddharth',
+        //     'firstName' => 'Siddharth',
+        //     'lastName' => 'Atkans',
+        //     'email' => 'user1@gmail.com',
+        //     'gender' => 'Male',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '1234567890',
+        //     'user_type' => 'user',
+        //     'role_id' => 3,
+        // ]);
 
-        User::create([
-            'name' => 'Neelam',
-            'firstName' => 'Neelam',
-            'lastName' => ' ',
-            'email' => 'user4@gmail.com',
-            'gender' => 'Male',
-            'password' => bcrypt('12345678'),
-            'phone' => '1234567890',
-            'user_type' => 'user',
-            'role_id' => 3,
-        ]);
+        // User::create([
+        //     'name' => 'Neelam',
+        //     'firstName' => 'Neelam',
+        //     'lastName' => ' ',
+        //     'email' => 'user4@gmail.com',
+        //     'gender' => 'Male',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '1234567890',
+        //     'user_type' => 'user',
+        //     'role_id' => 3,
+        // ]);
 
-        User::create([
-            'name' => 'Abc',
-            'firstName' => 'Def',
-            'lastName' => 'Abc',
-            'email' => 'user2@gmail.com',
-            'gender' => 'Male',
-            'password' => bcrypt('12345678'),
-            'phone' => '1234567890',
-            'user_type' => 'user',
-            'role_id' => 3,
-        ]);
+        // User::create([
+        //     'name' => 'Abc',
+        //     'firstName' => 'Def',
+        //     'lastName' => 'Abc',
+        //     'email' => 'user2@gmail.com',
+        //     'gender' => 'Male',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '1234567890',
+        //     'user_type' => 'user',
+        //     'role_id' => 3,
+        // ]);
 
-        User::create([
-            'name' => 'efg',
-            'firstName' => 'efg',
-            'lastName' => 'efg',
-            'email' => 'user3@gmail.com',
-            'gender' => 'Male',
-            'password' => bcrypt('12345678'),
-            'phone' => '1234567890',
-            'user_type' => 'user',
-            'role_id' => 3,
-        ]);
+        // User::create([
+        //     'name' => 'efg',
+        //     'firstName' => 'efg',
+        //     'lastName' => 'efg',
+        //     'email' => 'user3@gmail.com',
+        //     'gender' => 'Male',
+        //     'password' => bcrypt('12345678'),
+        //     'phone' => '1234567890',
+        //     'user_type' => 'user',
+        //     'role_id' => 3,
+        // ]);
     }
 }
