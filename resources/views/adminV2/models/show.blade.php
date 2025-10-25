@@ -112,6 +112,7 @@
                                     </p>
                                 </div>
                                 <div class="col-md-12 mt-4 text-center">
+                                    <strong>Gallery:</strong>
                                     @include('adminV2.models.gallery')
                                 </div>
                                 <div class="col-md-12 mt-4 text-center">
