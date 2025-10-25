@@ -26,7 +26,7 @@
                     <div class="media d-md-flex d-block">
                         <a href="#">
                             <img src="{{ $model->photo ? asset($model->photo) : asset('img/placeholder.png') }}"
-                                width="100" height="100" alt="Profile Photo" class="img-fluid rounded-circle">
+                                width="100" height="100" alt="Profile Photo" class="rounded-circle">
                         </a>
                         <div class="media-body z-index-1">
                             <div class="pl-4">
