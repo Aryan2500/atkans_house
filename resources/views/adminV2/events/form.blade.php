@@ -122,7 +122,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="brochure_url" class="form-label">Brochure (PDF)</label>
-                                <input type="file" name="brochure_url" class="form-control">
+                                <input type="file" name="brochure_url" class="form-control" accept=".pdf">
 
                                 @if (isset($event) && $event->brochure_url)
                                     <small class="text-muted">

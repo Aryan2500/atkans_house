@@ -17,6 +17,17 @@
                             <div class="date-comment"> <i class="ti-calendar"></i> {{ $event->start_date }} |
                                 {{ $event->location }}</div>
 
+                            @if ($event->brochure_url)
+                                <p class=" mb-15 mt-4">
+                                    Event Brochure <br>
+                                    <a href="{{ asset($event->brochure_url) }}" style="color: yellow" target="_blank">Click
+                                        here</a> to download the official
+                                    brochure containing all
+                                    event-related information,
+                                    eligibility criteria, and contact details.
+                                </p>
+                            @endif
+
 
                             @if ($event->event_stage == 'pending' || $event->event_stage == 'upcoming')
                                 @if ($event->milestone)
