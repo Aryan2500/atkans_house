@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-12 mt-3">
             <div class="position-relative">
-                
+
                 <div class="position-relative px-3 py-5">
                     <div class="media d-md-flex d-block">
                         <a href="#">
@@ -110,6 +110,9 @@
                                             {{ ucfirst($model->status) }}
                                         </span>
                                     </p>
+                                </div>
+                                <div class="col-md-12 mt-4 text-center">
+                                    @include('adminV2.models.gallery')
                                 </div>
                                 <div class="col-md-12 mt-4 text-center">
                                     <a href="{{ route('models.edit', $model->id) }}" class="btn btn-outline-primary">Edit

@@ -16,8 +16,6 @@
                             data-target="#addCriteriaModal">
                             <i class="fas fa-plus"></i> Add New Milestone
                         </button>
-
-
                     </div>
                 </div>
 
@@ -164,10 +162,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
-
-
 
                         </div>
 

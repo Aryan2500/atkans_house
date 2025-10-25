@@ -85,7 +85,7 @@
         <div class="row mb-5">
             @include('public.partials.alert')
             <h4 class="text-white mb-4">Gallery</h4>
-            @if (auth()->user()->modelprofile != null && auth()->user()->modelprofile->photos->count() > 0)
+            @if (auth()->user()->modelprofile != null)
                 @foreach (auth()->user()->modelprofile->photos as $photo)
                     <div class="col-12 col-md-6 col-xl-3 m-2" style="cursor: pointer;">
                         <div class="event-grid">
@@ -153,10 +153,12 @@
                                     </div>
                                 </div>
                             </form>
-
-
                         </div>
                     </div>
+                </div>
+            @else
+                <div class="text-center py-5">
+                    <h5 class="text-muted">Complete your model profile first</h5>
                 </div>
             @endif
 
