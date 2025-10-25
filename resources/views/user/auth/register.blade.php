@@ -123,10 +123,9 @@
                         </div>
                     </div>
 
-                    <!-- Email or Phone for OTP -->
+                    <!-- Email  for OTP -->
                     <div>
-                        <label for="contact" class="block text-sm font-medium text-gray-300 mb-2">Email or
-                            Phone</label>
+                        <label for="contact" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
                         <input id="contact" name="contact" type="text" required
                             class="input-glow w-full px-4 py-3 bg-gray-800 bg-opacity-50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"
                             placeholder="email@example.com or +91 9876543210">
