@@ -112,7 +112,7 @@ class RampWalkApplicationController
 
             return back()->with('success', 'Thank you! Your registration has been received.');
         } catch (\Throwable $e) {
-            dd($e);
+            // dd($e);
             return back()->with('error', 'Something went wrong. Please try again.')->withInput();
         }
     }

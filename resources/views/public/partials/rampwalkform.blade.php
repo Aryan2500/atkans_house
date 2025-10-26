@@ -210,15 +210,9 @@
                   errorMessage: 'Please select category'
               }])
               .addField('#instagram', [{
-                      rule: 'required',
-                      errorMessage: 'Instagram link is required'
-                  },
-                  {
-                      rule: 'customRegexp',
-                      value: /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9._%-]+\/?$/,
-                      errorMessage: 'Must be a valid Instagram profile link'
-                  }
-              ])
+                  rule: 'required',
+                  errorMessage: 'Instagram link is required'
+              }, ])
               .addField('[name="phone"]', [{
                       rule: 'required',
                       errorMessage: 'Phone is required'
