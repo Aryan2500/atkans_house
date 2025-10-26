@@ -80,7 +80,7 @@ class RampWalkApplicationController
                     'name'     => $request->name,
                     'email'    => $request->email,
                     'gender'   => $request->gender,
-                    'role'     => 'user',
+                    'user_type'     => 'user',
                     'password' => Hash::make(Str::random(10)),
                 ]);
 
