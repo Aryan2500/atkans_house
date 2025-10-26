@@ -710,7 +710,6 @@
     {{-- @include('public.partials.rampwalkform') --}}
 @endsection
 
-
 @push('scripts')
     <script>
         $('.owl-item:not(.cloned) .item img').each(function() {
