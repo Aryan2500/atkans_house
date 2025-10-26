@@ -707,7 +707,7 @@
         </div>
     </div> --}}
 
-    @include('public.partials.rampwalkform')
+    {{-- @include('public.partials.rampwalkform') --}}
 @endsection
 
 
