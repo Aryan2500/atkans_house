@@ -62,6 +62,7 @@ class ModelProfileService
                 "category" => $request->category,
                 "height_cm" => $request->height_cm,
                 "weight_kg" => $request->weight_kg,
+                
             ]);
             // $model->save();
         } catch (\Throwable $th) {

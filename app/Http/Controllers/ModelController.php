@@ -205,7 +205,7 @@ class ModelController
         try {
             $request->validate([
                 'status' => 'required|in:pending,approved,rejected',
-                'photo' => 'nullable|image|max:2048',
+                'photo' => 'nullable|image|max:15048',
             ]);
 
             $model = ModelProfile::findOrFail($id);
@@ -227,6 +227,8 @@ class ModelController
             $model->user->email = $request->email;
             $model->user->dob = $request->dob;
             $model->user->phone = $request->phone;
+            $model->state = $request->state;
+            $model->city = $request->city;
             $model->user->save();
             $model->status = $request->status;
             $model->experience = $request->experience;

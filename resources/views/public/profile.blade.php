@@ -17,7 +17,7 @@
                 <div class="col-lg-5 col-md-12">
                     <div class="item">
                         <div class="img">
-                            @if ($model->photo)
+                            @if (isset($model) && $model->photo)
                                 <img src="{{ asset($model->photo) }}" class="img-fluid" alt="">
                             @else
                                 <img src="https://thumbs.dreamstime.com/b/person-gray-photo-placeholder-man-costume-white-background-person-gray-photo-placeholder-man-136701248.jpg"
