@@ -45,34 +45,47 @@
                                 @foreach ($orders as $index => $order)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
+
+                                        {{-- Name --}}
                                         <td>{{ $order->first_name }} {{ $order->last_name }}</td>
+
+                                        {{-- Email / Phone / Total --}}
                                         <td>{{ $order->email }}</td>
                                         <td>{{ $order->phone }}</td>
                                         <td>₹{{ number_format($order->total, 2) }}</td>
+
+                                        {{-- Product Type (null-safe) --}}
                                         <td>
-                                            {{ optional(optional($order->items->first())->product)->type ?? 'N/A' }}
+                                            {{ $order->items->first()?->product?->type ?? 'N/A' }}
                                         </td>
 
+                                        {{-- Items Section --}}
                                         @if ($order->items->count() > 1)
+                                            {{-- Multiple items → show each item name safely --}}
                                             @foreach ($order->items as $item)
-                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item?->name ?? 'N/A' }}</td>
                                             @endforeach
                                         @else
+                                            {{-- Single item --}}
+                                            @php
+                                                $firstItem = $order->items->first();
+                                                $product = $firstItem?->product;
+                                                $productName = $product?->name ?? 'N/A';
+                                                $productImg =
+                                                    $product?->images?->first()?->image_url ??
+                                                    'https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp-95907_800x675.jpg';
+                                            @endphp
+
                                             <td>
-                                                <div class="d-flex ">
-                                                    <p>
-                                                        {{ $order->items->first()->product ? $order->items->first()->product->name : 'N/A' }}
-                                                    </p> &nbsp;
-                                                    <img height="40" width="40"
-                                                        src="{{ asset($order->items->first()->product ? $order->items->first()->product->images->first()->image_url : 'https://www.aaronfaber.com/wp-content/uploads/2017/03/product-placeholder-wp-95907_800x675.jpg') }}"
-                                                        alt="" srcset="">
+                                                <div class="d-flex">
+                                                    <p>{{ $productName }}</p> &nbsp;
+                                                    <img height="40" width="40" src="{{ asset($productImg) }}"
+                                                        alt="">
                                                 </div>
-
-
                                             </td>
                                         @endif
 
-
+                                        {{-- Order Status (safe) --}}
                                         <td>
                                             @php
                                                 $statusColors = [
@@ -83,11 +96,13 @@
                                                     'cancelled' => 'danger',
                                                 ];
                                             @endphp
+
                                             <span class="badge bg-{{ $statusColors[$order->status] ?? 'secondary' }}">
-                                                {{ ucfirst($order->status) }}
+                                                {{ ucfirst($order->status ?? 'N/A') }}
                                             </span>
                                         </td>
 
+                                        {{-- Payment Status --}}
                                         <td>
                                             @if ($order->payment_status === 'paid')
                                                 <span class="badge bg-success">Paid</span>
@@ -98,18 +113,20 @@
                                             @endif
                                         </td>
 
-                                        <td>{{ $order->created_at->format('d M Y, h:i A') }}</td>
+                                        {{-- Created Date --}}
+                                        <td>{{ optional($order->created_at)->format('d M Y, h:i A') ?? 'N/A' }}</td>
 
+                                        {{-- Action Buttons --}}
                                         <td>
                                             <a href="{{ route('orders.show', $order->id) }}"
                                                 class="btn btn-sm btn-info mt-2" title="View">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+
                                             <a href="{{ route('orders.edit', $order->id) }}"
-                                                class="btn btn-sm btn-warning mt-2" title="View">
+                                                class="btn btn-sm btn-warning mt-2" title="Edit">
                                                 <i class="fa fa-pen"></i>
                                             </a>
-
 
                                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST"
                                                 style="display:inline-block;">
