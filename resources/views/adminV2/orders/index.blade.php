@@ -50,7 +50,7 @@
                                         <td>{{ $order->phone }}</td>
                                         <td>₹{{ number_format($order->total, 2) }}</td>
                                         <td>
-                                            {{ $order->items->first()->product ? $order->items->first()->product->type : 'N/A' }}
+                                            {{ optional(optional($order->items->first())->product)->type ?? 'N/A' }}
                                         </td>
 
                                         @if ($order->items->count() > 1)
