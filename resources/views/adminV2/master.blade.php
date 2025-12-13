@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('v2/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('v2/plugins/fontawesome-free/css/all.min.css') }}">
+    <link href="{{asset('css/wm2.css')}}"  rel="stylesheet">
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('v2/ionicons/2.0.1/css/ionicons.min.css') }}">

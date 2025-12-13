@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Atkans House | Top Modeling Agency for New Faces & Professionals</title>
     <link rel="icon" type="image/png" href="img/favicon.png">
+    
+    <link href="{{asset('css/wm.css')}}"  rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Federo&amp;family=Barlow:wght@100..900&amp;display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
